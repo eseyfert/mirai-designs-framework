@@ -1,0 +1,37 @@
+@use '@miraidesigns/theme';
+
+// Set the relative URL to the location where your fonts are stored.
+$url: './fonts';
+
+// Setup font-families.
+$family-regular: 'Roboto' !default;
+$family-headline: 'Roboto' !default;
+$family-code: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono,
+	monospace, serif !default;
+
+// Text
+$text-font-size: 16px !default;
+$text-font-weight: 400 !default;
+$text-line-height: 1.5 !default;
+
+// Headings
+$headline-1-font-size: 98px !default;
+$headline-2-font-size: 61px !default;
+$headline-3-font-size: 49px !default;
+$headline-4-font-size: 35px !default;
+$headline-5-font-size: 24px !default;
+$headline-6-font-size: 20px !default;
+$headline-font-weight: 400 !default;
+$headline-line-height: 1.2 !default;
+
+// Paragraph
+$paragraph-vertical-margin: 16px !default;
+
+// Preformatted
+$pre-background-color: transparent !default;
+$pre-font-size: 12px !default;
+$pre-font-weight: 400 !default;
+$pre-line-height: 1.5 !default;
+$pre-border-color: var(--border, theme.prop('border')) !default;
+$pre-border-radius: 4px !default;
+$pre-border-width: 1px !default;

@@ -1,0 +1,28 @@
+@use '@miraidesigns/theme';
+
+$chip-height: 32px !default;
+$chip-right-margin: 8px !default;
+$chip-horizontal-padding: 12px !default;
+$chip-background-color: var(--background-hover, #{theme.prop('background-hover')}) !default;
+$chip-border-radius: 4px !default;
+
+$leading-icon-size: 24px !default;
+$leading-icon-spacing: 8px !default;
+$leading-icon-color: var(--secondary, #{theme.prop('secondary')}) !default;
+
+$text-font-size: 14px !default;
+
+$action-icon-color: var(--secondary, #{theme.prop('secondary')}) !default;
+$action-icon-size: 18px !default;
+
+$active-border-color: var(--brand, #{theme.brand()}) !default;
+$active-border-size: 2px !default;
+
+$input-height: 32px !default;
+$input-left-padding: 4px !default;
+$input-right-padding: 12px !default;
+$input-font-size: 14px !default;
+$input-bottom-padding: 8px !default;
+$input-border-size: 1px !default;
+$input-border-color: var(--border, #{theme.prop('border')}) !default;
+$input-border-hover-color: var(--border-hover, #{theme.prop('border-hover')}) !default;

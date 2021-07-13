@@ -1,0 +1,69 @@
+@use '@miraidesigns/base';
+@use '@miraidesigns/fx';
+@use '@miraidesigns/theme';
+@use '@miraidesigns/utils';
+@use './variables';
+
+@mixin styles() {
+    .#{base.$prefix}-page {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        height: 100%;
+        overflow: hidden;
+
+        &__header {
+            @include base.layer('raised');
+            @include fx.animation-standard(box-shadow, 200ms);
+
+            display: flex;
+            align-items: center;
+            width: 100%;
+            background-color: transparent;
+
+            &--sticky {
+                @include fx.elevation(base.layer('raised'));
+
+                position: fixed;
+                top: 0;
+                left: 0;
+                background-color: var(--background, #{theme.prop('background')});
+            }
+        }
+
+        &__main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        &__footer {
+            display: flex;
+            width: 100%;
+        }
+    }
+    
+    .#{base.$prefix}-divider {
+        display: flex;
+        align-items: center;
+        height: utils.px2rem(variables.$divider-height);
+        width: 100%;
+    
+        &::before {
+            content: '';
+            display: block;
+            height: variables.$divider-thickness;
+            width: 100%;
+            background-color: variables.$divider-color;
+        }
+    }
+
+    .#{base.$prefix}-spacer {
+        display: block;
+        width: 100vw;
+        max-width: 100%;
+        height: utils.px2rem(variables.$spacer-height);
+    }
+}

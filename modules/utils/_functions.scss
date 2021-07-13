@@ -1,0 +1,18 @@
+@use 'sass:math';
+
+@function strip-unit($value) {
+	@if math.is-unitless($value) {
+		@error '`#{$value}` is already unitless.';
+		@return null;
+	} @else {
+		@return math.div($value, $value * 0 + 1);
+	}
+}
+
+@function px2rem($value) {
+	@if math.unit($value) == 'px' {
+		@return math.div(strip-unit($value), 16) * 1rem;
+	} @else {
+		@return $value;
+	}
+}

@@ -1,0 +1,26 @@
+@use '@miraidesigns/theme';
+
+$margin-bottom: 16px !default;
+$border-color: var(--border, #{theme.prop('border')}) !default;
+$border-size: 1px !default;
+$icon-color: var(--secondary, #{theme.prop('secondary')}) !default;
+
+$condensed-height: 32px !default;
+$condensed-height-icon: 40px !default;
+$condensed-height-two-lines: 48px !default;
+$condensed-primary-text-size: 14px !default;
+$condensed-secondary-text-size: 12px !default;
+
+$item-height: 48px !default;
+$item-height-two-lines: 64px !default;
+$item-horizontal-padding: 16px !default;
+
+$leading-offset-right: 32px !default;
+
+$meta-text-color: var(--secondary, #{theme.prop('secondary')}) !default;
+$meta-text-size: 12px !default;
+
+$primary-text-color: var(--primary, #{theme.prop('primary')}) !default;
+
+$secondary-text-color: var(--secondary, #{theme.prop('secondary')}) !default;
+$secondary-text-size: 14px !default;

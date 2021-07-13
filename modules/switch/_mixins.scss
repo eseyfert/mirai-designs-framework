@@ -1,0 +1,167 @@
+@use '@miraidesigns/base';
+@use '@miraidesigns/fx';
+@use '@miraidesigns/theme';
+@use '@miraidesigns/utils';
+@use './variables';
+
+@mixin control() {
+	display: inline-flex;
+	align-items: center;
+	vertical-align: middle;
+	user-select: none;
+}
+
+@mixin container() {
+	position: relative;
+	display: inline-block;
+	height: utils.px2rem(variables.$input-height);
+	width: utils.px2rem(variables.$input-width);
+}
+
+@mixin disabled() {
+	opacity: 0.65;
+	cursor: default;
+	pointer-events: none;
+
+	& ~ label {
+		opacity: 0.65;
+		pointer-events: none;
+	}
+}
+
+@mixin input() {
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	height: utils.px2rem(variables.$input-height);
+	width: utils.px2rem(variables.$input-width);
+	margin: 0;
+
+	&:hover {
+		cursor: pointer;
+	}
+
+	&:disabled {
+		cursor: default;
+		pointer-events: none;
+	}
+}
+
+@mixin input-hover-focus() {
+	&:hover:not(.#{base.$prefix}-switch__input:checked) ~ .#{base.$prefix}-switch__shadow,
+	&:focus:not(.#{base.$prefix}-switch__input:checked) ~ .#{base.$prefix}-switch__shadow {
+		opacity: 0.2;
+		background-color: variables.$shadow-color;
+	}
+
+	&:hover ~ .#{base.$prefix}-switch__shadow,
+	&:focus ~ .#{base.$prefix}-switch__shadow {
+		opacity: 0.2;
+		background-color: variables.$checked-shadow-color;
+	}
+}
+
+@mixin input-checked() {
+	&:checked ~ .#{base.$prefix}-switch__track {
+		background-color: variables.$checked-track-color;
+	}
+
+	&:checked ~ .#{base.$prefix}-switch__thumb {
+		background-color: variables.$checked-thumb-color;
+		transform: translateX(utils.px2rem(24px));
+	}
+
+	&:checked ~ .#{base.$prefix}-switch__shadow {
+		transform: translateX(utils.px2rem(24px));
+	}
+}
+
+@mixin track() {
+	@include fx.animation-standard(background-color, 100ms);
+
+	z-index: 1;
+	position: absolute;
+	top: utils.px2rem(18px);
+	left: utils.px2rem(18px);
+	height: utils.px2rem(variables.$track-height);
+	width: utils.px2rem(variables.$track-width);
+	background-color: variables.$track-color;
+	border-radius: utils.px2rem(variables.$track-border-radius);
+	pointer-events: none;
+}
+
+@mixin thumb() {
+	@include fx.elevation(3);
+
+	z-index: 1;
+	position: absolute;
+	top: utils.px2rem(15px);
+	left: utils.px2rem(12px);
+	height: utils.px2rem(variables.$thumb-size);
+	width: utils.px2rem(variables.$thumb-size);
+	background-color: variables.$thumb-color;
+	border-radius: variables.$thumb-border-radius;
+	transition: background-color 100ms fx.$standard-curve-timing-function,
+		transform 100ms fx.$standard-curve-timing-function;
+	pointer-events: none;
+}
+
+@mixin shadow() {
+	z-index: 0;
+	position: absolute;
+	top: utils.px2rem(9px);
+	left: utils.px2rem(6px);
+	display: block;
+	height: utils.px2rem(32px);
+	width: utils.px2rem(32px);
+	opacity: 0;
+	background-color: var(--disabled, #{theme.brand()});
+	border-radius: 50%;
+	transition: background-color 100ms fx.$standard-curve-timing-function,
+		transform 100ms fx.$standard-curve-timing-function;
+	pointer-events: none;
+}
+
+@mixin styles() {
+	.#{base.$prefix}-control {
+		@include control();
+	}
+
+	.#{base.$prefix}-switch {
+		@include container();
+
+		// State: Disabled
+		&--disabled {
+			@include disabled();
+		}
+
+		&__track {
+			@include track();
+		}
+
+		&__thumb {
+			@include thumb();
+		}
+
+		&__shadow {
+			@include shadow();
+		}
+
+		&__input {
+			@include input();
+		}
+
+		// Make sure the switch is not disabled.
+		&:not(.#{base.$prefix}-switch--disabled) {
+			// Add the visual input states.
+			.#{base.$prefix}-switch__input {
+				// State: Hover & Focus
+				@include input-hover-focus();
+
+				// State: Checked
+				@include input-checked();
+			}
+		}
+	}
+}

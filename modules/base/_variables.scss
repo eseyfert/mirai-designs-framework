@@ -1,0 +1,42 @@
+$prefix: 'mdf';
+
+$breakpoints: (
+	'mobile-only': (
+		max-width: 599px,
+	),
+	'tablet-portrait': (
+		min-width: 600px,
+	),
+	'to-tablet': (
+		max-width: 899px,
+	),
+	'tablet-landscape': (
+		min-width: 900px,
+	),
+	'to-laptop': (
+		max-width: 1199px,
+	),
+	'laptop': (
+		min-width: 1200px,
+	),
+	'desktop': (
+		min-width: 1800px,
+	),
+	'exclude-desktop': (
+		max-width: 1799px,
+	),
+) !default;
+
+$layers: (
+	'background': -1,
+	'default': 0,
+	'raised': 1,
+	'menu': 2,
+	'tooltip': 2,
+	'backdrop': 3,
+	'lightbox': 4,
+	'sidebar': 4,
+	'alert': 5,
+	'snackbar': 5,
+	'dialog': 6,
+) !default;

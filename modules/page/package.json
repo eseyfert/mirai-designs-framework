@@ -1,0 +1,22 @@
+{
+	"name": "@miraidesigns/page",
+	"description": "Mirai Designs Framework: Page module",
+	"version": "1.0.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/miraidesigns/mirai-designs-framework.git",
+		"directory": "modules/page"
+	},
+	"keywords": [
+		"mirai designs framework",
+		"page"
+	],
+	"author": "Eric Seyfert",
+	"license": "ISC",
+	"dependencies": {
+		"@miraidesigns/base": "^1.0.0",
+		"@miraidesigns/fx": "^1.0.0",
+		"@miraidesigns/theme": "^1.0.0",
+		"@miraidesigns/utils": "^1.0.0"
+	}
+}

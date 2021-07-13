@@ -1,0 +1,90 @@
+@use 'sass:map';
+@use 'sass:meta';
+@use './variables';
+
+@mixin breakpoint($key) {
+	@if map.has-key(variables.$breakpoints, $key) {
+		@media #{meta.inspect(map.get(variables.$breakpoints, $key))} {
+			@content;
+		}
+	} @else {
+		@warn '`#{$key}` is not valid.';
+	}
+}
+
+@mixin layer($key) {
+	z-index: map.get(variables.$layers, $key);
+}
+
+@mixin reset() {
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	html:focus-within {
+		scroll-behavior: smooth;
+	}
+
+	body,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	figure,
+	blockquote,
+	dl,
+	dd {
+		margin: 0;
+	}
+
+	a {
+		text-decoration: none;
+
+		&:not([class]) {
+			text-decoration-skip-ink: auto;
+		}
+	}
+
+	img,
+	picture {
+		display: block;
+		max-width: 100%;
+	}
+
+	input,
+	button,
+	textarea,
+	select {
+		font: inherit;
+		letter-spacing: inherit;
+		word-spacing: inherit;
+	}
+
+	iframe {
+		border: 0;
+	}
+
+	ul[role='list'],
+	ol[role='list'] {
+		list-style: none;
+	}
+
+	[id] {
+		scroll-margin-top: 2ex;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		*,
+		*::before,
+		*::after {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
+			scroll-behavior: auto !important;
+		}
+	}
+}

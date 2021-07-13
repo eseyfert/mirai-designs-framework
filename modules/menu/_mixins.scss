@@ -1,0 +1,142 @@
+@use '@miraidesigns/base';
+@use '@miraidesigns/fx';
+@use '@miraidesigns/helpers';
+@use '@miraidesigns/list';
+@use '@miraidesigns/theme';
+@use '@miraidesigns/typography';
+@use '@miraidesigns/utils';
+@use './variables';
+
+@mixin base() {
+	@include base.layer('menu');
+	@include fx.elevation(4);
+
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	opacity: 0;
+	visibility: hidden;
+	min-width: utils.px2rem(variables.$min-width);
+	width: 100%;
+	max-width: utils.px2rem(variables.$max-width);
+	padding: utils.px2rem(variables.$vertical-padding) 0;
+	background-color: variables.$background-color;
+	border-radius: utils.px2rem(variables.$border-radius);
+	transform-origin: top left;
+	transition: opacity 250ms fx.$standard-curve-timing-function, 250ms transform fx.$standard-curve-timing-function;
+	pointer-events: none;
+
+	.#{base.$prefix}-list {
+		margin: 0;
+	}
+
+	.#{base.$prefix}-list__item {
+		&:hover {
+			background-color: variables.$hover-background-color;
+			cursor: pointer;
+		}
+
+		&:focus {
+			@include helpers.border-outline-reset();
+
+			background-color: variables.$hover-background-color;
+		}
+
+		&--disabled {
+			color: var(--disabled, #{theme.prop('disabled')}) !important;
+			pointer-events: none !important;
+			cursor: default !important;
+			user-select: none !important;
+
+			&:hover {
+				background-color: variables.$background-color !important;
+				cursor: default !important;
+			}
+
+			a {
+				color: var(--disabled, #{theme.prop('disabled')}) !important;
+				user-select: none !important;
+
+				&:hover,
+				&:focus {
+					color: var(--disabled, #{theme.prop('disabled')}) !important;
+				}
+			}
+		}
+
+		a {
+			display: inline-flex;
+			align-items: center;
+			height: 100%;
+			width: 100%;
+			color: var(--primary, #{theme.prop('primary')});
+
+			&:hover,
+			&:focus {
+				color: var(--primary, #{theme.prop('primary')});
+			}
+		}
+	}
+}
+
+@mixin active() {
+	visibility: visible;
+	opacity: 1;
+	pointer-events: auto;
+}
+
+@mixin caption() {
+	@include typography.caption();
+
+	padding: utils.px2rem(variables.$caption-vertical-padding) utils.px2rem(variables.$caption-horizontal-padding);
+	color: variables.$caption-color;
+}
+
+@mixin quick-menu() {
+	position: relative;
+	min-width: utils.px2rem(variables.$min-width);
+	width: 100%;
+	max-width: utils.px2rem(variables.$max-width);
+
+	.#{base.$prefix}-menu {
+		transform: scale(0.5);
+
+		&--active {
+			transform: scale(1);
+		}
+
+		a[role='menuitem'] {
+			&:focus {
+				@include helpers.border-outline-reset();
+
+				background-color: variables.$hover-background-color;
+			}
+		}
+	}
+
+	.#{base.$prefix}-list__item {
+		padding: 0;
+
+		a[role='menuitem'] {
+			padding: 0 utils.px2rem(list.$item-horizontal-padding);
+		}
+	}
+}
+
+@mixin styles() {
+	.#{base.$prefix}-menu {
+		@include base();
+
+		&--active {
+			@include active();
+		}
+
+		&__caption {
+			@include caption();
+		}
+	}
+
+	.#{base.$prefix}-quick-menu {
+		@include quick-menu();
+	}
+}

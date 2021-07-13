@@ -1,0 +1,22 @@
+{
+	"name": "@miraidesigns/range",
+	"description": "Mirai Designs Framework: Range module",
+	"version": "1.0.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/miraidesigns/mirai-designs-framework.git",
+		"directory": "modules/range"
+	},
+	"keywords": [
+		"mirai designs framework",
+		"range"
+	],
+	"author": "Eric Seyfert",
+	"license": "ISC",
+	"dependencies": {
+		"@miraidesigns/base": "^1.0.0",
+		"@miraidesigns/helpers": "^1.0.0",
+		"@miraidesigns/theme": "^1.0.0",
+		"@miraidesigns/utils": "^1.0.0"
+	}
+}

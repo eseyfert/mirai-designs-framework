@@ -1,0 +1,309 @@
+@use 'sass:math';
+@use '@miraidesigns/base';
+@use '@miraidesigns/helpers';
+@use '@miraidesigns/theme';
+@use '@miraidesigns/utils';
+@use './variables';
+
+@mixin container() {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	max-width: utils.px2rem(variables.$max-width);
+
+	.#{base.$prefix}-icon {
+		fill: var(--secondary, theme.prop('secondary'));
+	}
+}
+
+@mixin disabled() {
+	opacity: 0.65;
+	pointer-events: none;
+	cursor: default;
+
+	// Change all slider track colors to visualize the disabled state.
+	.#{base.$prefix}-range__input {
+		// WebKit browser styles.
+		&::-webkit-slider-thumb {
+			background-color: var(--background-emphasis, #{theme.prop('background-emphasis')});
+		}
+
+		&::-webkit-slider-runnable-track {
+			background-color: var(--background-hover, #{theme.prop('background-hover')});
+		}
+
+		// Firefox browser styles.
+		&::-moz-range-thumb {
+			background-color: var(--background-emphasis, #{theme.prop('background-emphasis')});
+		}
+
+		&::-moz-range-track {
+			background-color: var(--background-active, #{theme.prop('background-active')});
+		}
+
+		&::-moz-range-progress {
+			background-color: var(--background-active, #{theme.prop('background-active')});
+		}
+
+		// MS (Internet Explorer, Edge) browser styles.
+		&::-ms-thumb {
+			background-color: var(--background-emphasis, #{theme.prop('background-emphasis')});
+		}
+
+		&::-ms-fill-lower {
+			background-color: var(--background-active, #{theme.prop('background-active')});
+		}
+
+		&::-ms-fill-upper {
+			background-color: var(--background-hover, #{theme.prop('background-hover')});
+		}
+	}
+}
+
+@mixin editable() {
+	.#{base.$prefix}-range__trailing {
+		padding: utils.px2rem(8px) utils.px2rem(8px) utils.px2rem(6px) utils.px2rem(8px);
+		background-color: var(--background-muted, #{theme.prop('background-muted')});
+		border-radius: utils.px2rem(4px);
+	}
+}
+
+@mixin track() {
+	flex: 1 0 100%;
+	position: relative;
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+
+@mixin thumb() {
+	height: utils.px2rem(variables.$thumb-size);
+	width: utils.px2rem(variables.$thumb-size);
+	background-color: variables.$thumb-color;
+	border: 0;
+	border-radius: utils.px2rem(variables.$thumb-border-radius);
+	cursor: pointer;
+}
+
+@mixin thumb-shadow() {
+	box-shadow: 0px 0px 0px utils.px2rem(variables.$focus-thumb-shadow-size) variables.$focus-thumb-shadow-color;
+}
+
+@mixin input() {
+	--rangeProgress: 0%; // We use this for animating the track color change in our input script.
+
+	flex: 1 0 100%;
+	display: block;
+	width: 100%;
+	margin: 0;
+	background-color: transparent;
+	-webkit-appearance: none;
+
+	&:focus {
+		outline: 0;
+
+		// Create shadow around the thumb on focus.
+		&::-moz-range-thumb {
+			@include thumb-shadow();
+		}
+
+		&::-webkit-slider-thumb {
+			@include thumb-shadow();
+		}
+
+		&::-ms-thumb {
+			@include thumb-shadow();
+		}
+	}
+
+	// WebKit browser styles.
+	&::-webkit-slider-thumb {
+		@include thumb();
+
+		position: relative;
+		top: -#{utils.px2rem(6px)};
+		-webkit-appearance: none;
+	}
+
+	&::-webkit-slider-runnable-track {
+		height: utils.px2rem(variables.$track-height);
+		background-image: linear-gradient(
+			90deg,
+			variables.$track-lower-color var(--rangeProgress),
+			variables.$track-upper-color var(--rangeProgress)
+		);
+		border-radius: utils.px2rem(variables.$track-border-radius);
+		cursor: pointer;
+	}
+
+	// Firefox browser styles.
+	&::-moz-range-thumb {
+		@include thumb();
+	}
+
+	&::-moz-range-track {
+		height: utils.px2rem(variables.$track-inactive-height);
+		background-color: variables.$track-color;
+		border-radius: utils.px2rem(variables.$track-border-radius);
+		cursor: pointer;
+	}
+
+	&::-moz-range-progress {
+		height: utils.px2rem(variables.$track-height);
+		background-color: variables.$track-lower-color;
+		border-radius: utils.px2rem(variables.$track-border-radius);
+		cursor: pointer;
+	}
+
+	// MS (Internet Explorer, old Edge versions) browser styles.
+	&::-ms-thumb {
+		@include thumb();
+	}
+
+	&::-ms-track {
+		height: utils.px2rem(variables.$track-height);
+		background-color: transparent;
+		color: transparent;
+		border-color: transparent;
+		border-width: utils.px2rem(variables.$track-border-radius) 0;
+		cursor: pointer;
+	}
+
+	&::-ms-fill-lower {
+		height: utils.px2rem(variables.$track-inactive-height);
+		background-color: variables.$track-lower-color;
+	}
+
+	&::-ms-fill-upper {
+		height: utils.px2rem(variables.$track-height);
+		background-color: variables.$track-upper-color;
+	}
+}
+
+@mixin label-icon() {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	color: var(--secondary, #{theme.prop('secondary')});
+}
+
+@mixin leading() {
+	margin-right: utils.px2rem(variables.$value-spacing);
+}
+
+@mixin trailing() {
+	margin-left: utils.px2rem(variables.$value-spacing);
+}
+
+@mixin value() {
+	@include helpers.border-outline-reset();
+
+	display: flex;
+	align-items: center;
+	padding: 0;
+	background-color: transparent;
+	color: var(--secondary, #{theme.prop('secondary')});
+	border-bottom: 2px solid transparent;
+	line-height: 1;
+	appearance: none;
+	-moz-appearance: textfield;
+
+	&::selection {
+		background-color: transparent;
+	}
+
+	&:focus {
+		border-color: var(--brand, #{theme.brand()});
+	}
+
+	&:invalid {
+		box-shadow: none;
+	}
+}
+
+@mixin ticks() {
+	z-index: -1;
+	position: absolute;
+	display: flex;
+	justify-content: space-between;
+	height: utils.px2rem(variables.$track-height);
+	width: 100%;
+	padding: 0 utils.px2rem(math.div(variables.$thumb-size, 2));
+	pointer-events: none;
+}
+
+@mixin tick() {
+	position: relative;
+	top: utils.px2rem(variables.$track-height + variables.$tick-gap);
+	display: flex;
+	justify-content: center;
+	height: utils.px2rem(variables.$track-height);
+	width: utils.px2rem(variables.$tick-width);
+	background-color: variables.$tick-color;
+	color: variables.$tick-text-color;
+	font-size: utils.px2rem(variables.$tick-font-size);
+	line-height: utils.px2rem(variables.$tick-line-height);
+}
+
+@mixin rtl() {
+	.#{base.$prefix}-range {
+		&__leading {
+			margin-right: 0;
+			margin-left: utils.px2rem(variables.$value-spacing);
+		}
+
+		&__trailing {
+			margin-right: utils.px2rem(variables.$value-spacing);
+			margin-left: 0;
+		}
+	}
+}
+
+@mixin styles() {
+	.#{base.$prefix}-range {
+		@include container();
+
+		&--disabled {
+			@include disabled();
+		}
+
+		&--editable {
+			@include editable();
+		}
+
+		&__track {
+			@include track();
+		}
+
+		&__input {
+			@include input();
+		}
+
+		&__ticks {
+			@include ticks();
+
+			& > .#{base.$prefix}-range__tick {
+				@include tick();
+			}
+		}
+
+		&__leading {
+			@include label-icon();
+			@include leading();
+		}
+
+		&__trailing {
+			@include label-icon();
+			@include trailing();
+		}
+
+		&__value {
+			@include value();
+		}
+	}
+
+	.#{base.$prefix}-rtl {
+		@include rtl();
+	}
+}

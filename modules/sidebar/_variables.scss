@@ -1,0 +1,30 @@
+@use '@miraidesigns/theme';
+
+$max-width: 280px !default;
+$max-width-large: 320px !default;
+$background-color: var(--background, #{theme.prop('background')}) !default;
+$text-color: var(--primary, #{theme.prop('primary')}) !default;
+
+$header-min-height: 64px !default;
+$header-horizontal-padding: 16px !default;
+
+$title-color: var(--primary, #{theme.prop('primary')}) !default;
+
+$content-horizontal-padding: 8px !default;
+
+$link-vertical-padding: 12px !default;
+$link-horizontal-padding: 8px !default;
+$link-color: var(--primary, #{theme.prop('primary')}) !default;
+$link-font-weight: 500 !default;
+$link-border-radius: 4px !default;
+$link-icon-margin-right: 24px !default;
+$link-icon-color: var(--secondary, #{theme(theme, 'secondary')}) !default;
+$link-hover-background-color: var(--background-hover, #{theme.prop('background-hover')}) !default;
+$link-hover-color: var(--links, #{theme.prop('links')}) !default;
+$link-hover-icon-color: var(--links-hover, #{theme.prop('links-hover')}) !default;
+
+$footer-justify-content: center !default;
+$footer-vertical-padding: 8px !default;
+$footer-text-color: var(--secondary, #{theme.prop('secondary')}) !default;
+
+$backdrop-background-color: rgba(0, 0, 0, 0.35) !default;

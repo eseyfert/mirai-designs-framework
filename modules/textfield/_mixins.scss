@@ -1,0 +1,601 @@
+@use '@miraidesigns/base';
+@use '@miraidesigns/button';
+@use '@miraidesigns/elements';
+@use '@miraidesigns/fx';
+@use '@miraidesigns/helpers';
+@use '@miraidesigns/theme';
+@use '@miraidesigns/utils';
+@use './variables';
+
+@mixin container() {
+	position: relative;
+	width: 100%;
+	max-width: utils.px2rem(variables.$max-width);
+	margin-bottom: utils.px2rem(16px);
+}
+
+@mixin condensed() {
+	.#{base.$prefix}-textfield__label:not(.#{base.$prefix}-textfield__label--floating) {
+		top: utils.px2rem(12px);
+	}
+
+	.#{base.$prefix}-textfield {
+		height: utils.px2rem(variables.$condensed-height);
+	}
+
+	&.#{base.$prefix}-textfield--has-helper {
+		.#{base.$prefix}-textfield__prefix {
+			top: utils.px2rem(12px);
+			transform: none;
+		}
+
+		.#{base.$prefix}-textfield__icon:not(.#{base.$prefix}-textfield__button > .#{base.$prefix}-textfield__icon) {
+			top: utils.px2rem(9px);
+			transform: none;
+		}
+	}
+}
+
+@mixin stretch() {
+	max-width: 100%;
+}
+
+@mixin disabled() {
+	opacity: 0.38;
+	user-select: none;
+	pointer-events: none;
+
+	.#{base.$prefix}-textfield__label,
+	.#{base.$prefix}-textfield__helper {
+		color: var(--secondary, #{theme.prop('secondary')}) !important;
+		pointer-events: none;
+		cursor: default;
+	}
+
+	.#{base.$prefix}-textfield__input {
+		border-color: var(--border, #{theme.prop('border')}) !important;
+		pointer-events: none;
+		cursor: default;
+	}
+
+	.#{base.$prefix}-textfield__icon {
+		fill: var(--secondary, #{theme.prop('secondary')}) !important;
+	}
+}
+
+@mixin state($state) {
+	.#{base.$prefix}-textfield__label,
+	.#{base.$prefix}-textfield__helper {
+		color: theme.color($state) !important;
+	}
+
+	.#{base.$prefix}-textfield {
+		border-color: theme.color($state) !important;
+	}
+
+	.#{base.$prefix}-textfield__icon {
+		fill: theme.color($state) !important;
+	}
+}
+
+@mixin textarea() {
+	.#{base.$prefix}-textfield__input {
+		height: auto;
+		min-height: utils.px2rem(variables.$input-height);
+		max-height: utils.px2rem(variables.$textarea-max-height);
+		overflow: hidden;
+		// Top and bottom padding need to be adjusted for varying heights for the autogrow script.
+		padding-top: utils.px2rem(10px);
+		padding-bottom: utils.px2rem(10px);
+		resize: none;
+	}
+}
+
+@mixin number() {
+	.#{base.$prefix}-textfield__input {
+		&::-webkit-outer-spin-button,
+		&::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
+	}
+}
+
+@mixin leading-icon() {
+	.#{base.$prefix}-textfield__label:not(.mdf-textfield__label--floating) {
+		left: utils.px2rem(48px - variables.$input-horizontal-padding);
+	}
+
+	.#{base.$prefix}-textfield__input {
+		padding-left: utils.px2rem(48px) !important;
+
+		&:focus {
+			padding-left: utils.px2rem(48px - variables.$input-border-size) !important;
+		}
+	}
+
+	.#{base.$prefix}-textfield__button,
+	.#{base.$prefix}-textfield__icon:not(.#{base.$prefix}-textfield__button > .#{base.$prefix}-textfield__icon) {
+		position: absolute;
+		right: initial;
+		left: utils.px2rem(variables.$input-horizontal-padding);
+	}
+
+	.#{base.$prefix}-textfield__button {
+		top: 0;
+	}
+
+	.#{base.$prefix}-textfield__icon:not(.#{base.$prefix}-textfield__button > .#{base.$prefix}-textfield__icon) {
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	.#{base.$prefix}-textfield__button {
+		left: utils.px2rem(4px);
+	}
+}
+
+@mixin trailing-icon() {
+	.#{base.$prefix}-textfield__input {
+		padding-right: utils.px2rem(48px);
+	}
+
+	.#{base.$prefix}-textfield__button,
+	.#{base.$prefix}-textfield__icon:not(.#{base.$prefix}-textfield__button > .#{base.$prefix}-textfield__icon) {
+		position: absolute;
+		right: utils.px2rem(variables.$input-horizontal-padding);
+		left: initial;
+	}
+
+	.#{base.$prefix}-textfield__button {
+		top: 0;
+	}
+
+	.#{base.$prefix}-textfield__icon:not(.#{base.$prefix}-textfield__button > .#{base.$prefix}-textfield__icon) {
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	.#{base.$prefix}-textfield__button {
+		right: utils.px2rem(4px);
+	}
+}
+
+// Adjust positioning if we have a leading and trailing icon/button.
+@mixin leading-and-trailing-icon() {
+	// This positions the leading icon.
+	.#{base.$prefix}-textfield__icon:not(.#{base.$prefix}-textfield__button > .#{base.$prefix}-textfield__icon) {
+		right: auto;
+		left: utils.px2rem(variables.$input-horizontal-padding);
+	}
+
+	// This positions the trailing icon.
+	.#{base.$prefix}-textfield__icon:not(.#{base.$prefix}-textfield__button > .#{base.$prefix}-textfield__icon)
+		~ .#{base.$prefix}-textfield__icon:not(.#{base.$prefix}-textfield__button > .#{base.$prefix}-textfield__icon) {
+		right: utils.px2rem(variables.$input-horizontal-padding);
+		left: auto;
+	}
+
+	// This positions the leading button.
+	.#{base.$prefix}-textfield__button {
+		right: auto;
+		left: utils.px2rem(4px);
+
+		.#{base.$prefix}-textfield__icon {
+			right: utils.px2rem(8px);
+		}
+	}
+
+	// This positions the trailing button.
+	.#{base.$prefix}-textfield__button ~ .#{base.$prefix}-textfield__button {
+		left: auto;
+		right: utils.px2rem(4px);
+
+		.#{base.$prefix}-textfield__icon {
+			right: utils.px2rem(8px);
+		}
+	}
+}
+
+@mixin has-helper() {
+	.#{base.$prefix}-textfield__prefix {
+		top: 25%;
+		transform: translateY(-25%);
+	}
+
+	.#{base.$prefix}-textfield__icon:not(.#{base.$prefix}-textfield__button > .#{base.$prefix}-textfield__icon) {
+		top: 22.5%;
+		transform: translateY(-22.5%);
+	}
+}
+
+@mixin label() {
+	@include fx.animation-standard(all, 150ms);
+
+	position: absolute;
+	top: utils.px2rem(16px);
+	left: 1px;
+	display: inline-block;
+	padding: 0 utils.px2rem(variables.$input-horizontal-padding) 0 utils.px2rem(variables.$input-horizontal-padding);
+	color: variables.$label-text-color;
+	line-height: 1;
+	pointer-events: none;
+	cursor: text;
+}
+
+@mixin label-floating() {
+	top: -#{utils.px2rem(5px)};
+	left: 12px;
+	padding: 0 utils.px2rem(variables.$label-floating-horizontal-padding);
+	background-color: variables.$label-floating-background-color;
+	font-size: utils.px2rem(variables.$label-floating-font-size);
+}
+
+@mixin label-shake() {
+	animation-name: label-shake;
+	animation-duration: 300ms;
+	animation-timing-function: fx.$sharp-curve-timing-function;
+}
+
+@mixin label-focus() {
+	color: variables.$label-focus-text-color;
+}
+
+@mixin icon() {
+	@include elements.icon(variables.$icon-size, variables.$icon-color);
+}
+
+@mixin button() {
+	@include button.base();
+	@include button.icon-only();
+}
+
+@mixin prefix-suffix() {
+	position: absolute;
+	top: 50%;
+	right: initial;
+	left: 0;
+	color: variables.$prefix-suffix-text-color;
+	line-height: 1;
+	transform: translateY(-50%);
+
+	&--suffix {
+		right: 0;
+		left: initial;
+	}
+}
+
+@mixin prefix() {
+	padding-left: variables.$input-horizontal-padding;
+	padding-right: 0;
+}
+
+@mixin suffix() {
+	padding-right: variables.$input-horizontal-padding;
+	padding-left: 0;
+}
+
+@mixin helper-line() {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	height: utils.px2rem(variables.$helper-line-height);
+	width: 100%;
+
+	& > .#{base.$prefix}-textfield__helper--counter {
+		margin-left: auto;
+	}
+}
+
+@mixin helper() {
+	padding: utils.px2rem(4px) utils.px2rem(12px) 0 utils.px2rem(16px);
+	color: variables.$helper-text-color;
+	font-size: utils.px2rem(variables.$helper-text-font-size);
+	line-height: 1;
+	white-space: pre-wrap;
+
+	&--counter {
+		padding-right: utils.px2rem(16px);
+		padding-left: utils.px2rem(12px);
+		white-space: nowrap;
+	}
+}
+
+@mixin input() {
+	@include helpers.border-outline-reset();
+
+	display: flex;
+	align-items: center;
+	height: utils.px2rem(variables.$input-height);
+	width: 100%;
+	padding: 0 utils.px2rem(variables.$input-horizontal-padding);
+	background-color: transparent;
+	color: var(--primary, #{theme.prop('primary')});
+	border: utils.px2rem(variables.$input-border-size) solid variables.$input-border-color;
+	border-radius: utils.px2rem(variables.$input-border-radius);
+	appearance: none;
+	-moz-appearance: textfield;
+
+	&:hover {
+		border-color: variables.$input-hover-border-color;
+	}
+
+	&:focus {
+		padding-left: utils.px2rem(variables.$input-focus-padding-left);
+		border-color: variables.$input-focus-border-color;
+		border-width: utils.px2rem(variables.$input-focus-border-size);
+	}
+
+	&:invalid {
+		box-shadow: none;
+	}
+
+	&::placeholder {
+		opacity: 0.38;
+		color: var(--primary, #{theme.prop('primary')});
+	}
+
+	// Hide the native password hide/reveal toggle on IE.
+	&::-ms-reveal {
+		display: none;
+	}
+}
+
+@mixin rtl() {
+	.#{base.$prefix}-textfield {
+		&--icon-leading {
+			.#{base.$prefix}-textfield__label:not(.mdf-textfield__label--floating) {
+				right: utils.px2rem(40px);
+			}
+
+			.#{base.$prefix}-textfield__input {
+				padding-right: utils.px2rem(48px) !important;
+				padding-left: utils.px2rem(40px - variables.$input-horizontal-padding) !important;
+			}
+
+			.#{base.$prefix}-textfield__button,
+			.#{base.$prefix}-textfield__icon:not(.#{base.$prefix}-textfield__button
+					> .#{base.$prefix}-textfield__icon) {
+				right: utils.px2rem(variables.$input-horizontal-padding);
+				left: initial;
+			}
+
+			.#{base.$prefix}-textfield__button {
+				right: utils.px2rem(4px);
+			}
+
+			&.#{base.$prefix}-textfield--icon-trailing {
+				.#{base.$prefix}-textfield__input {
+					padding-right: utils.px2rem(48px) !important;
+					padding-left: utils.px2rem(48px) !important;
+				}
+
+				.#{base.$prefix}-textfield__icon:not(.#{base.$prefix}-textfield__button
+						> .#{base.$prefix}-textfield__icon) {
+					right: utils.px2rem(variables.$input-horizontal-padding);
+					left: initial;
+				}
+
+				.#{base.$prefix}-textfield__icon:not(.#{base.$prefix}-textfield__button
+						> .#{base.$prefix}-textfield__icon)
+					~ .#{base.$prefix}-textfield__icon:not(.#{base.$prefix}-textfield__button
+						> .#{base.$prefix}-textfield__icon) {
+					right: initial;
+					left: utils.px2rem(variables.$input-horizontal-padding);
+				}
+
+				.#{base.$prefix}-textfield__button {
+					right: utils.px2rem(8px);
+					left: initial;
+				}
+
+				.#{base.$prefix}-textfield__button ~ .#{base.$prefix}-textfield__button {
+					right: initial;
+					left: utils.px2rem(4px);
+				}
+			}
+		}
+
+		&--icon-trailing {
+			.#{base.$prefix}-textfield__input {
+				padding-right: utils.px2rem(variables.$input-horizontal-padding);
+				padding-left: utils.px2rem(48px);
+			}
+
+			.#{base.$prefix}-textfield__button,
+			.#{base.$prefix}-textfield__icon:not(.#{base.$prefix}-textfield__button
+					> .#{base.$prefix}-textfield__icon) {
+				right: initial;
+				left: utils.px2rem(variables.$input-horizontal-padding);
+			}
+
+			.#{base.$prefix}-textfield__button {
+				left: utils.px2rem(4px);
+			}
+		}
+
+		&--has-prefix {
+			.#{base.$prefix}-textfield__label:not(.mdf-textfield__label--floating) {
+				padding-right: utils.px2rem(20px);
+				padding-left: utils.px2rem(4px);
+			}
+
+			.#{base.$prefix}-textfield__input {
+				padding-right: utils.px2rem(30px);
+
+				&:focus {
+					padding-right: utils.px2rem(29px) !important;
+				}
+			}
+		}
+
+		&--has-suffix {
+			.#{base.$prefix}-textfield__label:not(.mdf-textfield__label--floating) {
+				padding-left: utils.px2rem(20px);
+				padding-right: utils.px2rem(4px);
+			}
+
+			.#{base.$prefix}-textfield__input {
+				padding-left: utils.px2rem(42px);
+
+				&:focus {
+					padding-left: utils.px2rem(41px) !important;
+				}
+			}
+		}
+
+		&__label {
+			right: 1px;
+			left: initial;
+
+			&--floating {
+				right: 12px;
+				left: initial;
+			}
+		}
+
+		&__prefix {
+			right: 0;
+			left: initial;
+			padding-right: utils.px2rem(variables.$input-horizontal-padding);
+			padding-left: 0;
+
+			&--suffix {
+				right: initial;
+				left: 0;
+				padding-right: 0;
+				padding-left: utils.px2rem(variables.$input-horizontal-padding);
+			}
+		}
+
+		&__helper--counter {
+			margin-right: auto;
+			margin-left: initial;
+		}
+	}
+}
+
+@mixin styles() {
+	.#{base.$prefix}-textfield {
+		@include container();
+
+		&--condensed {
+			@include condensed();
+		}
+
+		&--stretch {
+			@include stretch();
+		}
+
+		&--disabled {
+			@include disabled();
+		}
+
+		&--textarea {
+			@include textarea();
+		}
+
+		&--number {
+			@include number();
+		}
+
+		&--state-success {
+			@include state('success');
+		}
+
+		&--state-warning {
+			@include state('warning');
+		}
+
+		&--state-error {
+			@include state('error');
+		}
+
+		&--icon-leading {
+			@include leading-icon();
+
+			&.#{base.$prefix}-textfield--icon-trailing {
+				@include leading-and-trailing-icon();
+			}
+		}
+
+		&--icon-trailing {
+			@include trailing-icon();
+		}
+
+		&--has-helper {
+			@include has-helper();
+		}
+
+		&__label {
+			@include label();
+
+			&--floating {
+				@include label-floating();
+			}
+
+			&--shake {
+				@include label-shake();
+			}
+
+			&--focus {
+				@include label-focus();
+			}
+		}
+
+		&__icon {
+			@include icon();
+		}
+
+		&__button {
+			@include button();
+		}
+
+		&__prefix {
+			@include prefix-suffix();
+			@include prefix();
+
+			&--suffix {
+				@include suffix();
+			}
+		}
+
+		&__input {
+			@include input();
+		}
+
+		&__helper-line {
+			@include helper-line();
+		}
+
+		&__helper {
+			@include helper();
+		}
+	}
+
+	@keyframes label-shake {
+		0% {
+			left: utils.px2rem(12px);
+		}
+
+		25% {
+			left: utils.px2rem(24px);
+		}
+
+		50% {
+			left: utils.px2rem(12px);
+		}
+
+		75% {
+			left: utils.px2rem(24px);
+		}
+
+		100% {
+			left: utils.px2rem(12px);
+		}
+	}
+
+	.#{base.$prefix}-rtl {
+		@include rtl();
+	}
+}

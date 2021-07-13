@@ -1,0 +1,52 @@
+@use 'sass:map';
+@use '@miraidesigns/base';
+@use './variables';
+@use './functions';
+
+@mixin styles() {
+	// Remove text shadow from text highlights.
+	::selection {
+		text-shadow: none;
+	}
+
+	body {
+		// Save the brand color as a variable.
+		--brand: #{functions.color(variables.$brand)};
+
+		// Create variables for each value in our `light` theme.
+		@each $name, $value in map.get(variables.$themes, 'light') {
+			--#{$name}: #{$value};
+		}
+
+		// Create `inverted` theme with values from the opposing `dark` theme.
+		@each $name, $value in map.get(variables.$themes, 'dark') {
+			--#{$name}-inverted: #{$value};
+		}
+
+		// Change text highlight appearance based on the brand color.
+		::selection {
+			background-color: functions.color(variables.$brand);
+			color: functions.color-contrasted(variables.$brand);
+		}
+
+		// Set default background and text color.
+		background-color: var(--background, #{functions.prop('background')});
+		color: var(--primary, #{functions.prop('primary')});
+
+		&.#{base.$prefix}-theme-dark {
+			// Create variables for each value in our `dark` theme.
+			@each $name, $value in map.get(variables.$themes, 'dark') {
+				--#{$name}: #{$value};
+			}
+
+			// Create `inverted` theme with values from the opposing `light` theme.
+			@each $name, $value in map.get(variables.$themes, 'light') {
+				--#{$name}-inverted: #{$value};
+			}
+
+			// Set default background and text color.
+			background-color: var(--background, #{functions.prop('background', 'dark')});
+			color: var(--primary, #{functions.prop('primary', 'dark')});
+		}
+	}
+}

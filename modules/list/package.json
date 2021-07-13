@@ -1,0 +1,22 @@
+{
+	"name": "@miraidesigns/list",
+	"description": "Mirai Designs Framework: List module",
+	"version": "1.0.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/miraidesigns/mirai-designs-framework.git",
+		"directory": "modules/list"
+	},
+	"keywords": [
+		"mirai designs framework",
+		"list"
+	],
+	"author": "Eric Seyfert",
+	"license": "ISC",
+	"dependencies": {
+		"@miraidesigns/base": "^1.0.0",
+		"@miraidesigns/helpers": "^1.0.0",
+		"@miraidesigns/theme": "^1.0.0",
+		"@miraidesigns/utils": "^1.0.0"
+	}
+}

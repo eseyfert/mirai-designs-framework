@@ -1,0 +1,9 @@
+@use '@miraidesigns/theme';
+
+$main-padding: 16px !default;
+
+$divider-height: 64px !default;
+$divider-thickness: 1px !default;
+$divider-color: var(--border, #{theme.prop('border')}) !default;
+
+$spacer-height: 256px !default;

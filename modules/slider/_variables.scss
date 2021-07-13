@@ -1,0 +1,12 @@
+@use '@miraidesigns/theme';
+
+$control-icon-color: #fff !default;
+
+$nav-offset: 8px !default;
+
+$nav-item-size: 10px !default;
+$nav-item-padding: 6px !default;
+$nav-item-background-color: var(--disabled, #{theme.prop('disabled')}) !default;
+$nav-item-border-radius: 50% !default;
+$nav-item-hover-background-color: var(--secondary, #{theme.prop('secondary')}) !default;
+$nav-item-active-background-color: var(--brand, #{theme.brand()}) !default;

@@ -1,0 +1,24 @@
+{
+	"name": "@miraidesigns/sidebar",
+	"description": "Mirai Designs Framework: Sidebar module",
+	"version": "1.0.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/miraidesigns/mirai-designs-framework.git",
+		"directory": "modules/sidebar"
+	},
+	"keywords": [
+		"mirai designs framework",
+		"sidebar"
+	],
+	"author": "Eric Seyfert",
+	"license": "ISC",
+	"dependencies": {
+		"@miraidesigns/base": "^1.0.0",
+		"@miraidesigns/button": "^1.0.0",
+		"@miraidesigns/fx": "^1.0.0",
+		"@miraidesigns/theme": "^1.0.0",
+		"@miraidesigns/typography": "^1.0.0",
+		"@miraidesigns/utils": "^1.0.0"
+	}
+}

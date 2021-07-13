@@ -1,0 +1,14 @@
+@use '@miraidesigns/theme';
+
+$size: 18px !default;
+$padding: 11px !default;
+$inner-gap: 4px !default;
+$border-color: var(--border, #{theme.prop('border')}) !default;
+$border-size: 2px !default;
+$border-radius: 50% !default;
+$hover-border-color: var(--border-hover, #{theme.prop('border-hover')}) !default;
+$checked-border-color: var(--brand, #{theme.brand()}) !default;
+
+$circle-color: var(--brand, #{theme.brand()}) !default;
+
+$input-size: 40px !default;

@@ -1,0 +1,146 @@
+@use 'sass:color';
+@use '@miraidesigns/base';
+@use '@miraidesigns/button';
+@use '@miraidesigns/fx';
+@use '@miraidesigns/utils';
+@use './variables';
+
+@mixin base() {
+	@include base.layer('snackbar');
+	@include fx.animation-standard(transform, 250ms);
+	@include fx.elevation(5);
+
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	min-width: utils.px2rem(variables.$min-width);
+	max-width: utils.px2rem(variables.$max-width);
+	margin: utils.px2rem(variables.$margin);
+	background-color: variables.$background-color;
+	border-radius: utils.px2rem(variables.$border-radius);
+	transform: translate(0, 200%);
+	pointer-events: none;
+
+	@include base.breakpoint('tablet-landscape') {
+		margin: utils.px2rem(variables.$margin-medium);
+	}
+
+	@include base.breakpoint('laptop') {
+		margin: utils.px2rem(variables.$margin-large);
+	}
+}
+
+@mixin active() {
+	transform: none;
+	pointer-events: auto;
+
+	.#{base.$prefix}-snackbar__text {
+		opacity: 1;
+	}
+}
+
+@mixin text() {
+	@include fx.animation-standard(opacity, 300ms);
+
+	display: inline-flex;
+	align-items: center;
+	opacity: 0;
+	padding: utils.px2rem(variables.$text-vertical-padding) utils.px2rem(variables.$text-horizontal-padding);
+	font-size: utils.px2rem(variables.$text-font-size);
+	color: variables.$text-color;
+
+	&::before {
+		content: attr(data-snackbar-message);
+		display: inline;
+		color: variables.$text-color;
+	}
+}
+
+@mixin actions() {
+	display: inline-flex;
+	align-items: center;
+	margin-right: utils.px2rem(variables.$actions-margin-right);
+}
+
+@mixin close() {
+	@include button.base();
+	@include button.icon-only(variables.$close-button-size);
+
+	margin-left: utils.px2rem(variables.$close-margin-left);
+
+	&:hover,
+	&:focus-visible {
+		background-color: color.scale(variables.$background-color, $lightness: 10%);
+	}
+
+	&:active {
+		background-color: color.scale(variables.$background-color, $lightness: 20%);
+	}
+
+	@include base.breakpoint('mobile-only') {
+		display: none;
+	}
+
+	.#{base.$prefix}-icon {
+		height: utils.px2rem(variables.$close-icon-size);
+		width: utils.px2rem(variables.$close-icon-size);
+		fill: variables.$close-icon-color;
+	}
+}
+
+@mixin rtl() {
+    .#{base.$prefix}-snackbar {
+		right: 0;
+		left: initial;
+
+        &__actions {
+            margin-right: 0;
+            margin-left: utils.px2rem(variables.$actions-margin-right);
+        }
+
+        &__close {
+            margin-right: utils.px2rem(variables.$close-margin-left);
+            margin-left: 0;
+        }
+    }
+}
+
+@mixin styles() {
+	.#{base.$prefix}-snackbar {
+		@include base();
+
+		&--active {
+			@include active();
+		}
+
+		&__text {
+			@include text();
+		}
+
+		&__actions {
+			@include actions();
+
+			.#{base.$prefix}-button {
+				&:hover,
+				&:focus-visible {
+					background-color: color.scale(variables.$background-color, $lightness: 10%);
+				}
+			
+				&:active {
+					background-color: color.scale(variables.$background-color, $lightness: 20%);
+				}
+			}
+		}
+
+		&__close {
+			@include close();
+		}
+	}
+
+	.#{base.$prefix}-rtl {
+		@include rtl();
+	}
+}

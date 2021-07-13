@@ -1,0 +1,34 @@
+@use '@miraidesigns/theme';
+
+$max-width: 280px !default;
+$condensed-height: 40px !default;
+
+$textarea-max-height: 256px !default;
+
+$label-horizontal-padding: 4px !default;
+$label-text-color: var(--secondary, #{theme.prop('secondary')}) !default;
+$label-floating-horizontal-padding: 4px !default;
+$label-floating-font-size: 12px !default;
+$label-floating-background-color: var(--background, #{theme.prop('background')}) !default;
+$label-focus-text-color: var(--brand, #{theme.brand()}) !default;
+
+$icon-color: var(--secondary, #{theme.prop('secondary')}) !default;
+$icon-size: 24px !default;
+
+$prefix-suffix-text-color: var(--disabled, #{theme.prop('disabled')}) !default;
+
+$helper-line-height: 32px !default;
+$helper-text-color: var(--secondary, #{theme.prop('secondary')}) !default;
+$helper-text-font-size: 12px !default;
+
+$input-height: 48px !default;
+$input-horizontal-padding: 16px !default;
+$input-border-color: var(--border, #{theme.prop('border')}) !default;
+$input-border-size: 1px !default;
+$input-border-radius: 4px !default;
+$input-hover-border-color: var(--border-hover, #{theme.prop('border-hover')}) !default;
+$input-focus-padding-left: 15px !default;
+$input-focus-border-color: var(--brand, #{theme.brand()}) !default;
+$input-focus-border-size: 2px !default;
+
+$states: ('success', 'warning', 'error');

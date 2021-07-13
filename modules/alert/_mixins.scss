@@ -1,0 +1,171 @@
+@use '@miraidesigns/base';
+@use '@miraidesigns/fx';
+@use '@miraidesigns/theme';
+@use '@miraidesigns/utils';
+@use './variables';
+
+@mixin base() {
+	@include base.layer('alert');
+	@include fx.elevation(5);
+	@include fx.animation-exit-temporary(transform, 250ms);
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	opacity: 0;
+	width: 100%;
+	padding: utils.px2rem(variables.$padding);
+	background-color: variables.$background-color;
+	transform: translateY(-100%);
+	pointer-events: none;
+
+	.#{base.$prefix}-icon {
+		fill: theme.color(theme.$brand);
+	}
+}
+
+@mixin active() {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+@mixin move-in() {
+	transform: none;
+}
+
+@mixin filled() {
+	background-color: theme.color(theme.$brand) !important;
+
+	.#{base.$prefix}-alert__text {
+		color: theme.color-contrasted(theme.$brand) !important;
+	}
+
+	.#{base.$prefix}-button {
+		color: theme.color-contrasted(theme.$brand) !important;
+
+		&:hover,
+		&:focus {
+			background-color: rgba(0, 0, 0, 0.12);
+		}
+	}
+
+	.#{base.$prefix}-icon {
+		fill: theme.color-contrasted(theme.$brand) !important;
+	}
+}
+
+@mixin warning() {
+	background-color: theme.color('warning') !important;
+
+	.#{base.$prefix}-alert__text {
+		color: theme.color-contrasted('warning') !important;
+	}
+
+	.#{base.$prefix}-button {
+		color: theme.color-contrasted('warning') !important;
+
+		&:hover,
+		&:focus {
+			background-color: rgba(0, 0, 0, 0.12);
+		}
+	}
+
+	.#{base.$prefix}-icon {
+		fill: theme.color-contrasted('warning') !important;
+	}
+}
+
+@mixin error() {
+	background-color: theme.color('error') !important;
+
+	.#{base.$prefix}-alert__text {
+		color: theme.color-contrasted('error') !important;
+	}
+
+	.#{base.$prefix}-button {
+		color: theme.color-contrasted('error') !important;
+
+		&:hover,
+		&:focus {
+			background-color: rgba(0, 0, 0, 0.12);
+		}
+	}
+
+	.#{base.$prefix}-icon {
+		fill: theme.color-contrasted('error') !important;
+	}
+}
+
+@mixin content() {
+	display: flex;
+	align-items: center;
+
+	.#{base.$prefix}-icon {
+		margin-right: utils.px2rem(variables.$icon-spacing);
+	}
+}
+
+@mixin text() {
+	color: variables.$text-color;
+	font-size: utils.px2rem(variables.$text-font-size);
+}
+
+@mixin actions() {
+	display: inline-flex;
+	align-self: flex-end;
+}
+
+
+@mixin rtl() {
+	.#{base.$prefix}-alert {
+		.#{base.$prefix}-icon {
+			margin-right: 0;
+			margin-left: utils.px2rem(variables.$icon-spacing);
+		}
+	}
+}
+
+@mixin styles() {
+	.#{base.$prefix}-alert {
+		@include base();
+
+		&--filled {
+			@include filled();
+		}
+
+		&--warning {
+			@include warning();
+		}
+
+		&--error {
+			@include error();
+		}
+
+		&--active {
+			@include active();
+		}
+
+		&--move-in {
+			@include move-in();
+		}
+
+		&__content {
+			@include content();
+		}
+
+		&__text {
+			@include text();
+		}
+
+		&__actions {
+			@include actions();
+		}
+	}
+
+	.#{base.$prefix}-rtl {
+		@include rtl();
+	}
+}

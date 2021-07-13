@@ -1,0 +1,19 @@
+{
+	"name": "@miraidesigns/helpers",
+	"description": "Mirai Designs Framework: Helpers module",
+	"version": "1.0.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/miraidesigns/mirai-designs-framework.git",
+		"directory": "modules/helpers"
+	},
+	"keywords": [
+		"mirai designs framework",
+		"helpers"
+	],
+	"author": "Eric Seyfert",
+	"license": "ISC",
+	"dependencies": {
+		"@miraidesigns/base": "^1.0.0"
+	}
+}

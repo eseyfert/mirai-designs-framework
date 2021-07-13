@@ -1,0 +1,160 @@
+@use '@miraidesigns/base';
+@use '@miraidesigns/button';
+@use '@miraidesigns/fx';
+@use '@miraidesigns/helpers';
+@use '@miraidesigns/utils';
+@use './variables';
+
+@mixin base() {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	overflow: hidden;
+}
+
+@mixin is-dragging() {
+	cursor: grabbing;
+}
+
+@mixin slides() {
+	@include fx.animation-enter(transform, 350ms);
+
+	display: flex;
+	align-items: center;
+	width: max-content;
+}
+
+@mixin slide() {
+	position: relative;
+	user-select: none;
+}
+
+@mixin media() {
+	@include helpers.border-outline-reset();
+
+	height: auto;
+	width: 100%;
+	object-fit: cover;
+}
+
+@mixin control() {
+	@include base.layer('anchor');
+	@include button.base();
+	@include button.icon-only();
+
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+
+	& > .#{base.$prefix}-icon {
+		height: utils.px2rem(40px);
+		width: utils.px2rem(40px);
+		fill: variables.$control-icon-color;
+	}
+}
+
+@mixin control-prev() {
+	right: inherit;
+	left: 0;
+
+	.#{base.$prefix}-icon {
+		transform: rotate(180deg);
+	}
+}
+
+@mixin control-next() {
+	right: 0;
+	left: inherit;
+}
+
+@mixin nav() {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	margin: utils.px2rem(variables.$nav-offset) 0 0 0;
+}
+
+@mixin nav-top() {
+	margin: 0 0 utils.px2rem(variables.$nav-offset) 0;
+}
+
+@mixin nav-item() {
+	padding: utils.px2rem(variables.$nav-item-padding);
+
+	&:hover {
+		cursor: pointer;
+	}
+
+	&::before {
+		content: '';
+		display: block;
+		height: utils.px2rem(variables.$nav-item-size);
+		width: utils.px2rem(variables.$nav-item-size);
+		background-color: variables.$nav-item-background-color;
+		border-radius: utils.px2rem(variables.$nav-item-border-radius);
+	}
+
+	&:hover:not(.#{base.$prefix}-slider__nav-item--active) {
+		&::before {
+			background-color: variables.$nav-item-hover-background-color;
+		}
+	}
+}
+
+@mixin nav-item-active() {
+	&::before {
+		background-color: variables.$nav-item-active-background-color;
+	}
+}
+
+@mixin styles() {
+    .#{base.$prefix}-slider {
+        @include base();
+    
+        &--is-dragging {
+            @include is-dragging();
+        }
+    
+        &__slides {
+            @include slides();
+        }
+    
+        &__slide {
+            @include slide();
+        }
+    
+        &__media {
+            @include media();
+        }
+    
+        &__control {
+            @include control();
+    
+            &--prev {
+                @include control-prev();
+            }
+    
+            &--next {
+                @include control-next();
+            }
+        }
+    
+        &-nav {
+            @include nav();
+    
+            &--top {
+                @include nav-top();
+            }
+        }
+    
+        &-nav__item {
+            @include nav-item();
+    
+            &--active {
+                @include nav-item-active();
+            }
+        }
+    }
+}

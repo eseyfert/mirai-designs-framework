@@ -1,0 +1,19 @@
+@use '@miraidesigns/theme';
+
+$height: 56px !default;
+$min-width: 200px !default;
+$padding-vertical: 8px !default;
+$padding-horizontal: 16px !default;
+$padding-focus-horizontal: 11px !default;
+$text-margin-right: 8px !default;
+$text-color: var(--primary, #{theme.prop('primary')}) !default;
+$font-size: 16px !default;
+$border-color: var(--border, #{theme.prop('border')}) !default;
+$border-hover-color: var(--border-hover, #{theme.prop('border-hover')}) !default;
+$border-size: 1px !default;
+$border-radius: 4px !default;
+
+$icon-color: var(--secondary, #{theme.prop('secondary')});
+$icon-focus-color: var(--brand, #{theme.brand()});
+
+$item-selected-background-color: var(--brand-muted, #{theme.prop('brand-muted')}) !default;

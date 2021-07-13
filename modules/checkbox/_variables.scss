@@ -1,0 +1,16 @@
+@use '@miraidesigns/theme';
+
+$size: 18px !default;
+$padding: 11px !default;
+$border-color: var(--border, #{theme.prop('border')}) !default;
+$border-size: 2px !default;
+$border-radius: 2px !default;
+$hover-border-color: var(--border-hover, #{theme.prop('border-hover')}) !default;
+$checked-border-color: var(--brand, #{theme.brand()}) !default;
+
+$box-size: 18px !default;
+
+$check-size: 24px !default;
+$check-color: var(--brand, #{theme.brand()}) !default;
+
+$input-size: 40px !default;

@@ -1,0 +1,19 @@
+@use '@miraidesigns/theme';
+
+$track-height: 14px !default;
+$track-width: 32px !default;
+$track-color: var(--background-darken, #{theme.prop('background-darken')}) !default;
+$track-border-radius: 7px !default;
+$checked-track-color: var(--brand-muted, #{theme.prop('brand-muted')}) !default;
+
+$thumb-size: 20px !default;
+$thumb-color: var(--background, #{theme.prop('background')}) !default;
+$thumb-border-radius: 50% !default;
+$checked-thumb-color: var(--brand, #{theme.brand()}) !default;
+
+$shadow-size: 14px !default;
+$shadow-color: var(--disabled, #{theme.prop('disabled')}) !default;
+$checked-shadow-color: var(--brand, #{theme.prop('brand')}) !default;
+
+$input-height: 48px !default;
+$input-width: 68px !default;

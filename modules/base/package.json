@@ -1,0 +1,16 @@
+{
+	"name": "@miraidesigns/base",
+	"description": "Mirai Designs Framework: Base module",
+	"version": "1.0.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/miraidesigns/mirai-designs-framework.git",
+		"directory": "modules/base"
+	},
+	"keywords": [
+		"mirai designs framework",
+		"base"
+	],
+	"author": "Eric Seyfert",
+	"license": "ISC"
+}

@@ -1,0 +1,102 @@
+@use '@miraidesigns/base';
+@use './variables';
+@use './mixins';
+
+.#{base.$prefix}-float-left {
+    float: left;
+}
+
+.#{base.$prefix}-float-right {
+    float: right;
+}
+
+.#{base.$prefix}-clearfix::after {
+    content: '';
+    clear: both;
+    display: table;
+}
+
+.#{base.$prefix}-hidden {
+    display: none !important;
+}
+
+.#{base.$prefix}-hidden-mobile {
+    @include base.breakpoint('mobile-only') {
+        display: none !important;
+    }
+}
+
+.#{base.$prefix}-hidden-tablet {
+    @include base.breakpoint('to-tablet') {
+        display: none !important;
+    }  
+}
+
+.#{base.$prefix}-hidden-laptop {
+    @include base.breakpoint('to-laptop') {
+        display: none !important;
+    }  
+}
+
+.#{base.$prefix}-offscreen {
+    @include mixins.offscreen();
+}
+
+
+// Apply to <body> element, stops all transitions.
+.#{base.$prefix}-preload * {
+    transition: none !important;
+}
+
+.#{base.$prefix}-disable-transitions {
+    transition: none !important;
+}
+
+// Loop through our `sizes` array and create a class for each value.
+@each $name, $size in variables.$sizes {
+    .#{base.$prefix}-h-#{$name} {
+        height: $size !important;
+    }
+
+    .#{base.$prefix}-w-#{$name} {
+        width: $size !important;
+    }
+}
+
+.#{base.$prefix}-margin-reset {
+    margin: 0 !important;
+}
+
+.#{base.$prefix}-padding-reset {
+    padding: 0 !important;
+}
+
+.#{base.$prefix}-scrollbar-hidden {
+    overflow: hidden !important;
+}
+
+.#{base.$prefix}-scrollbar-h {
+    min-height: 0px;
+    overflow-x: auto !important;
+}
+
+.#{base.$prefix}-scrollbar-v {
+    min-height: 0px;
+    overflow-y: auto !important;
+}
+
+.#{base.$prefix}-rotate-90 {
+    transform: rotate(90deg);
+}
+
+.#{base.$prefix}-rotate-180 {
+    transform: rotate(180deg);
+}
+
+.#{base.$prefix}-rotate-270 {
+    transform: rotate(270deg);
+}
+
+.#{base.$prefix}-round {
+    border-radius: 50%;
+}

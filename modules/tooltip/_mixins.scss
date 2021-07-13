@@ -1,0 +1,44 @@
+@use '@miraidesigns/base';
+@use '@miraidesigns/fx';
+@use '@miraidesigns/utils';
+@use './variables';
+
+@mixin base() {
+	@include base.layer('tooltip');
+
+	position: absolute;
+	display: flex;
+	align-items: center;
+	opacity: 0;
+	padding: utils.px2rem(variables.$vertical-padding) utils.px2rem(variables.$horizontal-padding);
+	background-color: variables.$background-color;
+	color: variables.$text-color;
+	font-size: utils.px2rem(variables.$font-size);
+	border-radius: utils.px2rem(variables.$border-radius);
+	transition: opacity 150ms fx.$standard-curve-timing-function, transform 150ms fx.$standard-curve-timing-function;
+	pointer-events: none;
+}
+
+@mixin scale() {
+	transform: scale(0.75);
+}
+
+@mixin active() {
+	opacity: 1;
+	transform: scale(1);
+	pointer-events: auto;
+}
+
+@mixin styles() {
+	.#{base.$prefix}-tooltip {
+		@include base();
+
+		&--scale {
+			@include scale();
+		}
+
+		&--active {
+			@include active();
+		}
+	}
+}

@@ -1,0 +1,239 @@
+@use 'sass:math';
+@use '@miraidesigns/base';
+@use '@miraidesigns/button';
+@use '@miraidesigns/fx';
+@use '@miraidesigns/menu';
+@use '@miraidesigns/textfield';
+@use '@miraidesigns/utils';
+@use './_variables';
+
+@mixin base() {
+	margin-bottom: utils.px2rem(16px);
+
+	&:focus-within {
+		.#{base.$prefix}-select__button {
+			@include button-focus();
+		}
+
+		.#{base.$prefix}-select__label {
+			@include label-floating();
+			@include label-focus();
+		}
+
+		.#{base.$prefix}-select__icon {
+			@include icon-focus();
+		}
+	}
+}
+
+@mixin button() {
+	position: relative;
+	display: flex;
+	align-items: center;
+	height: utils.px2rem(variables.$height);
+	min-width: utils.px2rem(variables.$min-width);
+	max-width: utils.px2rem(menu.$max-width);
+	padding: utils.px2rem(variables.$padding-vertical) utils.px2rem(variables.$padding-horizontal);
+	background-color: transparent;
+	color: variables.$text-color;
+	font-size: utils.px2rem(variables.$font-size);
+	letter-spacing: 0.009375em;
+	text-transform: none;
+	white-space: nowrap;
+	border: 0;
+	border-radius: utils.px2rem(variables.$border-radius);
+	box-shadow: 0 0 0 utils.px2rem(variables.$border-size) variables.$border-color;
+	transition: none;
+	user-select: none;
+	-webkit-appearance: none;
+
+	&::-moz-focus-inner {
+		padding: 0;
+		border: 0;
+	}
+
+	&:hover {
+		box-shadow: 0 0 0 utils.px2rem(variables.$border-size) textfield.$input-hover-border-color;
+	}
+
+	&:focus {
+		@include button-focus();
+
+		& > .#{base.$prefix}-select__label {
+			@include label-floating();
+			@include label-focus();
+		}
+
+		& > .#{base.$prefix}-select__icon {
+			@include icon-focus();
+		}
+	}
+
+	&:focus-visible {
+		border: 0;
+		outline: 0;
+	}
+
+	&:active {
+		outline: 0;
+	}
+
+	&:disabled {
+		opacity: 0.38;
+		cursor: default;
+		pointer-events: none;
+	}
+}
+
+@mixin button-focus() {
+	background-color: transparent;
+	box-shadow: 0 0 0 utils.px2rem(textfield.$input-focus-border-size) textfield.$input-focus-border-color;
+
+	&:hover {
+		box-shadow: 0 0 0 utils.px2rem(textfield.$input-focus-border-size) textfield.$input-focus-border-color;
+	}
+}
+
+@mixin label() {
+	@include fx.animation-standard(all, 150ms);
+
+	position: absolute;
+	top: utils.px2rem(19px);
+	left: 1px;
+	display: inline-block;
+	padding: 0 utils.px2rem(textfield.$input-horizontal-padding) 0 utils.px2rem(textfield.$input-horizontal-padding);
+	color: textfield.$label-text-color;
+	line-height: 1;
+	pointer-events: none;
+	cursor: text;
+}
+
+@mixin label-floating() {
+	top: -#{utils.px2rem(6px)};
+	left: utils.px2rem(12px);
+	padding: 0 utils.px2rem(textfield.$label-floating-horizontal-padding);
+	background-color: textfield.$label-floating-background-color;
+	font-size: utils.px2rem(textfield.$label-floating-font-size);
+}
+
+@mixin label-focus() {
+	color: textfield.$label-focus-text-color;
+}
+
+@mixin text() {
+	overflow: hidden;
+	margin-right: utils.px2rem(variables.$text-margin-right);
+	text-overflow: ellipsis;
+	pointer-events: none;
+}
+
+@mixin icon() {
+	@include fx.animation-standard(transform, 200ms);
+
+	height: utils.px2rem(24px);
+	width: utils.px2rem(24px);
+	margin-left: auto;
+	transform: rotate(90deg);
+	pointer-events: none;
+
+	.#{base.$prefix}-icon {
+		fill: variables.$icon-color;
+	}
+}
+
+@mixin icon-focus() {
+	.#{base.$prefix}-icon {
+		fill: variables.$icon-focus-color;
+	}
+}
+
+@mixin icon-expanded() {
+	transform: rotate(270deg);
+}
+
+@mixin item-selected() {
+	background-color: variables.$item-selected-background-color;
+
+	&:hover,
+	&:focus {
+		background-color: variables.$item-selected-background-color;
+	}
+}
+
+@mixin menu() {
+	max-height: utils.px2rem(256px);
+	max-width: utils.px2rem(menu.$max-width);
+	margin-top: utils.px2rem(2px);
+	overflow: hidden;
+	overflow-y: auto;
+	scroll-behavior: smooth;
+}
+
+@mixin rtl() {
+	.#{base.$prefix}-select {
+		&__label {
+			right: 1px;
+			left: initial !important;
+
+			&--floating {
+				right: utils.px2rem(12px);
+				left: initial !important;
+			}
+		}
+
+		&__icon {
+			margin-right: auto;
+			margin-left: 0;
+		}
+	}
+}
+
+@mixin styles() {
+	.#{base.$prefix}-select {
+		@include base();
+
+		&__button {
+			@include button();
+
+			&[aria-expanded='true'] {
+				& > .#{base.$prefix}-select__icon {
+					@include icon-expanded();
+				}
+			}
+		}
+
+		&__label {
+			@include label();
+
+			&--floating {
+				@include label-floating();
+			}
+		}
+
+		&__text {
+			@include text();
+		}
+
+		&__icon {
+			@include icon();
+		}
+
+		.#{base.$prefix}-menu {
+			@include menu();
+		}
+
+		.#{base.$prefix}-list {
+			&:focus-visible {
+				outline: 0;
+			}
+
+			&__item--selected {
+				@include item-selected();
+			}
+		}
+	}
+
+	.#{base.$prefix}-rtl {
+		@include rtl();
+	}
+}

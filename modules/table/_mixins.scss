@@ -1,0 +1,381 @@
+@use '@miraidesigns/base';
+@use '@miraidesigns/button';
+@use '@miraidesigns/fx';
+@use '@miraidesigns/utils';
+@use './variables';
+
+@mixin container() {
+	display: inline-flex;
+	flex-flow: column;
+	margin-bottom: utils.px2rem(variables.$container-margin-bottom);
+	overflow-x: auto;
+	border: utils.px2rem(variables.$border-size) solid variables.$border-color;
+	border-radius: utils.px2rem(variables.$container-border-radius);
+}
+
+@mixin base() {
+	width: 100%;
+	border: 0;
+	border-collapse: collapse;
+	border-spacing: 0;
+	white-space: nowrap;
+}
+
+@mixin fixed() {
+	table-layout: fixed;
+}
+
+@mixin condensed() {
+	.#{base.$prefix}-table__row {
+		height: utils.px2rem(variables.$row-height-condensed);
+	}
+}
+
+@mixin bordered() {
+	.#{base.$prefix}-table__header {
+		border-right: utils.px2rem(variables.$border-size) solid variables.$border-color;
+
+		&:last-of-type {
+			border-right: 0;
+		}
+	}
+
+	.#{base.$prefix}-table__cell {
+		border-right: utils.px2rem(variables.$border-size) solid variables.$border-color;
+
+		&:last-of-type {
+			border-right: 0;
+		}
+	}
+}
+
+@mixin striped() {
+	.#{base.$prefix}-table__content .#{base.$prefix}-table__row:nth-child(even) {
+		background-color: variables.$row-stripe-color;
+	}
+}
+
+@mixin header() {
+	padding: 0 utils.px2rem(variables.$header-horizontal-padding);
+	overflow: hidden;
+	color: variables.$header-text-color;
+	font-size: utils.px2rem(variables.$header-font-size);
+	font-weight: 500;
+	line-height: 1.375;
+	text-align: left;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+@mixin header-checkbox() {
+	width: utils.px2rem(variables.$header-checkbox-cell-width);
+}
+
+@mixin header-sortable() {
+	&:hover {
+		color: variables.$header-sortable-hover-color;
+		cursor: pointer;
+	}
+}
+
+@mixin header-active() {
+	color: variables.$header-sortable-active-color;
+}
+
+@mixin header-sort-asc() {
+	&::after {
+		content: '';
+		position: relative;
+		top: utils.px2rem(2px);
+		left: utils.px2rem(6px);
+		display: inline-block;
+		width: utils.px2rem(8px);
+		height: utils.px2rem(8px);
+		border-top: utils.px2rem(2px) solid variables.$header-sortable-direction-color;
+		border-right: utils.px2rem(2px) solid variables.$header-sortable-direction-color;
+		transform: rotate(-45deg);
+	}
+}
+
+@mixin header-sort-desc() {
+	&::after {
+		content: '';
+		position: relative;
+		top: -#{utils.px2rem(2px)};
+		left: utils.px2rem(6px);
+		display: inline-block;
+		width: utils.px2rem(8px);
+		height: utils.px2rem(8px);
+		border-top: utils.px2rem(2px) solid variables.$header-sortable-direction-color;
+		border-right: utils.px2rem(2px) solid variables.$header-sortable-direction-color;
+		transform: rotate(135deg);
+	}
+}
+
+@mixin content() {
+	.#{base.$prefix}-table__row:not(.#{base.$prefix}-table__row--selected):hover {
+		background-color: variables.$row-hover-background-color;
+	}
+}
+
+@mixin row() {
+	@include fx.animation-standard(background-color, 75ms);
+
+	height: utils.px2rem(variables.$row-height);
+	border-top: utils.px2rem(variables.$border-size) solid variables.$border-color;
+}
+
+@mixin row-header() {
+	height: utils.px2rem(variables.$row-height-header);
+	border-top: 0;
+}
+
+@mixin row-selected() {
+	background-color: variables.$row-selected-background-color !important;
+}
+
+@mixin cell() {
+	padding: 0 utils.px2rem(variables.$cell-horizontal-padding);
+	overflow: hidden;
+	font-size: utils.px2rem(variables.$cell-font-size);
+	line-height: 1;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+@mixin pagination() {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding: utils.px2rem(variables.$pagination-padding);
+	border-top: utils.px2rem(variables.$border-size) solid variables.$border-color;
+}
+
+@mixin pagination-label() {
+	margin-right: utils.px2rem(variables.$pagination-label-margin-right);
+}
+
+@mixin pagination-select() {
+	margin-right: utils.px2rem(variables.$pagination-select-margin-right);
+	margin-bottom: 0;
+
+	.#{base.$prefix}-select__button {
+		display: inline-flex;
+		height: utils.px2rem(variables.$pagination-select-height);
+		min-width: utils.px2rem(variables.$pagination-select-min-width);
+		max-width: utils.px2rem(variables.$pagination-select-max-width);
+		padding: utils.px2rem(variables.$pagination-select-vertical-padding)
+			utils.px2rem(variables.$pagination-select-horizontal-padding);
+	}
+
+	.#{base.$prefix}-menu {
+		min-width: utils.px2rem(variables.$pagination-select-min-width);
+		max-width: utils.px2rem(variables.$pagination-select-max-width);
+	}
+}
+
+@mixin pagination-stats() {
+	margin-right: utils.px2rem(variables.$pagination-stats-margin-right);
+}
+
+@mixin pagination-control() {
+	@include button.base();
+	@include button.icon-only();
+
+	margin-right: utils.px2rem(variables.$pagination-control-margin-right);
+}
+
+@mixin pagination-control-disabled() {
+	opacity: 0.38;
+	cursor: default;
+	pointer-events: none;
+}
+
+@mixin pagination-control-prev() {
+	.#{base.$prefix}-icon {
+		transform: rotate(180deg);
+	}
+}
+
+@mixin pagination-control-next() {
+	margin-left: utils.px2rem(variables.$pagination-control-margin-right);
+}
+
+@mixin rtl() {
+	.#{base.$prefix}-table {
+		&__table {
+			&--bordered {
+				.#{base.$prefix}-table__header {
+					border-right: 0;
+					border-left: utils.px2rem(variables.$border-size) solid variables.$border-color;
+
+					&:last-of-type {
+						border-left: 0;
+					}
+				}
+
+				.#{base.$prefix}-table__cell {
+					border-right: 0;
+					border-left: utils.px2rem(variables.$border-size) solid variables.$border-color;
+
+					&:last-of-type {
+						border-left: 0;
+					}
+				}
+			}
+		}
+
+		&__header {
+			text-align: right;
+
+			&--sort-asc::after {
+				left: -#{utils.px2rem(6px)};
+			}
+
+			&--sort-desc::after {
+				left: -#{utils.px2rem(6px)};
+			}
+		}
+
+		&__pagination-label {
+			margin-right: 0;
+			margin-left: utils.px2rem(variables.$pagination-label-margin-right);
+		}
+
+		&__pagination-select {
+			margin-right: 0;
+			margin-left: utils.px2rem(variables.$pagination-select-margin-right);
+		}
+
+		&__pagination-stats {
+			margin-right: 0;
+			margin-left: utils.px2rem(variables.$pagination-stats-margin-right);
+		}
+
+		&__pagination-control {
+			margin-right: 0;
+			margin-left: utils.px2rem(variables.$pagination-control-margin-right);
+		}
+
+		&__pagination-control--prev {
+			.#{base.$prefix}-icon {
+				transform: none;
+			}
+		}
+
+		&__pagination-control--next {
+			margin-right: utils.px2rem(variables.$pagination-control-margin-right);
+			margin-left: 0;
+
+			.#{base.$prefix}-icon {
+				transform: rotate(180deg);
+			}
+		}
+	}
+}
+
+@mixin styles() {
+	.#{base.$prefix}-table {
+		@include container();
+
+		&__table {
+			@include base();
+
+			&--fixed {
+				@include fixed();
+			}
+
+			&--condensed {
+				@include condensed();
+			}
+
+			&--bordered {
+				@include bordered();
+			}
+
+			&--striped {
+				@include striped();
+			}
+		}
+
+		&__header {
+			@include header();
+
+			&--checkbox {
+				@include header-checkbox();
+			}
+
+			&--sortable {
+				@include header-sortable();
+			}
+
+			&--active {
+				@include header-active();
+			}
+
+			&--sort-asc {
+				@include header-sort-asc();
+			}
+
+			&--sort-desc {
+				@include header-sort-desc();
+			}
+		}
+
+		&__content {
+			@include content();
+		}
+
+		&__row {
+			@include row();
+
+			&--header {
+				@include row-header();
+			}
+
+			&--selected {
+				@include row-selected();
+			}
+		}
+
+		&__cell {
+			@include cell();
+		}
+
+		&__pagination {
+			@include pagination();
+		}
+
+		&__pagination-label {
+			@include pagination-label();
+		}
+
+		&__pagination-select {
+			@include pagination-select();
+		}
+
+		&__pagination-stats {
+			@include pagination-stats();
+		}
+
+		&__pagination-control {
+			@include pagination-control();
+
+			&--disabled {
+				@include pagination-control-disabled();
+			}
+
+			&--prev {
+				@include pagination-control-prev();
+			}
+
+			&--next {
+				@include pagination-control-next();
+			}
+		}
+	}
+
+	.#{base.$prefix}-rtl {
+		@include rtl();
+	}
+}

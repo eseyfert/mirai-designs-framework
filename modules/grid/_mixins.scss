@@ -1,0 +1,57 @@
+@use 'sass:map';
+@use '@miraidesigns/base';
+@use '@miraidesigns/utils';
+@use './variables';
+
+@mixin base() {
+	display: grid;
+	grid-template-columns: repeat(
+		variables.$cols,
+		minmax(utils.px2rem(variables.$cols-min-width), utils.px2rem(variables.$cols-max-width))
+	);
+	grid-template-rows: repeat(
+		variables.$rows,
+		minmax(utils.px2rem(variables.$rows-min-height), utils.px2rem(variables.$rows-max-height))
+	);
+	gap: utils.px2rem(variables.$gap);
+}
+
+@mixin masonry {
+	grid-template-columns: repeat(
+		auto-fill,
+		minmax(utils.px2rem(variables.$cols-min-width), utils.px2rem(variables.$cols-max-width))
+	);
+	grid-auto-rows: utils.px2rem(variables.$masonry-auto-row-height);
+}
+
+@mixin modifiers() {
+	@for $i from 1 through variables.$classes {
+		&--columns-#{$i} {
+			grid-template-columns: repeat(
+				#{$i},
+				minmax(utils.px2rem(variables.$cols-min-width), utils.px2rem(variables.$cols-max-width))
+			);
+		}
+
+		&--rows-#{$i} {
+			grid-template-rows: repeat(
+				#{$i},
+				minmax(utils.px2rem(variables.$rows-min-height), utils.px2rem(variables.$rows-max-height))
+			);
+		}
+	}
+
+	@each $name, $size in variables.$gaps {
+		&--gap-#{$name} {
+			gap: utils.px2rem(map.get(variables.$gaps, $name));
+		}
+	}
+}
+
+@mixin styles() {
+	.#{base.$prefix}-grid {
+		@include base();
+		@include masonry();
+		@include modifiers();
+	}
+}

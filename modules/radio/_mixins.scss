@@ -1,0 +1,128 @@
+@use '@miraidesigns/base';
+@use '@miraidesigns/fx';
+@use '@miraidesigns/utils';
+@use './variables';
+
+@mixin control() {
+	display: inline-flex;
+	align-items: center;
+	vertical-align: middle;
+	user-select: none;
+}
+
+@mixin container() {
+	position: relative;
+	flex: 0 0 utils.px2rem(variables.$size);
+	display: inline-block;
+	height: utils.px2rem(variables.$size);
+	width: utils.px2rem(variables.$size);
+	padding: utils.px2rem(variables.$padding);
+	box-sizing: content-box;
+}
+
+@mixin disabled() {
+	opacity: 0.65;
+	cursor: default;
+	pointer-events: none;
+
+	& ~ label {
+		opacity: 0.65;
+		pointer-events: none;
+	}
+}
+
+@mixin circle() {
+	@include fx.animation-standard(border-color, 100ms);
+
+	position: absolute;
+	height: utils.px2rem(variables.$size);
+	width: utils.px2rem(variables.$size);
+	border: utils.px2rem(variables.$border-size) solid variables.$border-color;
+	border-radius: variables.$border-radius;
+	pointer-events: none;
+
+	&::before {
+		content: '';
+		display: block;
+		opacity: 0;
+		height: utils.px2rem(variables.$size - variables.$inner-gap);
+		width: utils.px2rem(variables.$size - variables.$inner-gap);
+		background-color: variables.$circle-color;
+		border-radius: variables.$border-radius;
+		transform: scale(0.45);
+		transition: opacity 100ms fx.$standard-curve-timing-function, transform 100ms fx.$standard-curve-timing-function;
+		pointer-events: none;
+	}
+}
+
+@mixin input() {
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	height: utils.px2rem(variables.$input-size);
+	width: utils.px2rem(variables.$input-size);
+	margin: 0;
+
+	&:hover {
+		cursor: pointer;
+	}
+
+	&:disabled {
+		cursor: default;
+		pointer-events: none;
+	}
+}
+
+@mixin input-hover-focus() {
+	&:hover:not(.#{base.$prefix}-radio__input:checked) ~ .#{base.$prefix}-radio__circle,
+	&:focus:not(.#{base.$prefix}-radio__input:checked) ~ .#{base.$prefix}-radio__circle {
+		border-color: variables.$hover-border-color;
+	}
+}
+
+@mixin input-checked() {
+	&:checked ~ .#{base.$prefix}-radio__circle {
+		border-color: variables.$checked-border-color;
+
+		&:before {
+			opacity: 1;
+			transform: scale(0.65);
+		}
+	}
+}
+
+@mixin styles() {
+	.#{base.$prefix}-control {
+		@include control();
+	}
+
+	.#{base.$prefix}-radio {
+		@include container();
+
+		// State: Disabled
+		&--disabled {
+			@include disabled();
+		}
+
+		&__input {
+			@include input();
+		}
+
+		&__circle {
+			@include circle();
+		}
+
+		// Make sure the radio is not disabled.
+		&:not(.#{base.$prefix}-radio--disabled) {
+			// Add the visual input states.
+			.#{base.$prefix}-radio__input {
+				// State: Hover & Focus
+				@include input-hover-focus();
+
+				// State: Checked
+				@include input-checked();
+			}
+		}
+	}
+}

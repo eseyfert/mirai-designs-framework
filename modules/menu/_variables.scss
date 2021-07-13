@@ -1,0 +1,12 @@
+@use '@miraidesigns/theme';
+
+$min-width: 112px !default;
+$max-width: 280px !default;
+$vertical-padding: 8px !default;
+$background-color: var(--background, #{theme.prop('background')}) !default;
+$border-radius: 4px !default;
+$hover-background-color: var(--background-hover, #{theme.prop('background-hover')}) !default;
+
+$caption-horizontal-padding: 16px !default;
+$caption-vertical-padding: 8px !default;
+$caption-color: var(--secondary, #{theme.prop('secondary')}) !default;

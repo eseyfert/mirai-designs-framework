@@ -1,0 +1,9 @@
+@use '@miraidesigns/theme';
+
+$padding: 16px !default;
+$background-color: var(--background, #{theme.prop('background')}) !default;
+
+$text-color: var(--primary, #{theme.prop('primary')}) !default;
+$text-font-size: 14px !default;
+
+$icon-spacing: 8px !default;

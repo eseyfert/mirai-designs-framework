@@ -1,0 +1,184 @@
+@use '@miraidesigns/base';
+@use '@miraidesigns/button';
+@use '@miraidesigns/fx';
+@use '@miraidesigns/theme';
+@use '@miraidesigns/utils';
+@use './variables';
+
+@mixin container() {
+    @include base.layer('dialog');
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    padding: utils.px2rem(variables.$container-padding);
+    overflow: hidden;
+    pointer-events: none;
+}
+
+@mixin container-active() {
+    display: flex;
+    pointer-events: auto;
+}
+
+@mixin container-fade-in() {
+    & > .#{base.$prefix}-dialog {
+        opacity: 1;
+    }
+
+    & > .#{base.$prefix}-dialog-backdrop {
+        opacity: 1;
+    }
+}
+
+@mixin base() {
+    @include base.layer('dialog');
+    @include fx.elevation(6);
+    @include fx.animation-standard(opacity, 200ms);
+
+    position: absolute;
+    flex: 0 1 auto;
+    min-height: 0px;
+    width: 100%;
+    max-width: utils.px2rem(variables.$max-width);
+    opacity: 0;
+    background-color: variables.$background-color;
+    color: variables.$text-color;
+    border-radius: utils.px2rem(variables.$border-radius);
+
+    &--transition {
+        animation-name: dialog-grow;
+        animation-duration: 300ms;
+        animation-timing-function: fx.$deceleration-curve-timing-function;
+    }
+
+    @include base.breakpoint('tablet-portrait') {
+        max-width: utils.px2rem(variables.$max-width-large);
+    }
+}
+
+@mixin header() {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: utils.px2rem(variables.$header-height);
+}
+
+@mixin close-button() {
+    @include button.base();
+    @include button.icon-only();
+
+    margin: 0 utils.px2rem(variables.$close-right-margin) 0 0;
+    transform: translateY(-#{px2rem(4px)});
+
+    .#{base.$prefix}-icon {
+        height: utils.px2rem(24px);
+        width: utils.px2rem(24px);
+        fill: var(--primary, #{theme.prop('primary')});
+    }
+}
+
+@mixin title() {
+    margin: 0;
+    padding: utils.px2rem(variables.$title-padding);
+    font-size: utils.px2rem(variables.$title-font-size);
+    font-weight: variables.$title-font-weight;
+    line-height: 1;
+}
+
+@mixin content() {
+    max-height: variables.$content-max-height; // Will display vertical scroll-bar if it exceeds this value.
+    padding: 0 utils.px2rem(variables.$content-horizontal-padding);
+    overflow-x: auto !important; // !important has to stay
+    color: variables.$content-text-color;
+}
+
+@mixin actions() {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: utils.px2rem(variables.$actions-padding);
+}
+
+@mixin backdrop() {
+    @include base.layer('backdrop');
+    @include fx.animation-standard(opacity, 200ms);
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    background-color: variables.$backdrop-background-color;
+}
+
+@mixin rtl() {
+    .#{base.$prefix}-dialog {
+        &__close {
+            margin: 0 0 0 utils.px2rem(variables.$close-right-margin);
+        }
+    }
+}
+
+@mixin styles() {
+    .#{base.$prefix}-dialog-container {
+        @include container();
+    
+        &--active {
+            @include container-active();
+        }
+    
+        &--fade-in {
+            @include container-fade-in();
+        }
+    }
+    
+    .#{base.$prefix}-dialog {
+        @include base();
+    
+        &__header {
+            @include header();
+        }
+    
+        &__close {
+            @include close-button();
+        }
+    
+        &__title {
+            @include title();
+        }
+    
+        &__content {
+            @include content();
+        }
+    
+        &__actions {
+            @include actions();
+        }
+    }
+    
+    .#{base.$prefix}-dialog-backdrop {
+        @include backdrop();
+    }
+    
+    @keyframes dialog-grow {
+        0% {
+            transform: scale(0.5);
+        }
+    
+        100% {
+            transform: none;
+        }
+    }
+
+    .#{base.$prefix}-rtl {
+        @include rtl();
+    }
+}

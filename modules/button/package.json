@@ -1,0 +1,25 @@
+{
+	"name": "@miraidesigns/button",
+	"description": "Mirai Designs Framework: Button module",
+	"version": "1.0.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/miraidesigns/mirai-designs-framework.git",
+		"directory": "modules/button"
+	},
+	"keywords": [
+		"mirai designs framework",
+		"button"
+	],
+	"author": "Eric Seyfert",
+	"license": "ISC",
+	"dependencies": {
+		"@miraidesigns/base": "^1.0.0",
+		"@miraidesigns/elements": "^1.0.0",
+		"@miraidesigns/fx": "^1.0.0",
+		"@miraidesigns/helpers": "^1.0.0",
+		"@miraidesigns/theme": "^1.0.0",
+		"@miraidesigns/typography": "^1.0.0",
+		"@miraidesigns/utils": "^1.0.0"
+	}
+}

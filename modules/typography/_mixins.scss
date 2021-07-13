@@ -1,0 +1,155 @@
+@use '@miraidesigns/theme';
+@use '@miraidesigns/utils';
+@use './variables';
+
+@mixin load() {
+	@font-face {
+		font-display: fallback;
+		font-family: variables.$family-regular;
+		font-style: normal;
+		font-weight: 300;
+		src: url('#{variables.$url}/#{variables.$family-regular}-Light.woff2') format('woff2'),
+			url('#{variables.$url}/#{variables.$family-regular}-Light.woff') format('woff');
+	}
+
+	@font-face {
+		font-display: fallback;
+		font-family: variables.$family-regular;
+		font-style: normal;
+		font-weight: 400;
+		src: url('#{variables.$url}/#{variables.$family-regular}-Regular.woff2') format('woff2'),
+			url('#{variables.$url}/#{variables.$family-regular}-Regular.woff') format('woff');
+	}
+
+	@font-face {
+		font-display: fallback;
+		font-family: variables.$family-regular;
+		font-style: normal;
+		font-weight: 500;
+		src: url('#{variables.$url}/#{variables.$family-regular}-Medium.woff2') format('woff2'),
+			url('#{variables.$url}/#{variables.$family-regular}-Medium.woff') format('woff');
+	}
+
+	@font-face {
+		font-display: fallback;
+		font-family: variables.$family-regular;
+		font-style: normal;
+		font-weight: 700;
+		src: url('#{variables.$url}/#{variables.$family-regular}-Bold.woff2') format('woff2'),
+			url('#{variables.$url}/#{variables.$family-regular}-Bold.woff') format('woff');
+	}
+}
+
+@mixin regular($weight: variables.$text-font-weight, $height: variables.$text-line-height) {
+	font-family: variables.$family-regular, 'Arial', sans-serif;
+	font-weight: $weight;
+	line-height: $height;
+}
+
+@mixin headline($weight: variables.$headline-font-weight, $height: variables.$headline-line-height) {
+	font-family: variables.$family-headline, 'Verdana', serif;
+	font-weight: $weight;
+	line-height: $height;
+}
+
+@mixin code($weight: variables.$pre-font-weight, $height: variables.$pre-line-height) {
+	font-family: variables.$family-code;
+	font-weight: $weight;
+	line-height: $height;
+}
+
+@mixin body() {
+	@include regular();
+
+	font-size: utils.px2rem(variables.$text-font-size);
+}
+
+@mixin headline-1() {
+	@include headline();
+
+	font-size: utils.px2rem(variables.$headline-1-font-size);
+	letter-spacing: -1.5px;
+}
+
+@mixin headline-2() {
+	@include headline();
+
+	font-size: utils.px2rem(variables.$headline-2-font-size);
+	letter-spacing: -0.5px;
+}
+
+@mixin headline-3() {
+	@include headline();
+
+	font-size: utils.px2rem(variables.$headline-3-font-size);
+	letter-spacing: 0px;
+}
+
+@mixin headline-4() {
+	@include headline();
+
+	font-size: utils.px2rem(variables.$headline-4-font-size);
+	letter-spacing: 0.25px;
+}
+
+@mixin headline-5() {
+	@include headline();
+
+	font-size: utils.px2rem(variables.$headline-5-font-size);
+	letter-spacing: 0px;
+}
+
+@mixin headline-6() {
+	@include headline(500);
+
+	font-size: utils.px2rem(variables.$headline-6-font-size);
+	letter-spacing: 0.15px;
+}
+
+@mixin subtitle-1() {
+	font-size: utils.px2rem(16px);
+	font-weight: 400;
+	letter-spacing: 0.15px;
+}
+
+@mixin subtitle-2() {
+	font-size: utils.px2rem(14px);
+	font-weight: 500;
+	letter-spacing: 0.1px;
+}
+
+@mixin caption() {
+	font-size: utils.px2rem(12px);
+	font-weight: 400;
+	letter-spacing: 0.4px;
+}
+
+@mixin paragraph() {
+	margin: utils.px2rem(variables.$paragraph-vertical-margin) 0;
+}
+
+@mixin links() {
+	color: var(--links, #{theme.prop('links')});
+
+	&:hover {
+		color: var(--links-hover, #{theme.prop('links-hover')});
+	}
+
+	&:focus {
+		color: var(--links-hover, #{theme.prop('links-hover')});
+		outline: 0;
+	}
+}
+
+@mixin pre() {
+	@include code(variables.$pre-font-weight, variables.$pre-line-height);
+
+	width: 100%;
+	overflow: auto;
+	background-color: variables.$pre-background-color;
+	font-size: utils.px2rem(variables.$pre-font-size);
+	border: utils.px2rem(variables.$pre-border-width) solid variables.$pre-border-color;
+	border-radius: utils.px2rem(variables.$pre-border-radius);
+	white-space: pre-wrap;
+	tab-size: 4;
+}

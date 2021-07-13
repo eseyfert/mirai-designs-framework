@@ -1,0 +1,150 @@
+@use '@miraidesigns/base';
+@use '@miraidesigns/helpers';
+@use '@miraidesigns/utils';
+@use './variables';
+
+@mixin base() {
+	@include helpers.margin-padding-reset();
+
+	margin-bottom: utils.px2rem(variables.$margin-bottom);
+	list-style: none;
+
+	.#{base.$prefix}-icon {
+		fill: variables.$icon-color;
+	}
+}
+
+@mixin add-dividers() {
+	.#{base.$prefix}-list__item {
+		border-bottom: utils.px2rem(variables.$border-size) solid variables.$border-color;
+
+		&:last-of-type {
+			border: none;
+		}
+	}
+}
+
+@mixin condensed() {
+	.#{base.$prefix}-list__item {
+		height: utils.px2rem(variables.$condensed-height);
+
+		&--icon {
+			height: utils.px2rem(variables.$condensed-height-icon);
+		}
+
+		&--two-lines {
+			height: utils.px2rem(variables.$condensed-height-two-lines);
+
+			.#{base.$prefix}-list__primary-text {
+				font-size: utils.px2rem(variables.$condensed-primary-text-size);
+			}
+
+			.#{base.$prefix}-list__secondary-text {
+				margin-bottom: 0;
+				font-size: utils.px2rem(variables.$condensed-secondary-text-size);
+			}
+		}
+	}
+}
+
+@mixin item() {
+	display: flex;
+	align-items: center;
+	height: utils.px2rem(variables.$item-height);
+	padding: 0 utils.px2rem(variables.$item-horizontal-padding);
+}
+
+@mixin item-two-lines() {
+	height: utils.px2rem(variables.$item-height-two-lines);
+}
+
+@mixin leading() {
+	order: 0;
+	margin-right: utils.px2rem(variables.$leading-offset-right);
+}
+
+@mixin trailing() {
+	order: 2;
+	margin-right: initial;
+	margin-left: auto;
+	color: variables.$meta-text-color;
+	font-size: utils.px2rem(variables.$meta-text-size);
+}
+
+@mixin text() {
+	order: 1;
+	display: inline-flex;
+	flex-direction: column;
+	text-decoration: none;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+@mixin primary-text() {
+	color: variables.$primary-text-color;
+}
+
+@mixin secondary-text() {
+	color: variables.$secondary-text-color;
+	font-size: utils.px2rem(variables.$secondary-text-size);
+}
+
+@mixin rtl() {
+	.#{base.$prefix}-list {
+		&__leading {
+			margin-right: 0;
+			margin-left: utils.px2rem(variables.$leading-offset-right);
+		}
+
+		&__trailing {
+			margin-right: auto;
+			margin-left: 0;
+		}
+	}
+}
+
+@mixin styles() {
+	.#{base.$prefix}-list {
+		@include base();
+
+		&--add-dividers {
+			@include add-dividers();
+		}
+
+		&--condensed {
+			@include condensed();
+		}
+
+		&__item {
+			@include item();
+
+			&--two-lines {
+				@include item-two-lines();
+			}
+		}
+
+		&__leading {
+			@include leading();
+		}
+
+		&__trailing {
+			@include trailing();
+		}
+
+		&__text {
+			@include text();
+		}
+
+		&__primary-text {
+			@include primary-text();
+		}
+
+		&__secondary-text {
+			@include secondary-text();
+		}
+	}
+
+	.#{base.$prefix}-rtl {
+		@include rtl();
+	}
+}

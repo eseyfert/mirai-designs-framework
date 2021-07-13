@@ -1,0 +1,223 @@
+@use '@miraidesigns/base';
+@use '@miraidesigns/button';
+@use '@miraidesigns/fx';
+@use '@miraidesigns/typography';
+@use '@miraidesigns/utils';
+@use './variables';
+
+@mixin container() {
+	display: none;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+@mixin container-sidebar() {
+	@include base.layer('sidebar');
+	@include fx.elevation(4);
+	@include fx.animation-standard(transform, 250ms);
+
+	position: fixed;
+	top: 0;
+}
+
+@mixin container-sidebar-left() {
+	right: initial;
+	left: 0;
+	transform: translateX(-100%);
+}
+
+@mixin container-sidebar-right() {
+	right: 0;
+	left: initial;
+	transform: translateX(100%);
+}
+
+@mixin container-active() {
+	display: block;
+	pointer-events: auto;
+}
+
+@mixin container-move-in() {
+	& > .#{base.$prefix}-sidebar {
+		transform: none !important;
+	}
+
+	& > .#{base.$prefix}-sidebar-backdrop {
+		opacity: 1;
+		pointer-events: auto;
+	}
+}
+
+@mixin base() {
+	display: flex;
+	flex: 1 0 auto;
+	flex-direction: column;
+	height: 100%;
+	min-height: 0;
+	width: 100%;
+	max-width: utils.px2rem(variables.$max-width);
+	background-color: variables.$background-color;
+	color: variables.$text-color;
+
+	@include base.breakpoint('tablet-portrait') {
+		max-width: utils.px2rem(variables.$max-width-large);
+	}
+}
+
+@mixin header() {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	min-height: utils.px2rem(variables.$header-min-height);
+	padding: 0 utils.px2rem(variables.$header-horizontal-padding);
+}
+
+@mixin title() {
+	@include typography.headline-6();
+
+	color: variables.$title-color;
+}
+
+@mixin close() {
+	@include button.base();
+	@include button.icon-only();
+
+	margin-right: -#{utils.px2rem(8px)};
+}
+
+@mixin content() {
+	flex: 1 1 auto;
+	flex-direction: column;
+	min-height: 0;
+	max-height: 100%;
+	padding: 0 utils.px2rem(variables.$content-horizontal-padding);
+	overflow-y: auto;
+}
+
+@mixin link() {
+	display: inline-flex;
+	align-items: center;
+	width: 100%;
+	padding: utils.px2rem(variables.$link-vertical-padding) utils.px2rem(variables.$link-horizontal-padding);
+	color: variables.$link-color;
+	font-weight: variables.$link-font-weight;
+	border-radius: utils.px2rem(variables.$link-border-radius);
+
+	&:hover,
+	&:focus {
+		background-color: variables.$link-hover-background-color;
+		color: variables.$link-hover-color;
+
+		& > .#{base.$prefix}-icon {
+			fill: variables.$link-hover-icon-color;
+		}
+	}
+
+	& > .#{base.$prefix}-icon {
+		margin-right: utils.px2rem(variables.$link-icon-margin-right);
+		fill: variables.$link-icon-color;
+	}
+}
+
+@mixin footer() {
+	@include typography.subtitle-2();
+
+	display: flex;
+	align-items: center;
+	justify-content: variables.$footer-justify-content;
+	width: 100%;
+	padding: utils.px2rem(variables.$footer-vertical-padding) 0;
+	color: variables.$footer-text-color;
+}
+
+@mixin backdrop() {
+	@include base.layer('backdrop');
+	@include fx.animation-standard(opacity, 250ms);
+
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	background-color: variables.$backdrop-background-color;
+	pointer-events: none;
+}
+
+@mixin rtl() {
+    .#{base.$prefix}-sidebar {
+		&__close {
+			margin-right: 0;
+			margin-left: -#{utils.px2rem(8px)};
+		}
+
+        &__link {
+            .#{base.$prefix}-icon {
+                margin-right: 0;
+                margin-left: utils.px2rem(variables.$link-icon-margin-right);
+            }
+        }
+    }
+}
+
+@mixin styles() {
+	.#{base.$prefix}-sidebar-container {
+		@include container();
+
+		&--active {
+			@include container-active();
+		}
+
+		&--move-in {
+			@include container-move-in();
+		}
+
+		& > .#{base.$prefix}-sidebar {
+			@include container-sidebar();
+
+			&--left {
+				@include container-sidebar-left();
+			}
+
+			&--right {
+				@include container-sidebar-right();
+			}
+		}
+	}
+
+	.#{base.$prefix}-sidebar {
+		@include base();
+
+		&__header {
+			@include header();
+		}
+
+		&__title {
+			@include title();
+		}
+
+		&__close {
+			@include close();
+		}
+
+		&__content {
+			@include content();
+		}
+
+		&__link {
+			@include link();
+		}
+
+		&__footer {
+			@include footer();
+		}
+	}
+
+	.#{base.$prefix}-sidebar-backdrop {
+		@include backdrop();
+	}
+
+	.#{base.$prefix}-rtl {
+		@include rtl();
+	}
+}

@@ -1,0 +1,26 @@
+@use 'sass:color';
+@use '@miraidesigns/theme';
+
+$max-width: 512px !default;
+
+$value-spacing: 16px !default;
+
+$thumb-size: 18px !default;
+$thumb-color: var(--brand, #{theme.brand()}) !default;
+$thumb-border-radius: 50% !default;
+$focus-thumb-shadow-size: 12px !default;
+$focus-thumb-shadow-color: color.scale(theme.brand(), $alpha: -80%) !default;
+
+$track-inactive-height: 4px !default;
+$track-height: 6px !default;
+$track-color: var(--brand-faded, #{theme.prop('brand-faded')}) !default;
+$track-lower-color: var(--brand, #{theme.brand()}) !default;
+$track-upper-color: var(--brand-faded, #{theme.prop('brand-faded')}) !default;
+$track-border-radius: 4px !default;
+
+$tick-width: 1px !default;
+$tick-gap: 6px !default;
+$tick-color: var(--brand, #{theme.prop('brand')}) !default;
+$tick-text-color: var(--secondary, #{theme.prop('secondary')}) !default;
+$tick-font-size: 14px !default;
+$tick-line-height: 32px !default;

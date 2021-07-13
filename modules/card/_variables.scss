@@ -1,0 +1,18 @@
+@use '@miraidesigns/theme';
+
+$max-width: 340px !default;
+$background-color: var(--background, #{theme.prop('background')}) !default;
+$border-color: var(--border, #{theme.prop('border')}) !default;
+$border-size: 1px !default;
+$border-radius: 4px !default;
+
+$header-padding: 16px !default;
+
+$title-font-size: 20px !default;
+$title-font-weight: 500 !default;
+
+$content-vertical-margin: 8px !default;
+$content-horizontal-padding: 16px !default;
+
+$footer-horizontal-padding: 16px !default;
+$footer-vertical-padding: 8px !default;

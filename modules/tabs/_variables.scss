@@ -1,0 +1,25 @@
+@use '@miraidesigns/theme';
+
+$margin-bottom: 16px !default;
+
+$tab-height: 48px !default;
+$tab-min-width: 90px !default;
+$tab-horizontal-padding: 16px !default;
+$tab-text-color: var(--secondary, #{theme.prop('secondary')}) !default;
+
+$tab-icon-spacing: 8px !default;
+$tab-icon-color: var(--secondary, #{theme.prop('secondary')}) !default;
+
+$tab-selection-background-color: var(--brand-faded, #{theme.prop('brand-faded')}) !default;
+
+$tab-selected-text-color: var(--brand, #{theme.brand()}) !default;
+$tab-selected-icon-color: var(--brand, #{theme.brand()}) !default;
+
+$tab-stacked-height: 72px !default;
+$tab-stacked-top-padding: 8px !default;
+$tab-stacked-bottom-padding: 4px !default;
+
+$selection-bar-size: 2px !default;
+$selection-bar-color: var(--brand, #{theme.brand()}) !default;
+
+$panel-padding: 16px !default;

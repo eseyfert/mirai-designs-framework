@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "alwaysStrict": true,
+        "noImplicitAny": true,
+        "strictNullChecks": false,
+        "target": "ES6",
+        "module": "CommonJS",
+        "lib": ["ES2017", "DOM", "DOM.Iterable"]
+    },
+    "include": ["modules/**/*"],
+    "exclude": ["./node_modules"]
+}

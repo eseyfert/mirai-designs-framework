@@ -1,0 +1,57 @@
+@use '@miraidesigns/base';
+@use '@miraidesigns/helpers';
+@use '@miraidesigns/utils';
+@use './variables';
+
+@mixin base() {
+    @include helpers.margin-padding-reset();
+
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+
+@mixin item() {
+    margin: 0 utils.px2rem(variables.$item-spacing) 0 0;
+    font-size: utils.px2rem(variables.$font-size);
+
+    // Active item (current page)
+    &--active {
+        color: variables.$active-color;
+    }
+}
+
+@mixin divider() {
+    content: '';
+    display: inline-flex;
+    height: utils.px2rem(variables.$divider-height);
+    margin: 0 utils.px2rem(variables.$divider-spacing) 0 0;
+    border-right: utils.px2rem(variables.$divider-thickness) solid variables.$divider-color;
+    transform: translateY(2px) rotate(15deg);
+}
+
+@mixin rtl() {
+    .#{base.$prefix}-breadcrumbs {
+        .#{base.$prefix}-breadcrumbs__item + .#{base.$prefix}-breadcrumbs__item::before {
+            margin: 0 0 0 utils.px2rem(variables.$divider-spacing);
+        }
+    }
+}
+
+@mixin styles() {
+    .#{base.$prefix}-breadcrumbs {
+        @include base();
+    
+        &__item {
+            @include item();
+        }
+    
+        &__item + &__item::before {
+            @include divider();
+        }
+    }
+
+    .#{base.$prefix}-rtl {
+        @include rtl();
+    }
+}

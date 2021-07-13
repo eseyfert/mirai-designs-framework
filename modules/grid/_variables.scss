@@ -1,0 +1,26 @@
+$cols: 3 !default;
+$cols-min-width: 0 !default;
+$cols-max-width: 1fr !default;
+
+$rows: 3 !default;
+$rows-min-height: 0 !default;
+$rows-max-height: 1fr !default;
+
+$gap: 16px !default;
+$gaps: (
+	'xs': 4px,
+	'sm': 8px,
+	'md': 16px,
+	'lg': 24px,
+	'xl': 32px,
+) !default;
+
+// Set how many modifier classes to generate.
+$classes: 5 !default;
+
+/**
+ * Needs small px value for script. It creates padding-like whitespace at the bottom of each item.
+ * This avoids items spanning more rows than necessary.
+ * Don't change unless you know what you're doing.
+ */
+$masonry-auto-row-height: 8px !default;

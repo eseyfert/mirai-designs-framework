@@ -1,0 +1,80 @@
+@use '@miraidesigns/base';
+@use '@miraidesigns/theme';
+@use './variables';
+@use './mixins';
+
+@include mixins.load();
+
+body {
+	@include mixins.body();
+}
+
+h1,
+.#{base.$prefix}-headline-1 {
+	@include mixins.headline-1();
+}
+
+h2,
+.#{base.$prefix}-headline-2 {
+	@include mixins.headline-2();
+}
+
+h3,
+.#{base.$prefix}-headline-3 {
+	@include mixins.headline-3();
+}
+
+h4,
+.#{base.$prefix}-headline-4 {
+	@include mixins.headline-4();
+}
+
+h5,
+.#{base.$prefix}-headline-5 {
+	@include mixins.headline-5();
+}
+
+h6,
+.#{base.$prefix}-headline-6 {
+	@include mixins.headline-6();
+}
+
+p {
+	@include mixins.paragraph();
+}
+
+a {
+	@include mixins.links();
+}
+
+pre {
+	@include mixins.pre();
+}
+
+strong {
+	font-weight: 700;
+}
+
+.#{base.$prefix}-font-regular {
+	@include mixins.regular();
+}
+
+.#{base.$prefix}-font-headline {
+	@include mixins.headline();
+}
+
+.#{base.$prefix}-font-code {
+	@include mixins.code();
+}
+
+.#{base.$prefix}-subtitle-1 {
+	@include mixins.subtitle-1();
+}
+
+.#{base.$prefix}-subtitle-2 {
+	@include mixins.subtitle-2();
+}
+
+.#{base.$prefix}-caption {
+	@include mixins.caption();
+}

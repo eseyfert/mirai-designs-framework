@@ -1,0 +1,120 @@
+@use '@miraidesigns/base';
+@use '@miraidesigns/utils';
+@use './variables';
+
+@mixin column() {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin row() {
+    display: flex;
+    flex-direction: row;
+}
+
+@mixin container() {
+    width: 100%;
+    max-width: utils.px2rem(variables.$container-max-width);
+}
+
+@mixin container-left() {
+    margin-left: initial;
+    margin-right: auto;
+}
+
+@mixin container-centered() {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@mixin container-right() {
+    margin-right: initial;
+    margin-left: auto;
+}
+
+@mixin group() {
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+
+    & > * {
+        margin-right: utils.px2rem(variables.$group-default-gap);
+        margin-bottom: utils.px2rem(variables.$group-default-gap);
+    }
+}
+
+@mixin group-stacked() {
+    flex-direction: column;
+}
+
+@mixin group-wrap() {
+    flex-wrap: wrap;
+}
+
+@mixin group-no-gap() {
+    & > * {
+        margin-right: 0 !important;
+        margin-bottom: 0 !important;
+    }
+}
+
+@mixin group-gaps() {
+    @each $name, $size in variables.$group-gaps {
+        &--gap-#{$name} {
+            & > * {
+                margin-right: utils.px2rem($size) !important;
+                margin-bottom: utils.px2rem($size) !important;
+            }
+        }
+    }
+}
+
+@mixin styles() {
+    .#{base.$prefix}-column {
+        @include column();
+    }
+    
+    .#{base.$prefix}-row {
+        @include row();
+    }
+    
+    .#{base.$prefix}-container {
+        @include container();
+    
+        &--left {
+            @include container-left();
+        }
+    
+        &--centered {
+            @include container-centered();
+        }
+    
+        &--right {
+            @include container-right();
+        }
+    }
+    
+    .#{base.$prefix}-group {
+        @include group();
+        @include group-gaps();
+    
+        &--stacked {
+            @include group-stacked();
+        }
+    
+        &--wrap {
+            @include group-wrap();
+        }
+    
+        &--no-gap {
+            @include group-no-gap();
+        }
+    }
+}
+
+@mixin rtl() {
+    .#{base.$prefix}-rtl {
+        direction: rtl;
+        unicode-bidi: embed;
+    }
+}

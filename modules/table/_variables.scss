@@ -1,0 +1,36 @@
+@use '@miraidesigns/theme';
+
+$border-color: var(--border, #{theme.prop('border')}) !default;
+$border-size: 1px !default;
+
+$container-margin-bottom: 16px !default;
+$container-border-radius: 4px !default;
+
+$row-height: 52px !default;
+$row-height-condensed: 40px !default;
+$row-height-header: 56px !default;
+$row-stripe-color: var(--background-hover, #{theme.prop('background-hover')}) !default;
+$row-hover-background-color: var(--brand-faded, #{theme.prop('brand-faded')}) !default;
+$row-selected-background-color: var(--brand-faded, #{theme.prop('brand-faded')}) !default;
+
+$header-checkbox-cell-width: 60px !default;
+$header-horizontal-padding: 16px !default;
+$header-text-color: var(--secondary, #{theme.prop('secondary')}) !default;
+$header-font-size: 13px !default;
+$header-sortable-hover-color: var(--primary, #{theme.prop('primary')}) !default;
+$header-sortable-active-color: var(--primary, #{theme.prop('primary')}) !default;
+$header-sortable-direction-color: var(--secondary, #{theme.prop('secondary')}) !default;
+
+$cell-horizontal-padding: 16px !default;
+$cell-font-size: 13px !default;
+
+$pagination-padding: 8px !default;
+$pagination-label-margin-right: 8px !default;
+$pagination-select-height: 40px !default;
+$pagination-select-min-width: 90px !default;
+$pagination-select-max-width: 128px !default;
+$pagination-select-margin-right: 24px !default;
+$pagination-select-vertical-padding: 8px !default;
+$pagination-select-horizontal-padding: 8px !default;
+$pagination-stats-margin-right: 32px !default;
+$pagination-control-margin-right: 8px !default;

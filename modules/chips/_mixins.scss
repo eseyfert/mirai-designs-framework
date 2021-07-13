@@ -1,0 +1,167 @@
+@use '@miraidesigns/base';
+@use '@miraidesigns/button';
+@use '@miraidesigns/elements';
+@use '@miraidesigns/helpers';
+@use '@miraidesigns/theme';
+@use '@miraidesigns/utils';
+@use './variables';
+
+@mixin container() {
+	display: flex;
+	align-items: center;
+}
+
+@mixin container-has-input() {
+	padding: 0 0 utils.px2rem(variables.$input-bottom-padding) 0;
+	border: 0;
+	border-bottom: utils.px2rem(variables.$input-border-size) solid variables.$input-border-color;
+
+	&:hover {
+		border-color: variables.$input-border-hover-color;
+	}
+}
+
+@mixin container-active() {
+	border-bottom: utils.px2rem(variables.$active-border-size) solid variables.$active-border-color;
+
+	&:hover {
+		border-color: variables.$active-border-color;
+	}
+}
+
+@mixin grid() {
+	display: inline-flex;
+}
+
+@mixin chip() {
+	display: inline-flex;
+	align-items: center;
+	height: utils.px2rem(variables.$chip-height);
+	margin: 0 utils.px2rem(variables.$chip-right-margin) 0 0;
+	padding: 0 utils.px2rem(variables.$chip-horizontal-padding);
+	background-color: variables.$chip-background-color;
+	border-radius: utils.px2rem(variables.$chip-border-radius);
+
+	// States
+	&:focus-within {
+		@include helpers.border-outline-reset();
+
+		background-color: theme.color(theme.$brand);
+		color: theme.color-contrasted(theme.$brand);
+
+		.#{base.$prefix}-chips__icon {
+			fill: theme.color-contrasted(theme.$brand);
+		}
+
+		.#{base.$prefix}-chips__action > .#{base.$prefix}-icon {
+			fill: theme.color-contrasted(theme.$brand);
+		}
+	}
+
+	&::-moz-focus-inner {
+		padding: 0;
+		border: 0;
+	}
+}
+
+@mixin leading-icon() {
+	@include elements.icon(variables.$leading-icon-size, variables.$leading-icon-color);
+
+	margin: 0 utils.px2rem(variables.$leading-icon-spacing) 0 0;
+}
+
+@mixin text() {
+	font-size: utils.px2rem(variables.$text-font-size);
+	line-height: 1;
+	white-space: nowrap;
+
+	&:hover {
+		cursor: pointer;
+	}
+
+	&:focus {
+		outline: 0;
+	}
+}
+
+@mixin action() {
+	@include button.base();
+	@include button.icon-only($b-size: variables.$chip-height);
+
+	margin-left: utils.px2rem(4px); // Create space between text and button
+	margin-right: -#{utils.px2rem(button.$horizontal-padding)}; // Move the action button closer to the edge
+
+	.#{base.$prefix}-icon {
+		@include elements.icon(variables.$action-icon-size, variables.$action-icon-color);
+	}
+}
+
+@mixin input() {
+	@include helpers.border-outline-reset();
+
+	display: inline-flex;
+	align-items: center;
+	height: utils.px2rem(variables.$input-height);
+	width: 100%;
+	padding: 0 utils.px2rem(variables.$input-right-padding) 0 utils.px2rem(variables.$input-left-padding);
+	background-color: transparent;
+	color: var(--primary, #{theme.prop('primary')});
+	font-size: utils.px2rem(variables.$input-font-size);
+	line-height: 1;
+	white-space: nowrap;
+}
+
+@mixin rtl() {
+	.#{base.$prefix}-chips {
+		&__icon {
+			margin: 0 0 0 utils.px2rem(variables.$leading-icon-spacing);
+		}
+
+		&__action {
+			margin-left: -#{utils.px2rem(button.$horizontal-padding)};
+			margin-right: utils.px2rem(4px);
+		}
+	}
+}
+
+@mixin styles() {
+	.#{base.$prefix}-chips {
+		@include container();
+
+		&--has-input {
+			@include container-has-input();
+		}
+
+		&--active {
+			@include container-active();
+		}
+
+		&__grid {
+			@include grid();
+		}
+
+		&__chip {
+			@include chip();
+		}
+
+		&__icon {
+			@include leading-icon();
+		}
+
+		&__text {
+			@include text();
+		}
+
+		&__action {
+			@include action();
+		}
+
+		&__input {
+			@include input();
+		}
+	}
+
+	.#{base.$prefix}-rtl {
+		@include rtl();
+	}
+}

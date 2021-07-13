@@ -1,0 +1,22 @@
+{
+	"name": "@miraidesigns/breadcrumbs",
+	"description": "Mirai Designs Framework: Breadcrumbs module",
+	"version": "1.0.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/miraidesigns/mirai-designs-framework.git",
+		"directory": "modules/breadcrumbs"
+	},
+	"keywords": [
+		"mirai designs framework",
+		"breadcrumbs"
+	],
+	"author": "Eric Seyfert",
+	"license": "ISC",
+	"dependencies": {
+		"@miraidesigns/base": "^1.0.0",
+		"@miraidesigns/helpers": "^1.0.0",
+		"@miraidesigns/theme": "^1.0.0",
+		"@miraidesigns/utils": "^1.0.0"
+	}
+}

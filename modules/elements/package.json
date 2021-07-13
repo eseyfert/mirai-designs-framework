@@ -1,0 +1,23 @@
+{
+	"name": "@miraidesigns/elements",
+	"description": "Mirai Designs Framework: Elements module",
+	"version": "1.0.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/miraidesigns/mirai-designs-framework.git",
+		"directory": "modules/elements"
+	},
+	"keywords": [
+		"mirai designs framework",
+		"elements"
+	],
+	"author": "Eric Seyfert",
+	"license": "ISC",
+	"dependencies": {
+		"@miraidesigns/base": "^1.0.0",
+		"@miraidesigns/fx": "^1.0.0",
+		"@miraidesigns/helpers": "^1.0.0",
+		"@miraidesigns/theme": "^1.0.0",
+		"@miraidesigns/utils": "^1.0.0"
+	}
+}

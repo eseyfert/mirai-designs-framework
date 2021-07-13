@@ -1,0 +1,16 @@
+{
+	"name": "@miraidesigns/fx",
+	"description": "Mirai Designs Framework: Fx module",
+	"version": "1.0.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/miraidesigns/mirai-designs-framework.git",
+		"directory": "modules/fx"
+	},
+	"keywords": [
+		"mirai designs framework",
+		"fx"
+	],
+	"author": "Eric Seyfert",
+	"license": "ISC"
+}

@@ -1,0 +1,240 @@
+@use 'sass:color';
+@use '@miraidesigns/base';
+@use '@miraidesigns/elements';
+@use '@miraidesigns/fx';
+@use '@miraidesigns/helpers';
+@use '@miraidesigns/theme';
+@use '@miraidesigns/typography';
+@use '@miraidesigns/utils';
+@use './variables';
+
+@mixin base() {
+	@include helpers.border-outline-reset();
+	@include typography.regular(variables.$font-weight, inherit);
+	@include fx.animation-standard(all, 200ms);
+
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: utils.px2rem(variables.$min-width);
+	height: utils.px2rem(variables.$height);
+	margin: 0;
+	padding: 0 utils.px2rem(variables.$font-size);
+	overflow: visible;
+	background-color: transparent;
+	color: variables.$text-color;
+	font-size: utils.px2rem(variables.$font-size);
+	letter-spacing: 0.0892857143em;
+	text-transform: uppercase;
+	white-space: nowrap;
+	border-radius: utils.px2rem(variables.$border-radius);
+	user-select: none;
+	-webkit-appearance: none;
+
+	&::-moz-focus-inner {
+		padding: 0;
+		border: 0;
+	}
+
+	&:hover {
+		background-color: var(--buttons-hover, #{theme.prop('buttons-hover')});
+		cursor: pointer;
+	}
+
+	&:focus-visible {
+		background-color: var(--buttons-hover, #{theme.prop('buttons-hover')});
+	}
+
+	&:active {
+		background-color: var(--buttons-active, #{theme.prop('buttons-active')});
+		outline: 0;
+	}
+
+	&:disabled {
+		opacity: 0.38;
+		cursor: default;
+		pointer-events: none;
+	}
+}
+
+@mixin bordered() {
+	border: utils.px2rem(variables.$border-size) solid var(--buttons, #{theme.prop('buttons')});
+}
+
+@mixin filled() {
+	background-color: theme.color(theme.$brand) !important;
+	color: theme.color-contrasted(theme.$brand) !important;
+
+	&:hover {
+		background-color: color.scale(theme.color(theme.$brand), $lightness: -12%) !important;
+	}
+
+	&:focus-visible {
+		background-color: color.scale(theme.color(theme.$brand), $lightness: -12%) !important;
+	}
+
+	&:active {
+		background-color: color.scale(theme.color(theme.$brand), $lightness: -20%) !important;
+	}
+
+	.#{base.$prefix}-icon {
+		fill: theme.color-contrasted(theme.$brand) !important;
+	}
+}
+
+@mixin raised() {
+	@include fx.elevation(2);
+
+	&:hover {
+		@include fx.elevation(4);
+	}
+}
+
+@mixin small() {
+	height: utils.px2rem(variables.$height-small);
+	font-size: utils.px2rem(variables.$font-size-small);
+}
+
+@mixin large() {
+	height: utils.px2rem(variables.$height-large);
+	font-size: utils.px2rem(variables.$font-size-large);
+}
+
+@mixin block() {
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+
+@mixin leading-icon() {
+	.#{base.$prefix}-icon {
+		@include elements.icon(variables.$icon-size, variables.$icon-color);
+
+		order: -1; // Make sure the icon is at the start of the button.
+		margin: 0 utils.px2rem(variables.$icon-spacing) 0 -4px;
+	}
+}
+
+@mixin trailing-icon() {
+	.#{base.$prefix}-icon {
+		@include elements.icon(variables.$icon-size, variables.$icon-color);
+
+		order: 1; // Make sure the icon is at the end of the button.
+		margin: 0 0 0 utils.px2rem(variables.$icon-spacing);
+	}
+}
+
+@mixin icon-only($b-size: 48px, $b-radius: 50%) {
+	height: utils.px2rem($b-size);
+	width: utils.px2rem($b-size);
+	min-width: auto;
+	padding: 0;
+	border-radius: $b-radius;
+}
+
+@mixin toggle() {
+	@include icon-only();
+
+	margin: 0 -1px 0 0; // Negative margin to compensate for the border
+	background-color: var(--background, #{theme.prop('background')});
+	border: variables.$toggles-border-size solid variables.$toggles-border-color;
+	border-radius: 0;
+
+	.#{base.$prefix}-icon {
+		height: utils.px2rem(24px);
+		width: utils.px2rem(24px);
+		fill: var(--primary, #{theme.prop('primary')});
+	}
+}
+
+@mixin toggles-container() {
+	display: inline-flex;
+	align-items: center;
+	margin: 0 variables.$toggles-margin-right 0 0;
+
+	// Set toggle as active.
+	.#{base.$prefix}-button--active {
+		background-color: var(--background-hover, #{theme.prop('background-hover')});
+	}
+
+	// Add rounded corners to the first toggle.
+	.#{base.$prefix}-button:first-of-type {
+		border-top-left-radius: variables.$toggles-border-radius;
+		border-bottom-left-radius: variables.$toggles-border-radius;
+	}
+
+	// Add rounded corners to the last toggle.
+	.#{base.$prefix}-button:last-of-type {
+		border-top-right-radius: variables.$toggles-border-radius;
+		border-bottom-right-radius: variables.$toggles-border-radius;
+	}
+}
+
+@mixin rtl() {
+	.#{base.$prefix}-button--leading-icon {
+		.#{base.$prefix}-icon {
+			margin: 0 0 0 utils.px2rem(variables.$icon-spacing);
+		}
+	}
+
+	.#{base.$prefix}-button--trailing-icon {
+		.#{base.$prefix}-icon {
+			margin: 0 utils.px2rem(variables.$icon-spacing) 0 0;
+		}
+	}
+}
+
+@mixin styles() {
+	.#{base.$prefix}-button {
+		@include base();
+
+		&--bordered {
+			@include bordered();
+		}
+
+		&--filled {
+			@include filled();
+		}
+
+		&--raised {
+			@include raised();
+		}
+
+		&--small {
+			@include small();
+		}
+
+		&--large {
+			@include large();
+		}
+
+		&--block {
+			@include block();
+		}
+
+		&--leading-icon {
+			@include leading-icon();
+		}
+
+		&--trailing-icon {
+			@include trailing-icon();
+		}
+
+		&--icon {
+			@include icon-only();
+		}
+
+		&--toggle {
+			@include toggle();
+		}
+	}
+
+	.#{base.$prefix}-toggles {
+		@include toggles-container();
+	}
+
+	.#{base.$prefix}-rtl {
+		@include rtl();
+	}
+}

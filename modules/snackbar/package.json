@@ -1,0 +1,22 @@
+{
+	"name": "@miraidesigns/snackbar",
+	"description": "Mirai Designs Framework: Snackbar module",
+	"version": "1.0.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/miraidesigns/mirai-designs-framework.git",
+		"directory": "modules/snackbar"
+	},
+	"keywords": [
+		"mirai designs framework",
+		"snackbar"
+	],
+	"author": "Eric Seyfert",
+	"license": "ISC",
+	"dependencies": {
+		"@miraidesigns/base": "^1.0.0",
+		"@miraidesigns/button": "^1.0.0",
+		"@miraidesigns/fx": "^1.0.0",
+		"@miraidesigns/utils": "^1.0.0"
+	}
+}

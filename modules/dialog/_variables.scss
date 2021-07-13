@@ -1,0 +1,25 @@
+@use '@miraidesigns/theme';
+
+$container-padding: 16px !default;
+
+$max-width: 280px !default;
+$max-width-large: 320px !default;
+$background-color: var(--background, #{theme.prop('background')}) !default;
+$text-color: var(--primary, #{theme.prop('primary')}) !default;
+$border-radius: 2px !default;
+
+$header-height: 64px !default;
+
+$close-right-margin: 8px !default;
+
+$title-padding: 24px !default;
+$title-font-size: 20px !default;
+$title-font-weight: 500 !default;
+
+$content-max-height: 50vh !default;
+$content-horizontal-padding: 24px !default;
+$content-text-color: var(--secondary, #{theme.prop('secondary')}) !default;
+
+$actions-padding: 8px !default;
+
+$backdrop-background-color: rgba(0, 0, 0, 0.6) !default;

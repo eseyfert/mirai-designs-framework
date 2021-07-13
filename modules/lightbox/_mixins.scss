@@ -1,0 +1,272 @@
+@use '@miraidesigns/base';
+@use '@miraidesigns/button';
+@use '@miraidesigns/fx';
+@use '@miraidesigns/helpers';
+@use '@miraidesigns/typography';
+@use '@miraidesigns/utils';
+@use './variables';
+
+@mixin container() {
+    display: none;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+@mixin container-active() {
+    display: block;
+    pointer-events: auto;
+}
+
+@mixin container-fade-in() {
+    .#{base.$prefix}-lightbox {
+        opacity: 1;
+    }
+
+    .#{base.$prefix}-lightbox-backdrop {
+        opacity: 1;
+    }
+}
+
+@mixin base() {
+    @include base.layer('lightbox');
+    @include fx.animation-standard(opacity, 250ms);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+}
+
+@mixin items() {
+    @include helpers.margin-padding-reset();
+    @include fx.animation-standard(transform, 300ms);;
+
+    height: 100%;
+    width: 100%;
+    display: flex;
+    overflow: visible !important; // IMPORTANT, KEEP THIS AT ALL TIMES, OTHERWISE ITEMS WONT SHOW
+    list-style: none;
+}
+
+@mixin item() {
+    @include helpers.margin-padding-reset();
+
+    position: relative;
+    flex: 1 0 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin item-grow() {
+    .#{base.$prefix}-lightbox__media {
+        animation-name: media-grow;
+        animation-duration: 400ms;
+        animation-timing-function: fx.$deceleration-curve-timing-function;
+    }
+}
+
+@mixin wrapper() {
+    position: relative;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+
+    .#{base.$prefix}-lightbox__media {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@mixin wrapper-bordered() {
+    margin: utils.px2rem(variables.$iframe-margin);
+    border: utils.px2rem(variables.$iframe-border-size) solid variables.$iframe-border-color;
+    border-radius: utils.px2rem(variables.$iframe-border-radius);
+}
+
+@mixin media() {
+    @include helpers.margin-padding-reset();
+    @include helpers.border-outline-reset();
+
+    max-height: 100vh;
+    margin: 0 utils.px2rem(variables.$media-horizontal-margin);
+    overflow: hidden;
+    user-select: none;
+}
+
+@mixin info() {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    padding: utils.px2rem(variables.$info-padding);
+    background-color: variables.$info-background-color;
+}
+
+@mixin title() {
+    @include typography.subtitle-2();
+
+    color: variables.$title-color;
+}
+
+@mixin description() {
+    @include typography.caption();
+
+    margin: 0;
+    color: variables.$description-color;
+}
+
+@mixin control() {
+    @include base.layer('lightbox');
+    @include button.base();
+    @include button.icon-only();
+
+    position: fixed;
+
+    &:hover,
+    &:focus {
+        .#{base.$prefix}-icon {
+            fill: variables.$control-hover-icon-color;
+        }
+    }
+
+    .#{base.$prefix}-icon {
+        fill: variables.$control-icon-color;
+    }
+}
+
+@mixin control-close() {
+    top: utils.px2rem(4px);
+    right: utils.px2rem(4px);
+
+    .#{base.$prefix}-icon {
+        height: utils.px2rem(28px);
+        width: utils.px2rem(28px);
+    }
+}
+
+@mixin control-prev() {
+    top: 50%;
+    left: utils.px2rem(4px);
+    transform: translateY(-50%);
+
+    .#{base.$prefix}-icon {
+        height: utils.px2rem(40px);
+        width: utils.px2rem(40px);
+        transform: translateX(-1px) rotate(180deg);
+    }
+}
+
+@mixin control-next() {
+    top: 50%;
+    right: utils.px2rem(4px);
+    transform: translateY(-50%);
+
+    .#{base.$prefix}-icon {
+        height: utils.px2rem(40px);
+        width: utils.px2rem(40px);
+        transform: translateX(1px);
+    }
+}
+
+@mixin backdrop() {
+    @include base.layer('backdrop');
+    @include fx.animation-standard(opacity, 200ms);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    background-color: variables.$backdrop-background-color;
+}
+
+@mixin styles() {
+    .#{base.$prefix}-lightbox-container {
+        @include container();
+    
+        &--active {
+            @include container-active();
+        }
+    
+        &--fade-in {
+            @include container-fade-in();
+        }
+    }
+    
+    .#{base.$prefix}-lightbox {
+        @include base();
+    
+        &__items {
+            @include items();
+        }
+    
+        &__item {
+            @include item();
+    
+            &--grow {
+                @include item-grow();
+            }
+        }
+    
+        &__media-wrapper {
+            @include wrapper();
+    
+            &--bordered {
+                @include wrapper-bordered();
+            }
+        }
+    
+        &__media {
+            @include media();
+        }
+    
+        &__info {
+            @include info();
+        }
+    
+        &__title {
+            @include title();
+        }
+    
+        &__description {
+            @include description();
+        }
+    
+        &__control {
+            @include control();
+    
+            &--close {
+                @include control-close();
+            }
+    
+            &--prev {
+                @include control-prev();
+            }
+    
+            &--next {
+                @include control-next();
+            }
+        }
+    }
+    
+    .#{base.$prefix}-lightbox-backdrop {
+        @include backdrop();
+    }
+    
+    @keyframes media-grow {
+        0% {
+            transform: scale(0.25);
+        }
+    
+        100% {
+            transform: scale(1);
+        }
+    }
+}

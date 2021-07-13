@@ -1,0 +1,25 @@
+{
+	"name": "@miraidesigns/menu",
+	"description": "Mirai Designs Framework: Menu module",
+	"version": "1.0.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/miraidesigns/mirai-designs-framework.git",
+		"directory": "modules/menu"
+	},
+	"keywords": [
+		"mirai designs framework",
+		"menu"
+	],
+	"author": "Eric Seyfert",
+	"license": "ISC",
+	"dependencies": {
+		"@miraidesigns/base": "^1.0.0",
+		"@miraidesigns/fx": "^1.0.0",
+		"@miraidesigns/helpers": "^1.0.0",
+		"@miraidesigns/list": "^1.0.0",
+		"@miraidesigns/theme": "^1.0.0",
+		"@miraidesigns/typography": "^1.0.0",
+		"@miraidesigns/utils": "^1.0.0"
+	}
+}

@@ -1,0 +1,213 @@
+@use '@miraidesigns/base';
+@use '@miraidesigns/button';
+@use '@miraidesigns/fx';
+@use '@miraidesigns/utils';
+@use './variables';
+
+@mixin base() {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	margin-bottom: utils.px2rem(variables.$margin-bottom);
+}
+
+@mixin bar() {
+	display: flex;
+	justify-content: center;
+}
+
+@mixin bar-left() {
+	justify-content: flex-start;
+}
+
+@mixin bar-right() {
+	justify-content: flex-end;
+}
+
+@mixin bar-stretched() {
+	.#{base.$prefix}-tabs__tab {
+		flex-grow: 1 !important;
+	}
+}
+
+@mixin tab() {
+	@include button.base();
+
+	flex: 0 1 auto;
+	height: utils.px2rem(variables.$tab-height);
+	min-width: utils.px2rem(variables.$tab-min-width);
+	padding: 0 utils.px2rem(variables.$tab-horizontal-padding);
+	background-color: transparent;
+	border-radius: 0;
+	white-space: nowrap;
+
+	&:hover,
+	&:focus {
+		background-color: variables.$tab-selection-background-color;
+	}
+}
+
+@mixin tab-selected() {
+	.#{base.$prefix}-icon {
+		fill: variables.$tab-selected-icon-color !important;
+		transition-delay: 100ms !important;
+	}
+
+	.#{base.$prefix}-tabs__text {
+		color: variables.$tab-selected-text-color;
+		transition-delay: 100ms;
+	}
+
+	.#{base.$prefix}-tabs__selection {
+		opacity: 1;
+	}
+}
+
+@mixin tab-stacked() {
+	height: utils.px2rem(variables.$tab-stacked-height);
+
+	.#{base.$prefix}-tabs__content {
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+		.#{base.$prefix}-icon {
+			margin-right: 0 !important;
+			margin-left: 0 !important;
+		}
+	}
+}
+
+@mixin content() {
+	position: relative;
+	display: flex;
+	pointer-events: none;
+
+	.#{base.$prefix}-icon {
+		@include fx.animation-standard(fill, 150ms);
+
+		margin-right: utils.px2rem(variables.$tab-icon-spacing);
+		fill: variables.$tab-icon-color;
+	}
+}
+
+@mixin text() {
+	@include fx.animation-standard(color, 150ms);
+
+	color: variables.$tab-text-color;
+}
+
+@mixin selection() {
+	@include fx.animation-standard(transform, 200ms);
+
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	border-bottom: utils.px2rem(variables.$selection-bar-size) solid variables.$selection-bar-color;
+	transform-origin: left;
+	pointer-events: none;
+}
+
+@mixin panels() {
+	display: flex;
+	flex-direction: column;
+}
+
+@mixin panel() {
+	display: none;
+	padding: utils.px2rem(variables.$panel-padding);
+}
+
+@mixin panel-active() {
+	display: block;
+
+	&:focus {
+		outline: 0;
+	}
+}
+
+@mixin rtl() {
+	.#{base.$prefix}-tabs {
+		&__bar {
+			&--left {
+				justify-content: flex-end;
+			}
+
+			&--right {
+				justify-content: flex-start;
+			}
+		}
+
+		&__content > .#{base.$prefix}-icon {
+			margin-right: 0;
+			margin-left: utils.px2rem(variables.$tab-icon-spacing);
+		}
+	}
+}
+
+@mixin styles() {
+	.#{base.$prefix}-tabs {
+		@include base();
+
+		&__bar {
+			@include bar();
+
+			&--left {
+				@include bar-left();
+			}
+
+			&--right {
+				@include bar-right();
+			}
+
+			&--stretched {
+				@include bar-stretched();
+			}
+		}
+
+		&__tab {
+			@include tab();
+
+			&--stacked {
+				@include tab-stacked();
+			}
+
+			&--selected {
+				@include tab-selected();
+			}
+		}
+
+		&__content {
+			@include content();
+		}
+
+		&__text {
+			@include text();
+		}
+
+		&__selection {
+			@include selection();
+		}
+
+		&__panels {
+			@include panels();
+		}
+
+		&__panel {
+			@include panel();
+
+			&--active {
+				@include panel-active();
+			}
+		}
+	}
+
+	.#{base.$prefix}-rtl {
+		@include rtl();
+	}
+}

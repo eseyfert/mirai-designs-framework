@@ -1,0 +1,25 @@
+@use './variables';
+
+/**
+ * Material Design: Animation
+ * @see: https://github.com/material-components/material-components-web/blob/master/packages/mdc-animation
+ */
+@function animation-enter($name, $duration, $delay: 0ms) {
+	@return $name $duration $delay variables.$deceleration-curve-timing-function;
+}
+
+@function animation-exit-permanent($name, $duration, $delay: 0ms) {
+	@return $name $duration $delay variables.$acceleration-curve-timing-function;
+}
+
+@function animation-exit-temporary($name, $duration, $delay: 0ms) {
+	@return $name $duration $delay variables.$sharp-curve-timing-function;
+}
+
+@function animation-standard($name, $duration, $delay: 0ms) {
+	@return $name $duration $delay variables.$standard-curve-timing-function;
+}
+
+@function animation-linear($name, $duration, $delay: 0ms) {
+	@return $name $duration $delay linear;
+}
