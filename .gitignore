@@ -14,5 +14,5 @@ index.html
 /modules/app.ts
 app.css
 app.js
-appjs.map
+app.js.map
 package-lock.json
