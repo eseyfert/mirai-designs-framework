@@ -1,6 +1,7 @@
 # Menus
 
-Menus display a list of choices or options to the user. See [Lists](#lists) for customization options.
+Menus display a list of choices or options to the user.\
+This module also requires the [List](https://github.com/miraidesigns/mirai-designs-framework/tree/master/modules/list) module.
 
 ---
 

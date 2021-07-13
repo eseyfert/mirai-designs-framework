@@ -1,6 +1,7 @@
 # Tables
 
-Tables display data across a set of columns and rows.
+Tables display data across a set of columns and rows.\
+May require the [Checkbox](https://github.com/miraidesigns/mirai-designs-framework/tree/master/modules/checkbox), [Select](https://github.com/miraidesigns/mirai-designs-framework/tree/master/modules/select) or [Textfield](https://github.com/miraidesigns/mirai-designs-framework/tree/master/modules/textfield) module.
 
 ---
 

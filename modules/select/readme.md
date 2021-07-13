@@ -1,7 +1,8 @@
 # Selects
 
-Selects show a set of options the user can choose one from.
-Serves as an alternative to the native `<select>` element.
+Selects show a set of options the user can choose one from.\
+Serves as an alternative to the native `<select>` element.\
+This module also requires the [List](https://github.com/miraidesigns/mirai-designs-framework/tree/master/modules/list) and [Menu](https://github.com/miraidesigns/mirai-designs-framework/tree/master/modules/menu) modules.
 
 ---
 
