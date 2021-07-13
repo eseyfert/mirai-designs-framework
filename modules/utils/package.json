@@ -1,0 +1,16 @@
+{
+	"name": "@miraidesigns/utils",
+	"description": "Mirai Designs Framework: Utils module",
+	"version": "1.0.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/miraidesigns/mirai-designs-framework.git",
+		"directory": "modules/utils"
+	},
+	"keywords": [
+		"mirai designs framework",
+		"utils"
+	],
+	"author": "Eric Seyfert",
+	"license": "ISC"
+}
