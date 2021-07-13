@@ -1,7 +1,6 @@
 # Mirai Designs Framework
 
 A modular framework written in [Dart Sass](https://sass-lang.com/dart-sass) and [TypeScript](https://www.typescriptlang.org/).\
-This framework powers every [Mirai Designs](https://miraidesigns.net) app and website.\
 It requires a basic understanding of Sass and TypeScript and how to compile both into usable CSS and JS.
 
 ---
