@@ -11,7 +11,7 @@ const uglify = require('gulp-uglify-es').default;
 
 gulp.task('scss-dirty', function () {
 	return gulp
-		.src('app.scss')
+		.src('./modules/app.scss')
 		.pipe(scss({ includePaths: ['node_modules'] }))
 		.pipe(autoprefixer('last 5 version'))
 		.pipe(gulp.dest('/'));
@@ -19,7 +19,7 @@ gulp.task('scss-dirty', function () {
 
 gulp.task('scss-clean', function () {
 	return gulp
-		.src('app.scss')
+		.src('./modules/app.scss')
 		.pipe(scss({ includePaths: ['node_modules'] }))
 		.pipe(autoprefixer('last 5 version'))
 		.pipe(
@@ -41,7 +41,7 @@ gulp.task('scss-clean', function () {
 
 gulp.task('ts', function () {
 	return browserify({
-		entries: 'app.ts',
+		entries: './modules/app.ts',
 		extensions: ['.ts'],
 		debug: true,
 	})

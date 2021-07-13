@@ -1,8 +1,10 @@
-Element.prototype.addClass = function (this: Element, ...classes) {
+declare module '@vimeo/player/dist/player.js';
+
+Element.prototype.addClass = function (this: Element, ...classes: string[]) {
 	this.classList.add(...classes);
 };
 
-Element.prototype.removeClass = function (this: Element, ...classes) {
+Element.prototype.removeClass = function (this: Element, ...classes: string[]) {
 	this.classList.remove(...classes);
 };
 
@@ -16,7 +18,7 @@ Element.prototype.removeClassByPrefix = function (this: Element, prefix: string)
 	});
 };
 
-Element.prototype.toggleClass = function (this: Element, className, condition?) {
+Element.prototype.toggleClass = function (this: Element, className: string, condition?: boolean) {
 	if (condition === true) {
 		this.classList.add(className);
 	} else if (condition === false) {
@@ -26,12 +28,12 @@ Element.prototype.toggleClass = function (this: Element, className, condition?) 
 	}
 };
 
-Element.prototype.replaceClass = function (this: Element, oldClass, newClass) {
+Element.prototype.replaceClass = function (this: Element, oldClass: string, newClass: string) {
 	this.classList.remove(oldClass);
 	this.classList.add(newClass);
 };
 
-Element.prototype.hasClass = function (this: Element, className) {
+Element.prototype.hasClass = function (this: Element, className: string) {
 	return this.classList.contains(className);
 };
 
@@ -43,6 +45,6 @@ Element.prototype.hide = function (this: HTMLElement) {
 	this.classList.add('mdf-hidden');
 };
 
-String.prototype.truncate = function (this: string, limit): string {
+String.prototype.truncate = function (this: string, limit: number): string {
 	return this.length > limit ? `${this.substr(0, limit - 1)}...` : this;
 };
