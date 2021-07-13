@@ -1,7 +1,7 @@
 {
 	"name": "@miraidesigns/base",
 	"description": "Mirai Designs Framework: Base module",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/miraidesigns/mirai-designs-framework.git",
