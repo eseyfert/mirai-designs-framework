@@ -1,10 +1,12 @@
 # Base
 
-Base is called as the first Sass module in order and includes a CSS reset and a variety of important variables and mixins.
+Base serves as the core foundation for a lot of the components, both in Sass and TypeScript.
 
 ---
 
-### Usage
+## Sass
+
+Base includes a CSS reset we load first to create a standardized look for our apps and websites.
 
 ```scss
 // Apply the CSS reset.
@@ -13,10 +15,6 @@ Base is called as the first Sass module in order and includes a CSS reset and a 
 // Make use of the Base model with all its components.
 @use '@miraidesigns/base';
 ```
-
----
-
-## Sass
 
 ### Prefix
 
