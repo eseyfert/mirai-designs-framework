@@ -1,5 +1,21 @@
 declare module '@vimeo/player/dist/player.js';
 
+interface Element {
+	addClass(...classes: string[]): void;
+	removeClass(...classes: string[]): void;
+	removeClassByPrefix(prefix: string): void;
+	toggleClass(className: string, condition?: boolean): void;
+	replaceClass(oldClass: string, newClass: string): void;
+	hasClass(className: string): boolean;
+	show(): void;
+	hide(): void;
+}
+
+/* eslint @typescript-eslint/no-unused-vars: off */
+interface String {
+	truncate(limit: number): string;
+}
+
 Element.prototype.addClass = function (this: Element, ...classes: string[]) {
 	this.classList.add(...classes);
 };
