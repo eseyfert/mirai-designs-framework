@@ -5,7 +5,6 @@
  *
  * @export
  * @returns {boolean}
- *
  * @version 1.0.0
  */
 export function isRTL(): boolean {
@@ -22,7 +21,6 @@ export function isRTL(): boolean {
  * @param {Element} elem The element we are testing
  * @param {boolean} horizontal Check for horizontal instead of vertical scrollbar
  * @returns {boolean}
- *
  * @version 1.0.0
  */
 export function hasScrollbar(elem: Element, horizontal?: boolean): boolean {
@@ -46,7 +44,6 @@ export function hasScrollbar(elem: Element, horizontal?: boolean): boolean {
  * @export
  * @param {HTMLElement} elem The element we start our search from
  * @returns {HTMLElement}
- *
  * @version 1.0.0
  */
 export function getScrollbarParent(elem: HTMLElement): HTMLElement {
@@ -72,7 +69,6 @@ export function getScrollbarParent(elem: HTMLElement): HTMLElement {
  * @export
  * @param {HTMLElement} elem The elem we need to match to its parent
  * @returns {void}
- *
  * @version 1.0.0
  */
 export function matchParentHeight(elem: HTMLElement): void {
@@ -92,7 +88,7 @@ export function matchParentHeight(elem: HTMLElement): void {
 
 /**
  * throttle
- * 
+ *
  * Throttle the repeated execution of a given function.
  * Useful for functions that get called repeatedly like mouse movements or scroll-wheel activation.
  *
@@ -100,7 +96,6 @@ export function matchParentHeight(elem: HTMLElement): void {
  * @param {(...args: any[]) => void} func The function with its arguments
  * @param {number} delay The amount of time between function calls
  * @returns {() => void}
- * 
  * @version 1.0.0
  */
 export function throttle(func: (...args: any[]) => void, delay: number): () => void {
@@ -128,7 +123,7 @@ export function throttle(func: (...args: any[]) => void, delay: number): () => v
 
 /**
  * debounce
- * 
+ *
  * Block repeated calls of the same function until the timer has cleared.
  * Good for blocking things like repeated mouse-clicks or window resize calls.
  *
@@ -136,22 +131,35 @@ export function throttle(func: (...args: any[]) => void, delay: number): () => v
  * @param {(...args: any[]) => void} func The function with its arguments
  * @param {number} timeout The amount of time between before the function can be called again
  * @returns {() => void}
- * 
  * @version 1.0.0
  */
 export function debounce(func: (...args: any[]) => void, timeout: number): () => void {
-    // We use this variable to keep track of the setTimeout id.
-    let timer: number;
+	// We use this variable to keep track of the setTimeout id.
+	let timer: number;
 
-    const debouncedFunc = (...args: any[]) => {
-        // If we have an existing setTimeout instance, clear it.
-        if (timer) {
-            clearTimeout(timer);
-        }
+	const debouncedFunc = (...args: any[]) => {
+		// If we have an existing setTimeout instance, clear it.
+		if (timer) {
+			clearTimeout(timer);
+		}
 
-        // Run function with supplied arguments and start our timer.
-        timer = setTimeout(() => func(...args), timeout);
-    };
+		// Run function with supplied arguments and start our timer.
+		timer = setTimeout(() => func(...args), timeout);
+	};
 
-    return debouncedFunc;
+	return debouncedFunc;
+}
+
+/**
+ * empty
+ *
+ * Strip string of white spaces and check if its empty.
+ *
+ * @export
+ * @param {string} string The string to test
+ * @returns {boolean}
+ * @version 1.0.0
+ */
+export function empty(string: string): boolean {
+	return string.trim().length === 0;
 }
