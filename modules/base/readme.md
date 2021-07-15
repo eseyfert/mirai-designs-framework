@@ -88,6 +88,7 @@ For ease of access and readability we use prototypes to extend the functions of 
 | Function           | Type               | Description                                                                  |
 | ------------------ | ------------------ | ---------------------------------------------------------------------------- |
 | `.truncate(limit)` | `(number): string` | Stop the `String` from exceeding the set length and adds ellipses at the end |
+| `.empty()`         | `(): boolean`      | Remove white spaces and check if string is empty                             |
 
 A quick example on how to use the prototypes.
 
