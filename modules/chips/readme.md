@@ -48,6 +48,8 @@ Some basic examples on how the module can be used.
 
 ### User Created Chips
 
+Requires the `Helpers` module for the `mdf-offscreen` class.
+
 ```html
 <div class="mdf-chips mdf-chips--has-input">
     <div class="mdf-chips__grid" role="grid">   
@@ -78,7 +80,7 @@ Some basic examples on how the module can be used.
 import { MDFChips } from '@miraidesigns/chips';
 
 const chips = new MDFChips(document.querySelector('.mdf-chips'), {
-    iconURL: 'icons.svg#cancel'
+    iconURL: 'icons.svg#cancel' // Make sure to set this URL correctly
 });
 
 // Get the chips container and text input elements.
