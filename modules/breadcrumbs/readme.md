@@ -24,12 +24,12 @@ Breadcrumbs are a type of navigation that show your current location on the app 
 
 ```scss
 // Include default styles without configuration
-@forward 'modules/breadcrumbs/styles';
+@forward '@miraidesigns/breadcrumbs/styles';
 ```
 
 ```scss
 // Configure appearance
-@use 'modules/breadcrumbs' with (
+@use '@miraidesigns/breadcrumbs' with (
     $variable: value
 );
 
