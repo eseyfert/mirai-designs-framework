@@ -19,8 +19,8 @@ $gaps: (
 $classes: 5 !default;
 
 /**
- * Needs small px value for script. It creates padding-like whitespace at the bottom of each item.
+ * Needs small px value for script.
  * This avoids items spanning more rows than necessary.
  * Don't change unless you know what you're doing.
  */
-$masonry-auto-row-height: 8px !default;
+$masonry-auto-row-height: 1px !default;
