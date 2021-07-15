@@ -51,7 +51,10 @@
 @mixin styles() {
 	.#{base.$prefix}-grid {
 		@include base();
-		@include masonry();
 		@include modifiers();
+
+		&--masonry {
+			@include masonry();
+		}
 	}
 }
