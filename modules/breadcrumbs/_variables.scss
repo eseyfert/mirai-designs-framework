@@ -3,7 +3,7 @@
 $active-color: var(--secondary, #{theme.prop('secondary')}) !default;
 $font-size: 14px !default;
 $item-spacing: 16px !default;
+
 $divider-color: var(--border, #{theme.prop('border')}) !default;
 $divider-height: 14px !default;
-$divider-spacing: 10px !default;
 $divider-thickness: 2px !default;
