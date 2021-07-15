@@ -71,15 +71,15 @@ Media like images or video and user actions are easily added to any card.
 
 ### Classes
 
-| Name                   | Type     | Description                                               |
-| ---------------------- | -------- | --------------------------------------------------------- |
-| `mdf-card`             | Parent   | Container for the card elements                           |
-| `mdf-card--bordered`   | Modifier | Add a border to the card                                  |
-| `mdf-card--elevated`   | Modifier | Elevate the card by adding a shadow                       |
-| `mdf-card--fixed`      | Modifier | Restrict the card's width                                 |
-| `mdf-card__media`      | Child    | Contains the media elements. Child to `.mdf-card`         |
-| `mdf-card__media-item` | Child    | Media element. Child to `.mdf-card__media`                |
-| `mdf-card__header`     | Child    | Contains the title. Child to `.mdf-card`                  |
-| `mdf-card__title`      | Child    | Title element. Child to `.mdf-card__header`               |
-| `mdf-card__content`    | Child    | Contains the cards text description. Child to `.mdf-card` |
-| `mdf-card__footer`     | Child    | Contains the action buttons. Child to `.mdf-card`         |
+| Name                    | Type     | Description                                               |
+| ----------------------- | -------- | --------------------------------------------------------- |
+| `mdf-card`              | Parent   | Container for the card elements                           |
+| `mdf-card--bordered`    | Modifier | Add a border to the card                                  |
+| `mdf-card--raised`      | Modifier | Elevate the card by adding a shadow                       |
+| `mdf-card--fixed-width` | Modifier | Restrict the card's width                                 |
+| `mdf-card__media`       | Child    | Contains the media elements. Child to `.mdf-card`         |
+| `mdf-card__media-item`  | Child    | Media element. Child to `.mdf-card__media`                |
+| `mdf-card__header`      | Child    | Contains the title. Child to `.mdf-card`                  |
+| `mdf-card__title`       | Child    | Title element. Child to `.mdf-card__header`               |
+| `mdf-card__content`     | Child    | Contains the cards text description. Child to `.mdf-card` |
+| `mdf-card__footer`      | Child    | Contains the action buttons. Child to `.mdf-card`         |
