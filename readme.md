@@ -19,8 +19,6 @@ Using [NPM](https://www.npmjs.com), simply add the module(s) you require to your
 npm install @miraidesigns/button
 ```
 
-The other way is to either clone this repo or download one of the [releases](https://github.com/miraidesigns/mirai-designs-framework/releases).
-
 ### HTML
 
 Most modules have some sort of required HTML markup.\
