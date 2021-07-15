@@ -139,12 +139,12 @@ You may display numbers underneath the ticks as well.\
 ```ts
 // Without numbers
 new MDFRange(document.querySelector('.mdf-range'), {
-	ticks: true,
+    ticks: true,
 });
 
 // With numbers
 new MDFRange(document.querySelector('.mdf-range'), {
-	ticks: true,
+    ticks: true,
     numbers: true,
 });
 ```
