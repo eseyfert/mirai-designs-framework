@@ -58,6 +58,11 @@
 	height: utils.px2rem(variables.$item-height-two-lines);
 }
 
+@mixin icon() {
+	display: inline-flex;
+	align-items: center;
+}
+
 @mixin leading() {
 	order: 0;
 	margin-right: utils.px2rem(variables.$leading-offset-right);
@@ -124,10 +129,12 @@
 		}
 
 		&__leading {
+			@include icon();
 			@include leading();
 		}
 
 		&__trailing {
+			@include icon();
 			@include trailing();
 		}
 
