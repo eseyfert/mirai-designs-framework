@@ -3,7 +3,7 @@
  *
  * Contains declarations, types and extends native HTML objects.
  *
- * @version 1.2.0
+ * @version 1.0.0
  */
 
 // Declare Vimeo player module.
@@ -149,16 +149,4 @@ Element.prototype.show = function (this: HTMLElement): void {
  */
 String.prototype.truncate = function (this: string, limit: number): string {
 	return this.length > limit ? `${this.substr(0, limit - 1)}...` : this;
-};
-
-/**
- * empty
- *
- * Check whether or not the string is empty.
- *
- * @returns {boolean}
- * @since 1.2.0
- */
-String.prototype.empty = function (this: string): boolean {
-	return this.trim().length === 0;
 };
