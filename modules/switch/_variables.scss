@@ -2,7 +2,7 @@
 
 $track-height: 14px !default;
 $track-width: 32px !default;
-$track-color: var(--background-darken, #{theme.prop('background-darken')}) !default;
+$track-color: var(--background-emphasis, #{theme.prop('background-emphasis')}) !default;
 $track-border-radius: 7px !default;
 $checked-track-color: var(--brand-muted, #{theme.prop('brand-muted')}) !default;
 
