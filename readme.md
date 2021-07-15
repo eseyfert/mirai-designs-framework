@@ -1,7 +1,8 @@
 # Mirai Designs Framework
 
 A modular framework written in [Dart Sass](https://sass-lang.com/dart-sass) and [TypeScript](https://www.typescriptlang.org/).\
-It requires a basic understanding of Sass and TypeScript and how to compile both into usable CSS and JS.
+It requires a basic understanding of Sass and TypeScript and how to compile both into usable CSS and JS.\
+Use at your own risk. :sweat_smile:
 
 ---
 
@@ -9,6 +10,16 @@ It requires a basic understanding of Sass and TypeScript and how to compile both
 
 Modules are the individual components that makeup the framework.\
 A few modules like `Base` or `Theme` are generally required by every single module but the idea is that you can pick and choose what you need for your project without creating bloat.
+
+### Installation
+
+Using [NPM](https://www.npmjs.com), simply add the module(s) you require to your project.
+
+```
+npm install @miraidesigns/button
+```
+
+The other way is to either clone this repo or download one of the [releases](https://github.com/miraidesigns/mirai-designs-framework/releases).
 
 ### HTML
 
