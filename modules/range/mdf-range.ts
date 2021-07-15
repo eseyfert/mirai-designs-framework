@@ -1,4 +1,5 @@
 import '@miraidesigns/base';
+import { empty } from '@miraidesigns/utils';
 import { classes, selectors } from './constants';
 import { MDFRangeOptions } from './types';
 
@@ -143,19 +144,19 @@ export class MDFRange {
 	 * @version 1.0.1
 	 */
 	private setInputDefaults = () => {
-		if (this.value === '') {
+		if (empty(this.value)) {
 			this.value = '0';
 		}
 
-		if (this.min === '') {
+		if (empty(this.min)) {
 			this.min = '0';
 		}
 
-		if (this.max === '') {
+		if (empty(this.max)) {
 			this.max = '100';
 		}
 
-		if (this.step === '') {
+		if (empty(this.step === '')) {
 			this.step = '10';
 		}
 	};
