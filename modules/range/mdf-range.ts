@@ -10,7 +10,7 @@ import { MDFRangeOptions } from './types';
  *
  * @export
  * @class MDFRange
- * @version 1.0.2
+ * @version 1.0.3
  */
 export class MDFRange {
 	private container: HTMLElement;
@@ -141,7 +141,7 @@ export class MDFRange {
 	 * @private
 	 * @memberof MDFRange
 	 * @since 1.0.0
-	 * @version 1.0.2
+	 * @version 1.0.3
 	 */
 	private setInputDefaults = () => {
 		if (empty(this.value)) {
