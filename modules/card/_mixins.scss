@@ -38,6 +38,8 @@
 @mixin media-item() {
 	width: 100%;
 	height: 100%;
+	border-top-left-radius: utils.px2rem(variables.$border-radius);
+	border-top-right-radius: utils.px2rem(variables.$border-radius);
 }
 
 @mixin header() {
