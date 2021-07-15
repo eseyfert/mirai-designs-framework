@@ -65,6 +65,30 @@
 	display: flex;
 	align-items: center;
 	padding: utils.px2rem(variables.$footer-vertical-padding) utils.px2rem(variables.$footer-horizontal-padding);
+
+	.#{base.$prefix}-button {
+		margin-right: utils.px2rem(variables.$footer-button-margin-right);
+		padding: 0 utils.px2rem(variables.$footer-button-horizontal-padding);
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}
+
+@mixin rtl() {
+	.#{base.$prefix}-card {
+		&__footer {
+			.#{base.$prefix}-button {
+				margin-right: 0;
+				margin-left: utils.px2rem(variables.$footer-button-margin-right);
+
+				&:last-child {
+					margin-left: 0;
+				}
+			}
+		}
+	}
 }
 
 @mixin styles() {
@@ -106,5 +130,9 @@
 		&__footer {
 			@include footer();
 		}
+	}
+
+	.#{base.$prefix}-rtl {
+		@include rtl();
 	}
 }
