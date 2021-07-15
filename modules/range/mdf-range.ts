@@ -10,7 +10,7 @@ import { MDFRangeOptions } from './types';
  *
  * @export
  * @class MDFRange
- * @version 1.0.3
+ * @version 1.0.4
  */
 export class MDFRange {
 	private container: HTMLElement;
@@ -141,13 +141,9 @@ export class MDFRange {
 	 * @private
 	 * @memberof MDFRange
 	 * @since 1.0.0
-	 * @version 1.0.3
+	 * @version 1.0.4
 	 */
 	private setInputDefaults = () => {
-		if (empty(this.value)) {
-			this.value = '0';
-		}
-
 		if (empty(this.min)) {
 			this.min = '0';
 		}
@@ -156,8 +152,12 @@ export class MDFRange {
 			this.max = '100';
 		}
 
-		if (empty(this.step === '')) {
+		if (empty(this.step)) {
 			this.step = '10';
+		}
+
+		if (empty(this.value)) {
+			this.value = this.min;
 		}
 	};
 
