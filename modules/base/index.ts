@@ -1,5 +1,15 @@
+/**
+ * Base
+ *
+ * Contains declarations, types and extends native HTML objects.
+ *
+ * @version 1.2.0
+ */
+
+// Declare Vimeo player module.
 declare module '@vimeo/player/dist/player.js';
 
+// Extend Element prototype typing.
 interface Element {
 	addClass(...classes: string[]): void;
 	removeClass(...classes: string[]): void;
@@ -11,20 +21,46 @@ interface Element {
 	hide(): void;
 }
 
+// Extend String prototype typing.
 /* eslint @typescript-eslint/no-unused-vars: off */
 interface String {
 	truncate(limit: number): string;
+	empty(): boolean;
 }
 
-Element.prototype.addClass = function (this: Element, ...classes: string[]) {
+/**
+ * addClass
+ *
+ * Add single class or set of classes to the element.
+ *
+ * @param {string[]} classes Name of class(es) to add
+ * @since 1.0.0
+ */
+Element.prototype.addClass = function (this: Element, ...classes: string[]): void {
 	this.classList.add(...classes);
 };
 
-Element.prototype.removeClass = function (this: Element, ...classes: string[]) {
+/**
+ * removeClass
+ *
+ * Remove single class or set of classes from the element.
+ *
+ * @param {string[]} classes Name of class(es) to remove
+ * @since 1.0.0
+ */
+Element.prototype.removeClass = function (this: Element, ...classes: string[]): void {
 	this.classList.remove(...classes);
 };
 
-Element.prototype.removeClassByPrefix = function (this: Element, prefix: string) {
+/**
+ * removeClassByPrefix
+ *
+ * Remove class with the given prefix from the element.
+ *
+ * @param {string} prefix The prefix to test against
+ * @since 1.0.0
+ */
+Element.prototype.removeClassByPrefix = function (this: Element, prefix: string): void {
 	const prefixCheck = new RegExp(`\\b${prefix}.*?\\b`, 'g');
 
 	[...this.classList].map((className) => {
@@ -34,7 +70,17 @@ Element.prototype.removeClassByPrefix = function (this: Element, prefix: string)
 	});
 };
 
-Element.prototype.toggleClass = function (this: Element, className: string, condition?: boolean) {
+/**
+ * toggleClass
+ *
+ * Either add or remove class from the given element.
+ * Optionally with condition.
+ *
+ * @param {string} className The class to toggle
+ * @param {boolean} condition Add class when `true`, remove class when `false`
+ * @since 1.0.0
+ */
+Element.prototype.toggleClass = function (this: Element, className: string, condition?: boolean): void {
 	if (condition === true) {
 		this.classList.add(className);
 	} else if (condition === false) {
@@ -44,23 +90,75 @@ Element.prototype.toggleClass = function (this: Element, className: string, cond
 	}
 };
 
-Element.prototype.replaceClass = function (this: Element, oldClass: string, newClass: string) {
+/**
+ * replaceClass
+ *
+ * Replace one class with another
+ *
+ * @param {string} oldClass The class to remove
+ * @param {string} newClass The class to add
+ * @since 1.0.0
+ */
+Element.prototype.replaceClass = function (this: Element, oldClass: string, newClass: string): void {
 	this.classList.remove(oldClass);
 	this.classList.add(newClass);
 };
 
-Element.prototype.hasClass = function (this: Element, className: string) {
+/**
+ * hasClass
+ *
+ * Check if the element has the given class
+ *
+ * @param {string} className The class to check against
+ * @returns {boolean}
+ * @since 1.0.0
+ */
+Element.prototype.hasClass = function (this: Element, className: string): boolean {
 	return this.classList.contains(className);
 };
 
-Element.prototype.show = function (this: HTMLElement) {
-	this.classList.remove('mdf-hidden');
-};
-
-Element.prototype.hide = function (this: HTMLElement) {
+/**
+ * hide
+ *
+ * Hide the given element by adding the `mdf-hidden` class.
+ *
+ * @since 1.0.0
+ */
+Element.prototype.hide = function (this: HTMLElement): void {
 	this.classList.add('mdf-hidden');
 };
 
+/**
+ * show
+ *
+ * Show the given element by removing the `mdf-hidden` class.
+ *
+ * @since 1.0.0
+ */
+Element.prototype.show = function (this: HTMLElement): void {
+	this.classList.remove('mdf-hidden');
+};
+
+/**
+ * truncate
+ *
+ * Limit string to the given character limit and append ellipses.
+ *
+ * @param {number} limit Character limit
+ * @since 1.0.0
+ */
 String.prototype.truncate = function (this: string, limit: number): string {
 	return this.length > limit ? `${this.substr(0, limit - 1)}...` : this;
+};
+
+/**
+ * empty
+ *
+ * Check whether or not the string is empty.
+ *
+ * @returns {boolean}
+ * @since 1.2.0
+ */
+String.prototype.empty = function (this: string): boolean {
+	return this.trim().length === 0;
 };
