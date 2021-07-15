@@ -31,6 +31,8 @@ Otherwise when executed the script will set the values below by default.
 @include range.styles();
 ```
 
+### TypeScript
+
 ```ts
 import { MDFRange } from '@miraidesigns/range';
 
