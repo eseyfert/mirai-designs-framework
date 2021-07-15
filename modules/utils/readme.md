@@ -32,8 +32,9 @@ p {
 | `matchParentHeight(elem)`         | `(HTMLElement): void`                            | Match the given element's height to that of its parent.                          |
 | `throttle(func, delay)`           | `((...args: any[]) => void, number): () => void` | Will limit how often a function can be executed                                  |
 | `debounce(func, timeout)`         | `((...args: any[]) => void, number): () => void` | Will block a function from being executed again until enough time has passed     |
+| `empty(string)`                   | `(string): boolean`                              | Strip string of white spaces and check if its empty.                             |
 
-Here is a small example using the **throttle** function.
+Here is a small example using the `throttle` function.
 
 ```ts
 // Here we import the throttle function from our utils module.
