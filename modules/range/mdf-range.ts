@@ -10,7 +10,7 @@ import { MDFRangeOptions } from './types';
  *
  * @export
  * @class MDFRange
- * @version 1.0.4
+ * @version 1.0.5
  */
 export class MDFRange {
 	private container: HTMLElement;
@@ -136,12 +136,12 @@ export class MDFRange {
 	/**
 	 * setInputDefaults
 	 *
-	 * Set default input attributes if they were left empty.
+	 * Set defaults for required attributes if they were left empty.
 	 *
 	 * @private
 	 * @memberof MDFRange
 	 * @since 1.0.0
-	 * @version 1.0.4
+	 * @version 1.0.5
 	 */
 	private setInputDefaults = () => {
 		if (empty(this.min)) {
@@ -154,10 +154,6 @@ export class MDFRange {
 
 		if (empty(this.step)) {
 			this.step = '10';
-		}
-
-		if (empty(this.value)) {
-			this.value = this.min;
 		}
 	};
 
@@ -187,6 +183,9 @@ export class MDFRange {
 
 		// Set default input attributes if they were left empty.
 		this.setInputDefaults();
+
+		// Set initial WebKit progress.
+		this.webKitProgress();
 
 		// Show the current value if needed.
 		if (this.trailing) {
