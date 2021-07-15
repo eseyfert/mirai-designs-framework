@@ -5,109 +5,109 @@
 @use '@miraidesigns/utils';
 
 @mixin icon($size: 24px, $fill: var(--primary, #{theme.prop('primary')})) {
-    height: utils.px2rem($size);
-    width: utils.px2rem($size);
-    fill: $fill;
-    pointer-events: none;
+	height: utils.px2rem($size);
+	width: utils.px2rem($size);
+	fill: $fill;
+	pointer-events: none;
 }
 
 @mixin image() {
-    @include helpers.border-outline-reset();
+	@include helpers.border-outline-reset();
 
-    height: auto;
-    width: 100%;
+	height: auto;
+	width: 100%;
 }
 
 @mixin loading-bar() {
-    @include fx.animation-standard(opacity, 200ms);
+	@include fx.animation-standard(opacity, 200ms);
 
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
-    user-select: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+	visibility: hidden;
+	opacity: 0;
+	pointer-events: none;
+	user-select: none;
 
-    &.active {
-        visibility: visible;
-        opacity: 1;
-    }
+	&.active {
+		visibility: visible;
+		opacity: 1;
+	}
 
-    & > .bar {
-        position: relative;
-        height: utils.px2rem(4px);
-        width: 100%;
-        max-width: utils.px2rem(256px);
-        overflow: hidden;
-        background-color: var(--border, #{theme.prop('border')});
-        border-radius: utils.px2rem(32px);
+	& > .bar {
+		position: relative;
+		height: utils.px2rem(4px);
+		width: 100%;
+		max-width: utils.px2rem(256px);
+		overflow: hidden;
+		background-color: var(--border, #{theme.prop('border')});
+		border-radius: utils.px2rem(32px);
 
-        &::before,
-        &::after {
-            content: '';
-            position: absolute;
-            display: block;
-            height: utils.px2rem(4px);
-            background-color: var(--border-hover, #{theme.prop('border-hover')});
-            border-radius: utils.px2rem(32px);
-        }
+		&::before,
+		&::after {
+			content: '';
+			position: absolute;
+			display: block;
+			height: utils.px2rem(4px);
+			background-color: var(--border-hover, #{theme.prop('border-hover')});
+			border-radius: utils.px2rem(32px);
+		}
 
-        &::before {
-            animation: loading-bar-1 2s infinite;
-        }
+		&::before {
+			animation: loading-bar-1 2s infinite;
+		}
 
-        &::after {
-            animation: loading-bar-2 2s 0.5s infinite;
-        }
-    }
+		&::after {
+			animation: loading-bar-2 2s 0.5s infinite;
+		}
+	}
 
-    @keyframes loading-bar-1 {
-        from {
-            left: -5%;
-            width: 5%;
-        }
+	@keyframes loading-bar-1 {
+		from {
+			left: -5%;
+			width: 5%;
+		}
 
-        to {
-            left: 130%;
-            width: 100%;
-        }
-    }
+		to {
+			left: 130%;
+			width: 100%;
+		}
+	}
 
-    @keyframes loading-bar-2 {
-        from {
-            left: -80%;
-            width: 80%;
-        }
+	@keyframes loading-bar-2 {
+		from {
+			left: -80%;
+			width: 80%;
+		}
 
-        to {
-            left: 110%;
-            width: 10%;
-        }
-    }
+		to {
+			left: 110%;
+			width: 10%;
+		}
+	}
 }
 
 @mixin styles() {
-    .#{$prefix}-icon {
-        @include icon();
-    
-        &--small {
-            height: utils.px2rem(18px);
-            width: utils.px2rem(18px);
-        }
-    
-        &--large {
-            height: utils.px2rem(32px);
-            width: utils.px2rem(32px);     
-        }
-    }
-    
-    .#{$prefix}-img {
-        @include image();
-    }
+	.#{base.$prefix}-icon {
+		@include icon();
+
+		&--small {
+			height: utils.px2rem(18px);
+			width: utils.px2rem(18px);
+		}
+
+		&--large {
+			height: utils.px2rem(32px);
+			width: utils.px2rem(32px);
+		}
+	}
+
+	.#{base.$prefix}-img {
+		@include image();
+	}
 }
