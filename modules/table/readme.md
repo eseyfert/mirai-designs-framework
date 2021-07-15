@@ -1,7 +1,6 @@
 # Tables
 
-Tables display data across a set of columns and rows.\
-May require the [Checkbox](https://github.com/miraidesigns/mirai-designs-framework/tree/master/modules/checkbox), [Select](https://github.com/miraidesigns/mirai-designs-framework/tree/master/modules/select) or [Textfield](https://github.com/miraidesigns/mirai-designs-framework/tree/master/modules/textfield) module.
+Tables display data across a set of columns and rows.
 
 ---
 
@@ -94,7 +93,8 @@ new MDFTable(document.querySelector('.mdf-table'), {
 
 ### Pagination
 
-Pagination can be used to separate table data into multiple pages.
+Pagination can be used to separate table data into multiple pages.\
+Requires the `Select` module.
 
 ```html
 <div class="mdf-table">
@@ -178,7 +178,8 @@ select.container.addEventListener('MDFSelect:changed', () => {
 
 ### Filters
 
-Filter table data by text input.
+Filter table data by text input.\
+Requires the `Textfield` module.
 
 ```html
 <div id="table-filter-textfield" class="mdf-textfield mdf-textfield--icon-leading">
@@ -224,7 +225,8 @@ textfield.input.addEventListener('input', () => table.filter(textfield.value));
 
 ### Checkboxes
 
-Checkboxes can be used to select table row elements for scripting purposes.
+Checkboxes can be used to select table row elements for scripting purposes.\
+Requires the `Checkbox` module.
 
 ```html
 <div class="mdf-table">
