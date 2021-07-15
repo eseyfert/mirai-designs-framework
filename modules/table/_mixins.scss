@@ -7,6 +7,7 @@
 @mixin container() {
 	display: inline-flex;
 	flex-flow: column;
+	width: 100%;
 	margin-bottom: utils.px2rem(variables.$container-margin-bottom);
 	overflow-x: auto;
 	border: utils.px2rem(variables.$border-size) solid variables.$border-color;
