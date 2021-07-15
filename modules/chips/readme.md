@@ -48,6 +48,7 @@ Some basic examples on how the module can be used.
 
 ### User Created Chips
 
+Requires the `Elements` module for the `mdf-icon` class.\
 Requires the `Helpers` module for the `mdf-offscreen` class.
 
 ```html
