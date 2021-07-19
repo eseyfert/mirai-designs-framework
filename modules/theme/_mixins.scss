@@ -3,6 +3,22 @@
 @use './variables';
 @use './functions';
 
+@mixin theme($primary, $secondary) {
+	// Create variables for each value in our `primary` theme.
+	@each $name, $value in map.get(variables.$themes, $primary) {
+		--#{$name}: #{$value};
+	}
+
+	// Create `inverted` theme with values from the opposing `secondary` theme.
+	@each $name, $value in map.get(variables.$themes, $secondary) {
+		--#{$name}-inverted: #{$value};
+	}
+
+	// Set default background and text color.
+	background-color: var(--background, #{functions.prop('background', $primary)});
+	color: var(--primary, #{functions.prop('primary', $primary)});
+}
+
 @mixin styles() {
 	// Remove text shadow from text highlights.
 	::selection {
@@ -13,40 +29,24 @@
 		// Save the brand color as a variable.
 		--brand: #{functions.color(variables.$brand)};
 
-		// Create variables for each value in our `light` theme.
-		@each $name, $value in map.get(variables.$themes, 'light') {
-			--#{$name}: #{$value};
-		}
-
-		// Create `inverted` theme with values from the opposing `dark` theme.
-		@each $name, $value in map.get(variables.$themes, 'dark') {
-			--#{$name}-inverted: #{$value};
-		}
-
 		// Change text highlight appearance based on the brand color.
 		::selection {
 			background-color: functions.color(variables.$brand);
 			color: functions.color-contrasted(variables.$brand);
 		}
 
-		// Set default background and text color.
-		background-color: var(--background, #{functions.prop('background')});
-		color: var(--primary, #{functions.prop('primary')});
-
-		&.#{base.$prefix}-theme-dark {
-			// Create variables for each value in our `dark` theme.
-			@each $name, $value in map.get(variables.$themes, 'dark') {
-				--#{$name}: #{$value};
-			}
-
-			// Create `inverted` theme with values from the opposing `light` theme.
-			@each $name, $value in map.get(variables.$themes, 'light') {
-				--#{$name}-inverted: #{$value};
-			}
-
-			// Set default background and text color.
-			background-color: var(--background, #{functions.prop('background', 'dark')});
-			color: var(--primary, #{functions.prop('primary', 'dark')});
+		@if variables.$theme == 'light' {
+			@include theme('light', 'dark');
+		} @else if variables.$theme == 'dark' {
+			@include theme('dark', 'light');
 		}
+	}
+
+	.#{base.$prefix}-theme-light {
+		@include theme('light', 'dark');
+	}
+
+	.#{base.$prefix}-theme-dark {
+		@include theme('dark', 'light');
 	}
 }
