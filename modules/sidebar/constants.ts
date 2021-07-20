@@ -5,6 +5,7 @@ const attr = {
 
 const classes = {
 	active: 'mdf-sidebar-container--active',
+	disableScrollbar: 'mdf-scrollbar-hidden',
 	move: 'mdf-sidebar-container--move-in',
 };
 
