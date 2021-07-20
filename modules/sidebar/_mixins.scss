@@ -134,7 +134,7 @@
 	@include base.layer('backdrop');
 	@include fx.animation-standard(opacity, 250ms);
 
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	height: 100vh;
