@@ -137,27 +137,27 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	height: 100%;
-	width: 100%;
+	height: 100vh;
+	width: 100vw;
 	opacity: 0;
 	background-color: variables.$backdrop-background-color;
 	pointer-events: none;
 }
 
 @mixin rtl() {
-    .#{base.$prefix}-sidebar {
+	.#{base.$prefix}-sidebar {
 		&__close {
 			margin-right: 0;
 			margin-left: -#{utils.px2rem(8px)};
 		}
 
-        &__link {
-            .#{base.$prefix}-icon {
-                margin-right: 0;
-                margin-left: utils.px2rem(variables.$link-icon-margin-right);
-            }
-        }
-    }
+		&__link {
+			.#{base.$prefix}-icon {
+				margin-right: 0;
+				margin-left: utils.px2rem(variables.$link-icon-margin-right);
+			}
+		}
+	}
 }
 
 @mixin styles() {
