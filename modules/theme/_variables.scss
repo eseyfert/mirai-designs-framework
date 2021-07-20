@@ -1,8 +1,8 @@
 @use "sass:color";
 @use "sass:map";
 
-$brand: 'green' !default;
-$theme: 'light' !default;
+$brand: 'blue' !default;
+$complementary: 'orange' !default;
 
 $colors: (
 	'grey': #9e9e9e,
@@ -12,7 +12,7 @@ $colors: (
 	'blue': #2196f3,
 	'cyan': #00bcd4,
 	'teal': #26a69a,
-	'green': #4caf50,
+	'green': #00cc69,
 	'yellow': #ffeb3b,
 	'orange': #ffa726,
 	'deep-orange': #ff5722,
@@ -38,46 +38,72 @@ $colors-alpha: (
 	'error': 0.91,
 ) !default;
 
+$theme: 'light' !default;
+
+$primary-light: #000 !default;
+$background-light: #fff !default;
+
+$primary-dark: #fff !default;
+$background-dark: #212121 !default;
+
 $themes: (
 	'light': (
-		'primary': rgba(0, 0, 0, 0.87),
-		'secondary': rgba(0, 0, 0, 0.54),
-		'disabled': rgba(0, 0, 0, 0.38),
-		'faded': rgba(0, 0, 0, 0.12),
-		'brand-muted': color.mix(map.get($colors, $brand), #fff, 60%),
-		'brand-faded': color.mix(map.get($colors, $brand), #fff, 20%),
+		'primary': $primary-light,
+		'secondary': color.scale($primary-light, $alpha: -46%),
+		'disabled': color.scale($primary-light, $alpha: -72%),
+		'faded': color.scale($primary-light, $alpha: -88%),
+		'brand-muted': color.mix(map.get($colors, $brand), $primary-light, 60%),
+		'brand-faded': color.mix(map.get($colors, $brand), $primary-light, 20%),
+		'complementary-muted': color.mix(map.get($colors, $complementary), $primary-light, 60%),
+		'complementary-faded': color.mix(map.get($colors, $complementary), $primary-light, 20%),
 		'links': color.scale(map.get($colors, $brand), $lightness: -20%),
 		'links-hover': color.scale(map.get($colors, $brand), $lightness: -40%),
+		'links-complementary': color.scale(map.get($colors, $complementary), $lightness: -20%),
+		'links-complementary-hover': color.scale(map.get($colors, $complementary), $lightness: -40%),
 		'buttons': color.scale(map.get($colors, $brand), $lightness: -20%),
-		'buttons-hover': color.scale(color.mix(#fff, map.get($colors, $brand), 75%), $alpha: -75%),
-		'buttons-active': color.scale(color.mix(#fff, map.get($colors, $brand), 25%), $alpha: -75%),
-		'background': #fff,
-		'background-hover': color.scale(#fff, $lightness: -6%),
-		'background-active': color.scale(#fff, $lightness: -12%),
-		'background-muted': color.scale(#fff, $lightness: -3%),
-    'background-emphasis': color.scale(#fff, $lightness: -24%),
-		'border': color.scale(#fff, $lightness: -12%),
-		'border-hover': color.scale(#fff, $lightness: -24%),
+		'buttons-hover': color.scale(color.mix($primary-light, map.get($colors, $brand), 75%), $alpha: -75%),
+		'buttons-active': color.scale(color.mix($primary-light, map.get($colors, $brand), 25%), $alpha: -75%),
+		'buttons-complementary': color.scale(map.get($colors, $complementary), $lightness: -20%),
+		'buttons-complementary-hover':
+			color.scale(color.mix($primary-light, map.get($colors, $complementary), 75%), $alpha: -75%),
+		'buttons-complementary-active':
+			color.scale(color.mix($primary-light, map.get($colors, $complementary), 25%), $alpha: -75%),
+		'background': $background-light,
+		'background-hover': color.scale($background-light, $lightness: -6%),
+		'background-active': color.scale($background-light, $lightness: -12%),
+		'background-muted': color.scale($background-light, $lightness: -3%),
+		'background-emphasis': color.scale($background-light, $lightness: -24%),
+		'border': color.scale($primary-light, $lightness: -12%),
+		'border-hover': color.scale($primary-light, $lightness: -24%),
 	),
 	'dark': (
-		'primary': #fff,
-		'secondary': rgba(255, 255, 255, 0.7),
-		'disabled': rgba(255, 255, 255, 0.5),
-		'faded': rgba(255, 255, 255, 0.12),
-		'brand-muted': color.mix(map.get($colors, $brand), #212121, 60%),
-		'brand-faded': color.mix(map.get($colors, $brand), #212121, 38%),
+		'primary': $primary-dark,
+		'secondary': color.scale($primary-dark, $alpha: -30%),
+		'disabled': color.scale($primary-dark, $alpha: -50%),
+		'faded': color.scale($primary-dark, $alpha: -88%),
+		'brand-muted': color.mix(map.get($colors, $brand), $background-dark, 60%),
+		'brand-faded': color.mix(map.get($colors, $brand), $background-dark, 38%),
+		'complementary-muted': color.mix(map.get($colors, $complementary), $background-dark, 60%),
+		'complementary-faded': color.mix(map.get($colors, $complementary), $background-dark, 38%),
 		'links': map.get($colors, $brand),
 		'links-hover': color.scale(map.get($colors, $brand), $lightness: 20%),
+		'links-complementary': map.get($colors, $complementary),
+		'links-complementary-hover': color.scale(map.get($colors, $complementary), $lightness: 20%),
 		'buttons': map.get($colors, $brand),
-		'buttons-hover': color.scale(color.mix(#212121, map.get($colors, $brand), 75%), $alpha: -75%),
-		'buttons-active': color.scale(color.mix(#212121, map.get($colors, $brand), 25%), $alpha: -75%),
-		'background': #212121,
-		'background-hover': color.scale(#212121, $lightness: 6%),
-		'background-active': color.scale(#212121, $lightness: 12%),
-		'background-muted': color.scale(#212121, $lightness: 3%),
-    'background-emphasis': color.scale(#212121, $lightness: 24%),
-		'border': color.scale(#212121, $lightness: 12%),
-		'border-hover': color.scale(#212121, $lightness: 36%),
+		'buttons-hover': color.scale(color.mix($background-dark, map.get($colors, $brand), 75%), $alpha: -75%),
+		'buttons-active': color.scale(color.mix($background-dark, map.get($colors, $brand), 25%), $alpha: -75%),
+		'buttons-complementary': map.get($colors, $complementary),
+		'buttons-complementary-hover':
+			color.scale(color.mix($background-dark, map.get($colors, $complementary), 75%), $alpha: -75%),
+		'buttons-complementary-active':
+			color.scale(color.mix($background-dark, map.get($colors, $complementary), 25%), $alpha: -75%),
+		'background': $background-dark,
+		'background-hover': color.scale($background-dark, $lightness: 6%),
+		'background-active': color.scale($background-dark, $lightness: 12%),
+		'background-muted': color.scale($background-dark, $lightness: 3%),
+		'background-emphasis': color.scale($background-dark, $lightness: 24%),
+		'border': color.scale($background-dark, $lightness: 12%),
+		'border-hover': color.scale($background-dark, $lightness: 36%),
 	),
 ) !default;
 
