@@ -26,8 +26,9 @@
 	}
 
 	body {
-		// Save the brand color as a variable.
+		// Save the brand and complementary color as a variable.
 		--brand: #{functions.color(variables.$brand)};
+		--complementary: #{functions.color(variables.$complementary)};
 
 		// Change text highlight appearance based on the brand color.
 		::selection {
