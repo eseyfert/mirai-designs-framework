@@ -1,4 +1,5 @@
 import '@miraidesigns/base';
+import { getScrollbarParent } from '@miraidesigns/utils';
 import { attr, classes, events, selectors } from './constants';
 import { MDFSidebarOptions } from './types';
 
@@ -9,7 +10,7 @@ import { MDFSidebarOptions } from './types';
  *
  * @export
  * @class MDFSidebar
- * @version 1.0.0
+ * @version 1.0.1
  */
 export class MDFSidebar {
 	public readonly anchor: HTMLElement;
@@ -24,6 +25,7 @@ export class MDFSidebar {
 	private focusableElements: HTMLElement[];
 	private lastActiveElement: HTMLElement;
 	private index: number;
+	private scrollbarParent: HTMLElement;
 
 	/**
 	 * Creates an instance of MDFSidebar.
@@ -32,7 +34,8 @@ export class MDFSidebar {
 	 * @param {MDFSidebarOptions} [options] Object holding user options
 	 *
 	 * @memberof MDFSidebar
-	 * @version 1.0.0
+	 * @since 1.0.0
+	 * @version 1.0.1
 	 */
 	constructor(sidebar: Element, options: MDFSidebarOptions) {
 		// If the supplied element doesn't exist, abort the script.
@@ -69,6 +72,9 @@ export class MDFSidebar {
 
 		// Don't continue if the anchor element does not exist.
 		if (!this.anchor) return;
+
+		// Find the closest element with a scrollbar. We'll use this later.
+		this.scrollbarParent = getScrollbarParent(this.anchor);
 
 		// Sidebar content.
 		this.content = this.sidebar.querySelector(selectors.content);
@@ -194,6 +200,7 @@ export class MDFSidebar {
 	 * @private
 	 * @memberof MDFSidebar
 	 * @since 1.0.0
+	 * @version 1.0.1
 	 */
 	public openSidebar = (setFocus?: boolean): void => {
 		// Store the last active element before we opened the sidebar.
@@ -207,6 +214,9 @@ export class MDFSidebar {
 		setTimeout(() => {
 			this.container.addClass(classes.move);
 		}, 100);
+
+		// Disable scrolling while the sidebar is open.
+		this.scrollbarParent.addClass(classes.disableScrollbar);
 
 		// Set the `aria-modal` attribute for the sidebar.
 		this.sidebar.setAttribute(attr.modal, 'true');
@@ -236,6 +246,7 @@ export class MDFSidebar {
 	 * @private
 	 * @memberof MDFSidebar
 	 * @since 1.0.0
+	 * @version 1.0.1
 	 */
 	public closeSidebar = (): void => {
 		// Move the sidebar out of view and fade-out the backdrop.
@@ -246,6 +257,9 @@ export class MDFSidebar {
 			// Set sidebar as inactive.
 			this.container.removeClass(classes.active);
 			this.container.setAttribute(attr.hidden, 'true');
+
+			// Enable scrolling again once the sidebar is closed.
+			this.scrollbarParent.removeClass(classes.disableScrollbar);
 
 			// Remove the sidebar event listener to avoid repeats.
 			this.sidebar.removeEventListener('transitionend', waitForTransition);
