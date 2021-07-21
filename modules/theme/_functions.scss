@@ -58,6 +58,10 @@
 	@return map.get(variables.$colors, variables.$brand);
 }
 
+@function complementary() {
+	@return map.get(variables.$colors, variables.$complementary);
+}
+
 @function prop($key, $theme: variables.$theme) {
 	@return map.get(variables.$themes, $theme, $key);
 }
