@@ -29,21 +29,37 @@ It creates a set of variables for each theme, a *light* and *dark* theme.\
 The `$themes` map holds the values for both themes. The map keys and CSS3 variables share the same names for ease of access.\
 I recommend loading this module early in your load order.
 
+### Variables
+
+| Name                | Default   | Description                            |
+| ------------------- | --------- | -------------------------------------- |
+| `$brand`            | `blue`    | Primary brand color                    |
+| `$complementary`    | `orange`  | Complementary to the brand color       |
+| `$theme`            | `light`   | Default page theme: `light` or `dark`  |
+| `$primary-light`    | `#000`    | Base text color for the `light` theme  |
+| `$background-light` | `#fff`    | Background color for the `light` theme |
+| `$primary-dark`     | `#fff`    | Base text color for the `dark` theme   |
+| `$background-dark`  | `#212121` | Background color for the `dark` theme  |
+
 ### Color
 
 The `.color()` function is used to lookup values from our `$colors` map.
 
 ```scss
 a {
-    color: theme.color('red');
+    color: theme.color('red'); // #f44336 by default
 }
 ```
 
-Alternatively, if all you want to access is your set `$brand` color, use the `.brand()` function.
+Alternatively, if all you want to access is your `$brand` or `$complementary` color, use the function with the same name.
 
 ```scss
-a {
-    color: theme.brand();
+a.logo {
+    color: theme.brand(); // Brand color
+}
+
+a.links {
+    color: theme.complementary(); // Complementary color
 }
 ```
 
