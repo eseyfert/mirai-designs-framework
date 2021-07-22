@@ -1,5 +1,6 @@
 @use 'sass:map';
 @use '@miraidesigns/base';
+@use '@miraidesigns/fx';
 @use '@miraidesigns/utils';
 @use './variables';
 
@@ -17,11 +18,14 @@
 }
 
 @mixin masonry {
+	@include fx.animation-standard(opacity, 200ms);
+
 	grid-template-columns: repeat(
 		auto-fill,
 		minmax(utils.px2rem(variables.$cols-min-width), utils.px2rem(variables.$cols-max-width))
 	);
 	grid-auto-rows: utils.px2rem(variables.$masonry-auto-row-height);
+	will-change: opacity;
 }
 
 @mixin modifiers() {
