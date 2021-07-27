@@ -1,5 +1,6 @@
 import '@miraidesigns/base';
-import { selectors } from './constants';
+import { imageLoaded } from '@miraidesigns/utils';
+import { classes, selectors } from './constants';
 
 /**
  * MDFGrid
@@ -8,14 +9,13 @@ import { selectors } from './constants';
  *
  * @export
  * @class MDFGrid
- * @version 1.0.3
+ * @version 1.0.4
  */
 export class MDFGrid {
 	public readonly container: HTMLElement;
 	public readonly items: HTMLElement[];
 
 	private autoRows: number;
-	private images: HTMLCollection;
 	private rowGap: number;
 
 	/**
@@ -24,11 +24,11 @@ export class MDFGrid {
 	 * @param {Element} elem The element we are manipulating
 	 * @memberof MDFGrid
 	 * @since 1.0.0
-	 * @version 1.0.3
+	 * @version 1.0.4
 	 */
 	constructor(elem: Element) {
 		// If the supplied element doesn't exist, abort the script.
-		if (!elem) return;
+		if (!elem || typeof elem != 'object' || !elem.nodeType) return;
 
 		// Store a reference to the given element.
 		this.container = elem as HTMLElement;
@@ -38,9 +38,6 @@ export class MDFGrid {
 
 		// If we have no grid items, abort the script.
 		if (!this.items) return;
-
-		// Get all images inside our .
-		this.images = this.container.getElementsByTagName('img');
 
 		// Get CSSStyle properties for the grid.
 		this.autoRows = parseInt(window.getComputedStyle(this.container).getPropertyValue('grid-auto-rows'));
@@ -54,69 +51,27 @@ export class MDFGrid {
 	 *
 	 * @memberof MDFGrid
 	 * @since 1.0.0
-	 * @version 1.0.3
+	 * @version 1.0.4
 	 */
-	public resize = async (): Promise<void> => {
-		// Check wether or not we have images in our grid.
-		if (this.images.length) {
-			// We temporarily hide the grid while we wait for the images to finish loading.
-			this.container.style.opacity = '0';
-
-			// Status of our images.
-			const imagesLoaded = await this.waitForImages();
-
-			if (imagesLoaded) {
-				// Once the images are loaded, we resize our items.
-				for (const item of this.items) {
-					this.resizeItem(item);
-				}
-
-				// And we make our grid visible again.
-				this.container.style.opacity = '1';
-			}
-		} else {
-			for (const item of this.items) {
-				this.resizeItem(item);
-			}
+	public resize = (): void => {
+		for (const item of this.items) {
+			this.resizeItem(item);
 		}
 	};
 
 	/**
-	 * waitForImages
+	 * addItem
 	 *
-	 * Wait for all images inside the grid to load.
+	 * Add additional item to the grid and resize it.
 	 *
-	 * @private
+	 * @param {Element} elem The item we are adding
+	 * @param {boolean} fadeIn Whether to fade-in the item
 	 * @memberof MDFGrid
-	 * @since 1.0.3
+	 * @since 1.0.4
 	 */
-	private waitForImages = () => {
-		return new Promise<boolean>((resolve) => {
-			// We use this later in our resolve to let the script know the images have been loaded.
-			let isLoaded = false;
-
-			// We use this value to keep track of how many images have been loaded.
-			let imageCount = 0;
-
-			// Loop through all images.
-			for (const image of this.images) {
-				// Create a clone of the current image without adding it to the DOM.
-				const clone = new Image();
-				clone.src = (image as HTMLImageElement).src;
-
-				// Wait for the cloned image to be fully loaded.
-				void clone.decode().then(() => {
-					// Increase the images loaded counter.
-					imageCount++;
-
-					// Once the counter is equal to the amount of images, we resolve the promise.
-					if (imageCount === this.images.length) {
-						isLoaded = true;
-						resolve(isLoaded);
-					}
-				});
-			}
-		});
+	public addItem = (item: Element, fadeIn?: boolean): void => {
+		this.items.push(item as HTMLElement);
+		this.resizeItem(item as HTMLElement, fadeIn);
 	};
 
 	/**
@@ -144,16 +99,46 @@ export class MDFGrid {
 	 * @param {HTMLElement} item The item we are resizing
 	 * @memberof MDFGrid
 	 * @since 1.0.0
-	 * @version 1.0.3
+	 * @version 1.0.4
 	 */
-	private resizeItem = (item: HTMLElement) => {
+	private resizeItem = (item: HTMLElement, fadeIn?: boolean) => {
 		// Make sure the item has the content wrapper element in place.
 		if (item.firstElementChild.matches(selectors.itemContent)) {
-			// Calculate span.
-			const span = this.calcSpan(item);
+			// Resize the item.
+			const resize = () => {
+				// Calculate span.
+				const span = this.calcSpan(item);
 
-			// Set the span (height) of the grid item.
-			item.style.gridRowEnd = `span ${span}`;
+				// Set the span (height) of the grid item.
+				item.style.gridRowEnd = `span ${span}`;
+
+				// If enabled, fade-in the item after.
+				if (fadeIn) {
+					item.addClass(classes.fadeIn);
+				}
+			};
+
+			// See if we have an image inside the item.
+			const images = item.getElementsByTagName('img');
+
+			if (images.length) {
+				// Wait for the image to be loaded.
+				const resizeAfterLoad = async () => {
+					// Will resolve once image is ready.
+					const loaded = await imageLoaded(images[0]);
+
+					// Once resolved, resize the item.
+					if (loaded) {
+						resize();
+					}
+				};
+
+				// Resize the item after the image is done loading.
+				void resizeAfterLoad();
+			} else {
+				// Resize the grid item.
+				resize();
+			}
 		}
 	};
 }
