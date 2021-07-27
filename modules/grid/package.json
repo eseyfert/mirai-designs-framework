@@ -1,7 +1,7 @@
 {
 	"name": "@miraidesigns/grid",
 	"description": "Mirai Designs Framework: Grid module",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/miraidesigns/mirai-designs-framework.git",
@@ -16,6 +16,6 @@
 	"dependencies": {
 		"@miraidesigns/base": "^1.0.0",
 		"@miraidesigns/fx": "^1.0.0",
-		"@miraidesigns/utils": "^1.0.0"
+		"@miraidesigns/utils": "^1.2.0"
 	}
 }
