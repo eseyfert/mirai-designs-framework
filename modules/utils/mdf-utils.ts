@@ -163,3 +163,33 @@ export function debounce(func: (...args: any[]) => void, timeout: number): () =>
 export function empty(string: string): boolean {
 	return string.trim().length === 0;
 }
+
+/**
+ * imageLoaded
+ *
+ * Will resolve promise once an image is fully loaded.
+ *
+ * @export
+ * @param {HTMLImageElement} image The image to watch
+ * @return {Promise<boolean>}
+ * @version 1.0.0
+ */
+export async function imageLoaded(image: HTMLImageElement): Promise<boolean> {
+	return new Promise<boolean>((resolve, reject) => {
+		// Create a clone of the current image without adding it to the DOM.
+		const clone = new Image();
+		clone.src = image.src;
+
+		// Wait for the cloned image to be fully loaded.
+		void clone
+			.decode()
+			.then(() => {
+				// Image loaded, resolve the promise.
+				resolve(true);
+			})
+			.catch((error) => {
+				// Caught error, reject the promise.
+				reject(error);
+			});
+	});
+}
