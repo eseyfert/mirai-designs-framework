@@ -70,12 +70,37 @@ Make sure to follow the example bellow and wrap your content in two `<div>` elem
 #### TypeScript
 
 ```ts
-import { throttle } from '@miraidesigns/utils';
+import { debounce } from '@miraidesigns/utils';
 import { MDFGrid } from '@miraidesigns/grid';
 
 const grid = new MDFGrid(document.querySelector('.mdf-grid'));
 grid.resize();
 
 // Update grid sizing whenever the browser window gets resized
-window.addEventListener('resize', throttle(grid.resize, 250));
+window.addEventListener('resize', debounce(() => grid.resize(), 100));
 ```
+
+---
+
+## Implementation
+
+### Classes
+
+| Name                     | Type           | Description                                                             |
+| ------------------------ | -------------- | ----------------------------------------------------------------------- |
+| `mdf-grid`               | Parent         | Contains the grid items.                                                |
+| `mdf-grid--masonry`      | Modifier       | Prepare for masonry style grid                                          |
+| `mdf-grid--columns-*`    | Modifier       | Set amount of columns. Number based on # of classes generated           |
+| `mdf-grid--rows-*`       | Modifier       | Set amount of rows. Number based on # of classes generated              |
+| `mdf-grid--gap-*`        | Modifier       | Set gap size. Value based on generated classes                          |
+| `mdf-grid__item`         | Parent / Child | Grid item element, masonry only. Child to `.mdf-grid`                   |
+| `mdf-grid__item-content` | Parent / Child | Wrapper for grid item content, masonry only. Child to `.mdf-grid__item` |
+
+### Properties
+
+| Name                      | Type                       | Description                                                |
+| ------------------------- | -------------------------- | ---------------------------------------------------------- |
+| `.container`              | `(): HTMLElement`          | Returns the grid container element                         |
+| `.items`                  | `(): HTMLElement`          | Returns an `Array` of all grid items                       |
+| `.resize()`               | `(): void`                 | Resize all grid items                                      |
+| `.addItem(item, fadeIn?)` | `(Element, boolean): void` | Resize the given item and optionally fade it in afterwards |
