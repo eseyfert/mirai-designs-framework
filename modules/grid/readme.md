@@ -86,15 +86,16 @@ window.addEventListener('resize', debounce(() => grid.resize(), 100));
 
 ### Classes
 
-| Name                     | Type           | Description                                                             |
-| ------------------------ | -------------- | ----------------------------------------------------------------------- |
-| `mdf-grid`               | Parent         | Contains the grid items.                                                |
-| `mdf-grid--masonry`      | Modifier       | Prepare for masonry style grid                                          |
-| `mdf-grid--columns-*`    | Modifier       | Set amount of columns. Number based on # of classes generated           |
-| `mdf-grid--rows-*`       | Modifier       | Set amount of rows. Number based on # of classes generated              |
-| `mdf-grid--gap-*`        | Modifier       | Set gap size. Value based on generated classes                          |
-| `mdf-grid__item`         | Parent / Child | Grid item element, masonry only. Child to `.mdf-grid`                   |
-| `mdf-grid__item-content` | Parent / Child | Wrapper for grid item content, masonry only. Child to `.mdf-grid__item` |
+| Name                      | Type           | Description                                                             |
+| ------------------------- | -------------- | ----------------------------------------------------------------------- |
+| `mdf-grid`                | Parent         | Contains the grid items.                                                |
+| `mdf-grid--masonry`       | Modifier       | Prepare for masonry style grid                                          |
+| `mdf-grid--columns-*`     | Modifier       | Set amount of columns. Number based on # of classes generated           |
+| `mdf-grid--rows-*`        | Modifier       | Set amount of rows. Number based on # of classes generated              |
+| `mdf-grid--gap-*`         | Modifier       | Set gap size. Value based on generated classes                          |
+| `mdf-grid__item`          | Parent / Child | Grid item element, masonry only. Child to `.mdf-grid`                   |
+| `mdf-grid__item--fade-in` | Modifier       | Fades-in the grid item, used by the masonry script                      |
+| `mdf-grid__item-content`  | Parent / Child | Wrapper for grid item content, masonry only. Child to `.mdf-grid__item` |
 
 ### Properties
 
