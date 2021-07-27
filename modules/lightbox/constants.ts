@@ -47,11 +47,11 @@ const events = {
 };
 
 const selectors = {
-	media: '.mdf-lightbox__media',
 	controlClose: '.mdf-lightbox__control--close',
 	controlPrev: '.mdf-lightbox__control--prev',
 	controlNext: '.mdf-lightbox__control--next',
 	focus: 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe:not([tabindex^="-"]), [tabindex]:not([tabindex^="-"])',
+	media: '.mdf-lightbox__media',
 };
 
 export { attr, classes, events, selectors };
