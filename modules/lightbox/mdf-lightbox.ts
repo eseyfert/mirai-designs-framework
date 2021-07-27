@@ -11,7 +11,7 @@ import { MDFLightboxOptions, MDFLightboxChangedEvent } from './types';
  *
  * @export
  * @class MDFLightbox
- * @version 1.0.0
+ * @version 1.0.1
  */
 export class MDFLightbox {
 	public activeItem: HTMLElement;
@@ -20,32 +20,32 @@ export class MDFLightbox {
 	public items: HTMLCollection;
 	public itemsContainer: HTMLElement;
 	public lightbox: HTMLElement;
-	public readonly links: HTMLLinkElement[];
+	public links: HTMLLinkElement[];
 	public readonly options: MDFLightboxOptions;
 
-	private defaults: MDFLightboxOptions;
-	private firstItemCopy: HTMLElement;
-	private lastItemCopy: HTMLElement;
+	private backdrop: HTMLElement;
 	private controlClose: HTMLButtonElement;
 	private controlPrev: HTMLButtonElement;
 	private controlNext: HTMLButtonElement;
+	private defaults: MDFLightboxOptions;
+	private firstItemCopy: HTMLElement;
 	private focusableElements: HTMLElement[];
+	private id: string;
+	private isRTL: boolean;
+	private lastItemCopy: HTMLElement;
 	private lastActiveElement: HTMLElement;
 	private scrollbarParent: HTMLElement;
-	private backdrop: HTMLElement;
-	private isRTL: boolean;
-	private useCopies: boolean;
-	private id: string;
 	private touchCoords: Record<string, number>;
+	private useCopies: boolean;
 
 	/**
 	 * Creates an instance of MDFLightbox.
 	 *
 	 * @param {NodeListOf<Element>} links The link elements we are manipulating
 	 * @param {MDFLightboxOptions} [options] Object holding user options
-	 *
 	 * @memberof MDFLightbox
 	 * @since 1.0.0
+	 * @version 1.0.1
 	 */
 	constructor(links: NodeListOf<Element>, options?: MDFLightboxOptions) {
 		// Get a list of all lightbox links.
@@ -94,17 +94,53 @@ export class MDFLightbox {
 			};
 		}
 
-		// Setup the lightbox.
-		this.createLightbox();
-		this.createItems();
+		// Setup the lightbox if it does not exist yet.
+		if (!this.container) {
+			// Create the lightbox container element.
+			this.createLightbox();
 
-		// If enabled, create the control elements.
-		if (this.options.controlButtons || this.options.closeButton) {
-			this.createControls();
+			// If enabled, create the control elements.
+			if (this.options.controlButtons || this.options.closeButton) {
+				this.createControls();
+			}
+
+			// Create the items
+			if (!this.items) {
+				this.createItems();
+			}
+
+			// Keep track wether or not we are using copied items.
+			this.useCopies = false;
+
+			// If we have 3 or more items, create copies of the first and last lightbox item for transition purposes.
+			if (this.items.length >= 3) {
+				this.createCopies();
+				this.useCopies = true;
+			}
+
+			// Set the list of keyboard focusable elements.
+			this.focusableElements = Array.from(this.container.querySelectorAll(selectors.focus));
+
+			// Add lightbox link event listeners.
+			this.linkEvents();
 		}
+	}
 
-		// Keep track wether or not we are using copied items.
-		this.useCopies = false;
+	/**
+	 * refresh
+	 *
+	 * Refresh the lightbox, adding new items without re-creating the entire lightbox element.
+	 *
+	 * @param {NodeListOf<Element>} links The link elements we are manipulating
+	 * @memberof MDFLightbox
+	 * @since 1.0.1
+	 */
+	public refresh = (): void => {
+		// Get a list of all lightbox links.
+		this.links = Array.from(document.querySelectorAll(`[${attr.lightbox}="${this.id}"]`));
+
+		// Create the lightbox items.
+		this.createItems();
 
 		// If we have 3 or more items, create copies of the first and last lightbox item for transition purposes.
 		if (this.items.length >= 3) {
@@ -112,12 +148,9 @@ export class MDFLightbox {
 			this.useCopies = true;
 		}
 
-		// Set the list of keyboard focusable elements.
-		this.focusableElements = Array.from(this.container.querySelectorAll(selectors.focus));
-
 		// Add lightbox link event listeners.
 		this.linkEvents();
-	}
+	};
 
 	/**
 	 * createLightbox
@@ -274,6 +307,7 @@ export class MDFLightbox {
 	 * @private
 	 * @memberof MDFLightbox
 	 * @since 1.0.0
+	 * @version 1.0.1
 	 */
 	private createItems = () => {
 		// Create document fragment.
@@ -420,7 +454,10 @@ export class MDFLightbox {
 			docFrag.appendChild(itemContainer);
 		}
 
-		// Add items to the lightbox.
+		// Make sure the ligthbox item container is empty first.
+		this.itemsContainer.innerHTML = '';
+
+		// Add items to the lightbox items container.
 		this.itemsContainer.appendChild(docFrag);
 
 		// Populate the live list of items.
