@@ -89,15 +89,16 @@ new MDFLightbox(document.querySelectorAll('[data-lightbox="id"]'), {
 
 ### Properties
 
-| Name              | Type                | Description                                           |
-| ----------------- | ------------------- | ----------------------------------------------------- |
-| `.activeItem`     | `HTMLElement`       | Returns the current lightbox item on display          |
-| `.container`      | `HTMLElement`       | Returns the lightbox container element                |
-| `.index`          | `number`            | Returns the index of the current lightbox item        |
-| `.items`          | `HTMLCollection`    | Returns a `HTMLCollection` holding all lightbox items |
-| `.itemsContainer` | `HTMLElement`       | Returns the lightbox items container element          |
-| `.lightbox`       | `HTMLElement`       | Returns the lightbox element                          |
-| `.links`          | `HTMLLinkElement[]` | Returns an `Array` holding all lightbox links         |
+| Name              | Type                | Description                                                                            |
+| ----------------- | ------------------- | -------------------------------------------------------------------------------------- |
+| `.activeItem`     | `HTMLElement`       | Returns the current lightbox item on display                                           |
+| `.container`      | `HTMLElement`       | Returns the lightbox container element                                                 |
+| `.index`          | `number`            | Returns the index of the current lightbox item                                         |
+| `.items`          | `HTMLCollection`    | Returns a `HTMLCollection` holding all lightbox items                                  |
+| `.itemsContainer` | `HTMLElement`       | Returns the lightbox items container element                                           |
+| `.lightbox`       | `HTMLElement`       | Returns the lightbox element                                                           |
+| `.links`          | `HTMLLinkElement[]` | Returns an `Array` holding all lightbox links                                          |
+| `.refresh()`      | `(): void`          | Refresh the lightbox, adding new items without re-creating the entire lightbox element |
 
 ### Options
 
