@@ -43,13 +43,19 @@ export function hasScrollbar(elem: Element, horizontal?: boolean): boolean {
  *
  * @export
  * @param {HTMLElement} elem The element we start our search from
+ * @param {string} ignoreElem Selector for element to ignore while traversing the DOM
  * @returns {HTMLElement}
- * @version 1.0.0
+ * @version 1.1.0
  */
-export function getScrollbarParent(elem: HTMLElement): HTMLElement {
+export function getScrollbarParent(elem: HTMLElement, ignoreElem?: string): HTMLElement {
 	// If recursion arrives at the document body, return the body element and stop the script.
 	if (elem === document.body) {
 		return elem;
+	}
+
+	// If specified, ignore the element with the given selector and run the function again.
+	if (ignoreElem.length && elem.matches(ignoreElem)) {
+		return getScrollbarParent(elem.parentElement);
 	}
 
 	if (hasScrollbar(elem, true) || hasScrollbar(elem)) {
