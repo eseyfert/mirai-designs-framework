@@ -86,6 +86,7 @@ Please see the [WAI-ARIA](https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_m
 | `mdf-dialog__title`    | Child          | Title element. Child to `.mdf-dialog__header`                                   |
 | `mdf-dialog__content`  | Parent / Child | Contains the text description or other kinds of content. Child to `.mdf-dialog` |
 | `mdf-dialog__actions`  | Parent / Child | Contains the user actions. Child to `.mdf-dialog`                               |
+| `mdf-dialog-backdrop`  | Child          | Dialog backdrop. Child to `.mdf-dialog-container`                               |
 
 ### Events
 
