@@ -1,0 +1,12 @@
+@use '@miraidesigns/theme';
+
+$content-padding: 16px !default;
+$content-background-color: var(--background, #{theme.prop('background')}) !default;
+
+$loading-vertical-margin: 24px !default;
+$loading-background: var(--background-hover, #{theme.prop('background-hover')}) !default;
+$loading-bar-height: 4px !default;
+$loading-bar-color: var(--brand, #{theme.brand()}) !default;
+$loading-bar-border-radius: 20px !default;
+
+$backdrop-color: rgba(0, 0, 0, 0.7) !default;

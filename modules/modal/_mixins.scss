@@ -1,0 +1,198 @@
+@use 'sass:math';
+@use '@miraidesigns/base';
+@use '@miraidesigns/fx';
+@use '@miraidesigns/theme';
+@use '@miraidesigns/utils';
+@use './variables';
+
+@mixin base() {
+	@include base.layer('dialog');
+	@include fx.animation-standard(opacity, 250ms);
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	width: 100vw;
+	opacity: 0;
+	pointer-events: none;
+}
+
+@mixin active() {
+	display: flex;
+	pointer-events: auto;
+}
+
+@mixin fade-in() {
+	opacity: 1;
+}
+
+@mixin close() {
+	@include base.layer('dialog');
+
+	position: fixed;
+	top: 0;
+	right: 0;
+
+	&:hover,
+	&:focus-visible {
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+
+	@include base.breakpoint('tablet-landscape') {
+		top: utils.px2rem(8px);
+		right: utils.px2rem(8px);
+	}
+
+	.#{base.$prefix}-icon {
+		fill: #fff;
+	}
+}
+
+@mixin content() {
+	@include base.layer('dialog');
+	@include fx.elevation(base.layer('dialog'));
+
+	position: relative;
+	flex: 0 1 auto;
+	min-height: 0px;
+	max-height: calc(100vh - 64px);
+	max-width: calc(100vw - 148px);
+	overflow-x: hidden;
+	overflow-y: auto;
+	background-color: variables.$content-background-color;
+	transition: fx.animation-linear(height, 250ms), fx.animation-linear(width, 250ms);
+
+	@include base.breakpoint('tablet-landscape') {
+		max-height: calc(100vh - 128px);
+	}
+}
+
+@mixin content-padded() {
+	padding: utils.px2rem(variables.$content-padding);
+}
+
+@mixin loading() {
+	@include fx.animation-standard(opacity, 200ms);
+
+	position: relative;
+	display: none;
+	align-items: center;
+	width: 100%;
+	min-width: utils.px2rem(280px);
+	max-width: utils.px2rem(512px);
+	margin: utils.px2rem(variables.$loading-vertical-margin) auto;
+	padding: utils.px2rem(math.div(variables.$loading-bar-height, 2));
+	background-color: variables.$loading-background;
+	border-radius: utils.px2rem(variables.$loading-bar-border-radius);
+
+	&::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		right: 100%;
+		bottom: 0;
+		left: 0;
+		display: block;
+		height: utils.px2rem(variables.$loading-bar-height);
+		width: 0;
+		background-color: variables.$loading-bar-color;
+		border-radius: utils.px2rem(variables.$loading-bar-border-radius);
+		animation: infinite-bar 2s linear infinite;
+	}
+
+	@keyframes infinite-bar {
+		0% {
+			left: 0%;
+			right: 100%;
+			width: 0%;
+		}
+		10% {
+			left: 0%;
+			right: 75%;
+			width: 25%;
+		}
+		90% {
+			right: 0%;
+			left: 75%;
+			width: 25%;
+		}
+		100% {
+			left: 100%;
+			right: 0%;
+			width: 0%;
+		}
+	}
+}
+
+@mixin loading-active() {
+	display: flex;
+}
+
+@mixin backdrop() {
+	@include base.layer('backdrop');
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+	background-color: variables.$backdrop-color;
+}
+
+@mixin rtl() {
+	.#{base.$prefix}-rtl {
+		.#{base.$prefix}-modal {
+			&__close {
+				right: initial;
+				left: 0;
+
+				@include base.breakpoint('tablet-landscape') {
+					right: initial;
+					left: utils.px2rem(8px);
+				}
+			}
+		}
+	}
+}
+
+@mixin styles() {
+	.#{base.$prefix}-modal {
+		@include base();
+
+		&--active {
+			@include active();
+		}
+
+		&--fade-in {
+			@include fade-in();
+		}
+
+		&__close {
+			@include close();
+		}
+
+		&__content {
+			@include content();
+
+			&--padded {
+				@include content-padded();
+			}
+		}
+
+		&__loading {
+			@include loading();
+
+			&--active {
+				@include loading-active();
+			}
+		}
+
+		&__backdrop {
+			@include backdrop();
+		}
+	}
+}
