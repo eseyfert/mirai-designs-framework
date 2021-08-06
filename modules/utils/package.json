@@ -1,7 +1,7 @@
 {
 	"name": "@miraidesigns/utils",
 	"description": "Mirai Designs Framework: Utils module",
-	"version": "1.3.0",
+	"version": "1.3.1",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/miraidesigns/mirai-designs-framework.git",
