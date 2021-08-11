@@ -1,0 +1,19 @@
+{
+	"name": "@miraidesigns/parallax",
+	"description": "Mirai Designs Framework: Parallax module",
+	"version": "1.0.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/miraidesigns/mirai-designs-framework.git",
+		"directory": "modules/parallax"
+	},
+	"keywords": [
+		"mirai designs framework",
+		"parallax"
+	],
+	"author": "Eric Seyfert",
+	"license": "ISC",
+	"dependencies": {
+		"@miraidesigns/base": "^1.2.0"
+	}
+}

@@ -1,0 +1,11 @@
+@use '@miraidesigns/base';
+
+@mixin base() {
+	overflow: hidden;
+}
+
+@mixin styles() {
+	.#{base.$prefix}-parallax {
+		@include base();
+	}
+}
