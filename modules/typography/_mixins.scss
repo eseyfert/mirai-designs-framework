@@ -1,3 +1,4 @@
+@use '@miraidesigns/base';
 @use '@miraidesigns/theme';
 @use '@miraidesigns/utils';
 @use './variables';
@@ -38,6 +39,24 @@
 		src: url('#{variables.$url}/#{variables.$family-regular}-Bold.woff2') format('woff2'),
 			url('#{variables.$url}/#{variables.$family-regular}-Bold.woff') format('woff');
 	}
+
+	@font-face {
+		font-display: fallback;
+		font-family: variables.$family-headline;
+		font-style: normal;
+		font-weight: 400;
+		src: url('#{variables.$url}/#{variables.$family-headline}-Regular.woff2') format('woff2'),
+			url('#{variables.$url}/#{variables.$family-headline}-Regular.woff') format('woff');
+	}
+
+	@font-face {
+		font-display: fallback;
+		font-family: variables.$family-headline;
+		font-style: normal;
+		font-weight: 700;
+		src: url('#{variables.$url}/#{variables.$family-headline}-Bold.woff2') format('woff2'),
+			url('#{variables.$url}/#{variables.$family-headline}-Bold.woff') format('woff');
+	}
 }
 
 @mixin regular($weight: variables.$text-font-weight, $height: variables.$text-line-height) {
@@ -56,6 +75,33 @@
 	font-family: variables.$family-code;
 	font-weight: $weight;
 	line-height: $height;
+}
+
+/**
+ * font-size-responsive
+ *
+ * Set a font-size for each specified media breakpoint.
+ */
+@mixin font-size-responsive($default, $portrait: null, $landscape: null, $laptop: null, $desktop: null) {
+	font-size: utils.px2rem($default);
+
+	@if $portrait != null {
+		@include base.breakpoint('tablet-portrait') {
+			font-size: utils.px2rem($portrait);
+		}
+	} @else if $landscape != null {
+		@include base.breakpoint('tablet-landscape') {
+			font-size: utils.px2rem($landscape);
+		}
+	} @else if $laptop != null {
+		@include base.breakpoint('laptop') {
+			font-size: utils.px2rem($laptop);
+		}
+	} @else if $desktop != null {
+		@include base.breakpoint('desktop') {
+			font-size: utils.px2rem($desktop);
+		}
+	}
 }
 
 @mixin body() {
