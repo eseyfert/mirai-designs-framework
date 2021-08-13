@@ -1,11 +1,11 @@
 @use '@miraidesigns/theme';
 
 // Set the relative URL to the location where your fonts are stored.
-$url: './fonts';
+$url: '../fonts';
 
 // Setup font-families.
 $family-regular: 'Roboto' !default;
-$family-headline: 'Roboto' !default;
+$family-headline: 'NotoSerif' !default;
 $family-code: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono,
 	monospace, serif !default;
 
