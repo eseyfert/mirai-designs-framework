@@ -11,7 +11,7 @@ import { MDFSelectChangedEvent } from './types';
  *
  * @export
  * @class MDFSelect
- * @version 1.0.0
+ * @version 1.0.1
  */
 export class MDFSelect {
 	public readonly container: HTMLElement;
@@ -174,11 +174,12 @@ export class MDFSelect {
 	 * @private
 	 * @memberof MDFSelect
 	 * @since 1.0.0
+	 * @version 1.0.1
 	 */
 	private setInitialState = () => {
 		// Make sure the select button and menu both have the same width applied.
-		this.button.style.width = `${this.button.offsetWidth}px`;
-		this.menu.style.width = `${this.button.offsetWidth}px`;
+		this.button.style.width = `${this.menu.offsetWidth}px`;
+		this.menu.style.width = `${this.menu.offsetWidth}px`;
 
 		// Loop through the available list items and make sure they all required attributes.
 		for (const item of this.items) {
