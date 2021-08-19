@@ -162,6 +162,7 @@
 
 @mixin menu() {
 	max-height: utils.px2rem(256px);
+	width: auto;
 	max-width: utils.px2rem(menu.$max-width);
 	margin-top: utils.px2rem(2px);
 	overflow: hidden;
