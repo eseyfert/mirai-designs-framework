@@ -1,28 +1,38 @@
-@mixin border-outline-reset() {
-    border: 0;
-    outline: 0;
+@use '@miraidesigns/utils';
+
+@mixin margin($t: 0, $r: 0, $b: 0, $l: 0) {
+	margin: utils.px2rem($t) utils.px2rem($r) utils.px2rem($b) utils.px2rem($l);
+}
+
+@mixin padding($t: 0, $r: 0, $b: 0, $l: 0) {
+	padding: utils.px2rem($t) utils.px2rem($r) utils.px2rem($b) utils.px2rem($l);
 }
 
 @mixin margin-padding-reset() {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
+}
+
+@mixin border-outline-reset() {
+	border: 0;
+	outline: 0;
 }
 
 @mixin clearfix() {
-    &::after {
-        content: '';
-        clear: both;
-        display: table;
-    }
+	&::after {
+		content: '';
+		clear: both;
+		display: table;
+	}
 }
 
 @mixin offscreen() {
-    clip: rect(1px 1px 1px 1px);
-    clip: rect(1px, 1px, 1px, 1px);
-    position: absolute !important;
-    height: 1px !important;
-    width: 1px !important;
-    padding: 0 !important;
-    overflow: hidden !important;
-    border: 0 !important;
+	clip: rect(1px 1px 1px 1px);
+	clip: rect(1px, 1px, 1px, 1px);
+	position: absolute !important;
+	height: 1px !important;
+	width: 1px !important;
+	padding: 0 !important;
+	overflow: hidden !important;
+	border: 0 !important;
 }
