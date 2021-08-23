@@ -12,6 +12,8 @@
 }
 
 @mixin item() {
+	display: inline-flex;
+	align-items: center;
 	margin: 0 utils.px2rem(variables.$item-spacing) 0 0;
 	font-size: utils.px2rem(variables.$font-size);
 
@@ -27,7 +29,7 @@
 	height: utils.px2rem(variables.$divider-height);
 	margin: 0 utils.px2rem(variables.$item-spacing) 0 0;
 	border-right: utils.px2rem(variables.$divider-thickness) solid variables.$divider-color;
-	transform: translateY(2px) rotate(15deg);
+	transform: rotate(15deg);
 }
 
 @mixin rtl() {
