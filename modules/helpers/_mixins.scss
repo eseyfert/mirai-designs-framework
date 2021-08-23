@@ -1,11 +1,38 @@
+@use "sass:list";
 @use '@miraidesigns/utils';
 
-@mixin margin($t: 0, $r: 0, $b: 0, $l: 0) {
-	margin: utils.px2rem($t) utils.px2rem($r) utils.px2rem($b) utils.px2rem($l);
+@mixin margin($margin: 0 0 0 0) {
+	@if (list.length($margin) == 1) {
+		margin: utils.px2rem(list.nth($margin, 1));
+	} @else if (list.length($margin) == 2) {
+		margin: utils.px2rem(list.nth($margin, 1)) utils.px2rem(list.nth($margin, 2));
+	} @else if (list.length($margin) == 3) {
+		margin: utils.px2rem(list.nth($margin, 1))
+			utils.px2rem(list.nth($margin, 2))
+			utils.px2rem(list.nth($margin, 3));
+	} @else if (list.length($margin) == 4) {
+		margin: utils.px2rem(list.nth($margin, 1))
+			utils.px2rem(list.nth($margin, 2))
+			utils.px2rem(list.nth($margin, 3))
+			utils.px2rem(list.nth($margin, 4));
+	}
 }
 
-@mixin padding($t: 0, $r: 0, $b: 0, $l: 0) {
-	padding: utils.px2rem($t) utils.px2rem($r) utils.px2rem($b) utils.px2rem($l);
+@mixin padding($padding: 0 0 0 0) {
+	@if (list.length($padding) == 1) {
+		padding: utils.px2rem(list.nth($padding, 1));
+	} @else if (list.length($padding) == 2) {
+		padding: utils.px2rem(list.nth($padding, 1)) utils.px2rem(list.nth($padding, 2));
+	} @else if (list.length($padding) == 3) {
+		padding: utils.px2rem(list.nth($padding, 1))
+			utils.px2rem(list.nth($padding, 2))
+			utils.px2rem(list.nth($padding, 3));
+	} @else if (list.length($padding) == 4) {
+		padding: utils.px2rem(list.nth($padding, 1))
+			utils.px2rem(list.nth($padding, 2))
+			utils.px2rem(list.nth($padding, 3))
+			utils.px2rem(list.nth($padding, 4));
+	}
 }
 
 @mixin margin-padding-reset() {
