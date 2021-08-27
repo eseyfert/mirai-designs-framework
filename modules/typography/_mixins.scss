@@ -89,15 +89,21 @@
 		@include base.breakpoint('tablet-portrait') {
 			font-size: utils.px2rem($portrait);
 		}
-	} @else if $landscape != null {
+	}
+
+	@if $landscape != null {
 		@include base.breakpoint('tablet-landscape') {
 			font-size: utils.px2rem($landscape);
 		}
-	} @else if $laptop != null {
+	}
+
+	@if $laptop != null {
 		@include base.breakpoint('laptop') {
 			font-size: utils.px2rem($laptop);
 		}
-	} @else if $desktop != null {
+	}
+
+	@if $desktop != null {
 		@include base.breakpoint('desktop') {
 			font-size: utils.px2rem($desktop);
 		}
