@@ -125,9 +125,9 @@ Password fields allow to toggle between hidden and plain text.
 | `mdf-textfield--condensed`       | `Modifier`       | Reduce the input's height                                                                          |
 | `mdf-textfield--stretch`         | `Modifier`       | Stretches the input to the width of its parent                                                     |
 | `mdf-textfield--disabled`        | `Modifier`       | Greys out the input, stops all interaction with the element                                        |
-| `mdf-textfield--state--success`  | `Modifier`       | Used in input validation, changes input colors to green                                            |
-| `mdf-textfield--state--warning`  | `Modifier`       | Used in input validation, changes input colors to yellow                                           |
-| `mdf-textfield--state--error`    | `Modifier`       | Used in input validation, changes input colors to red                                              |
+| `mdf-textfield--state-success`   | `Modifier`       | Used in input validation, changes input colors to green                                            |
+| `mdf-textfield--state-warning`   | `Modifier`       | Used in input validation, changes input colors to yellow                                           |
+| `mdf-textfield--state-error`     | `Modifier`       | Used in input validation, changes input colors to red                                              |
 | `mdf-textfield--textarea`        | `Modifier`       | For textarea elements                                                                              |
 | `mdf-textfield--number`          | `Modifier`       | For number input elements                                                                          |
 | `mdf-textfield--has-helper`      | `Modifier`       | Prepare the input for helper text (also used for error messages)                                   |
